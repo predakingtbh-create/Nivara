@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nivâra | Messages</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="animations.css">
+<link rel="stylesheet" href="page-transitions.css">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102222",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"],
+                        "hand": ["Just Another Hand", "cursive"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #234848;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-hidden h-screen">
+<div class="flex h-full w-full">
+<!-- Sidebar Navigation -->
+<aside class="w-64 flex-shrink-0 bg-[#112222] border-r border-[#234848] flex flex-col justify-between py-6">
+<div class="flex flex-col gap-8 px-4">
+<!-- Logo -->
+<a href="index.html" class="flex items-center gap-3 px-2">
+<img src="logo.png" alt="Nivâra Logo" class="h-10">
+<h1 class="text-5xl font-hand tracking-[3px] text-white">nivâra</h1>
+</a>
+<!-- Nav Links -->
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#92c9c9] hover:text-white hover:bg-[#234848]/50 rounded-lg transition-all" href="index.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#92c9c9] hover:text-white hover:bg-[#234848]/50 rounded-lg transition-all" href="doctor_appointments_-_book_now_cta.html">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-sm font-medium">Appointments</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 bg-primary/10 text-primary rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="text-sm font-medium">Messages</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#92c9c9] hover:text-white hover:bg-[#234848]/50 rounded-lg transition-all" href="pet_records_-_pet_portal.html">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm font-medium">Pet Records</span>
+</a>
+ 
+</nav>
+</div>
+ 
+</aside>
+<!-- Main Content Area: Messages Layout -->
+<main class="flex flex-1 overflow-hidden fade-in-element">
+<!-- Conversation List (Left Pane) -->
+<section class="w-80 border-r border-[#234848] flex flex-col bg-[#112222]/50 fade-in-element">
+<div class="p-4 border-bottom border-[#234848]">
+<h2 class="text-xl font-bold text-white mb-4">Messages</h2>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#92c9c9] text-xl">search</span>
+<input class="w-full bg-[#234848] border-none rounded-lg py-2.5 pl-10 pr-4 text-white text-sm focus:ring-1 focus:ring-primary placeholder:text-[#92c9c9]" placeholder="Search conversations..." type="text"/>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar">
+<!-- Active Conversation Card -->
+<div class="px-3 py-1">
+<div class="bg-primary/10 border-l-4 border-primary p-3 rounded-lg cursor-pointer flex gap-3 group transition-all conversation" data-name="Dr. Aris Thorne" data-subtitle="Veterinary Surgeon • Surgery Follow-up" data-profile="doctor_profile_&_appointment_detail.html" data-avatar="https://lh3.googleusercontent.com/aida-public/AB6AXuA3ZhV_BUjng6BiQq8DPREQ6ribhj0NoKAU8-dyxgQBfP1ajrVvG_davHy4fmDmnyisI9egOXgACPFw1kc8qY9JpQLYOsRTzDJWsLSiYBiTKdxG_oLoFpEBaiMsy7iGP78RrGJNWogoNAmOA0ox3ynMUx0BNY5k8AUsdRXFLLD48pgFL9wtMOxAxHgsO8r3YYiobu6SK23UDkqah9KGoLvFFFoFrwViDDbQM5Gx8Gcp8YSFX1DdxhRY7Ukgd-gkXhDci14IDfN46ntq">
+<div class="relative flex-shrink-0">
+<div class="h-12 w-12 rounded-full bg-cover bg-center" data-alt="Portrait of Dr. Aris Thorne" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA3ZhV_BUjng6BiQq8DPREQ6ribhj0NoKAU8-dyxgQBfP1ajrVvG_davHy4fmDmnyisI9egOXgACPFw1kc8qY9JpQLYOsRTzDJWsLSiYBiTKdxG_oLoFpEBaiMsy7iGP78RrGJNWogoNAmOA0ox3ynMUx0BNY5k8AUsdRXFLLD48pgFL9wtMOxAxHgsO8r3YYiobu6SK23UDkqah9KGoLvFFFoFrwViDDbQM5Gx8Gcp8YSFX1DdxhRY7Ukgd-gkXhDci14IDfN46ntq')"></div>
+<div class="absolute bottom-0 right-0 h-3 w-3 bg-green-500 rounded-full border-2 border-[#112222]"></div>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<h3 class="text-white text-sm font-bold truncate">Dr. Aris Thorne</h3>
+<span class="text-[10px] text-primary font-medium">Online</span>
+</div>
+<p class="text-primary text-[11px] font-semibold mb-1 uppercase tracking-tight">Surgery Follow-up</p>
+<p class="text-[#92c9c9] text-xs truncate">The incision looks healthy...</p>
+</div>
+</div>
+</div>
+<!-- Other Conversations -->
+<div class="px-3 py-1">
+<div class="p-3 rounded-lg cursor-pointer flex gap-3 hover:bg-[#234848]/30 transition-all conversation" data-name="City Pet Hospital" data-subtitle="Dental Cleaning" data-profile="doctor_profile_&_appointment_detail.html" data-avatar="https://lh3.googleusercontent.com/aida-public/AB6AXuC9QBHlg_907dqiwnXBxTa0UtnGI2xj11yjVIOaYbre1UDe3dKa3pmdbx2n5MmHXB8GlorQAtY0lsnCA4XspTRzqSE8c1sruaPR25X6RRG3pl2B_O-57eCrbnvuVE4Kwce7qAcZMObTnFfXY9uMQth7CF_4tytP2kLQmgJaUkKFAczgXNrPJo2YpOcy9bUrhnfau8OqDgbB1xq97o7IoYQulZgZQ5jeX-xei0bb72TadhbMUcZAmYH_8y4hSuAyJ0rq6rdonBaMtQyz">
+<div class="relative flex-shrink-0">
+<div class="h-12 w-12 rounded-full bg-cover bg-center grayscale" data-alt="City Pet Hospital facility logo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC9QBHlg_907dqiwnXBxTa0UtnGI2xj11yjVIOaYbre1UDe3dKa3pmdbx2n5MmHXB8GlorQAtY0lsnCA4XspTRzqSE8c1sruaPR25X6RRG3pl2B_O-57eCrbnvuVE4Kwce7qAcZMObTnFfXY9uMQth7CF_4tytP2kLQmgJaUkKFAczgXNrPJo2YpOcy9bUrhnfau8OqDgbB1xq97o7IoYQulZgZQ5jeX-xei0bb72TadhbMUcZAmYH_8y4hSuAyJ0rq6rdonBaMtQyz')"></div>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<h3 class="text-white text-sm font-medium truncate">City Pet Hospital</h3>
+<span class="text-[10px] text-[#92c9c9]">2h ago</span>
+</div>
+<p class="text-[#92c9c9] text-[11px] mb-1">Dental Cleaning</p>
+<p class="text-[#92c9c9] text-xs truncate font-medium">Confirmed for next Tuesday at...</p>
+</div>
+</div>
+</div>
+<div class="px-3 py-1">
+<div class="p-3 rounded-lg cursor-pointer flex gap-3 hover:bg-[#234848]/30 transition-all conversation" data-name="Dr. Sarah Miller" data-subtitle="Vaccination Schedule" data-profile="doctor_profile_&_appointment_detail.html" data-avatar="https://lh3.googleusercontent.com/aida-public/AB6AXuDQ2alYVKiTQ9i1jprKerMqMnbn-QMhkLYbX34HvQdHQmz90NHKhgSlXmWGuegbqs9c7oKde7IXtw7HU1ufNblPlGdOjlcGa2f1lmQ1EhgG6wpbxh2wxFz8MKCRkYDIozhLMFtCXT4Q_ULVRVY0o8zO-fq0f_UXfH0ZVALJFAhY3B_YS8D6_r6Fs5xdR4Vk7A-0y-xSxQ37sSesd6JWcNnKUPJ8YNxQVGg0Zk1n6IccNgbNjRBhPQ6i0WEgj5R1U-izQ3ugTMNxQRW_">
+<div class="relative flex-shrink-0">
+<div class="h-12 w-12 rounded-full bg-cover bg-center" data-alt="Portrait of Dr. Sarah Miller" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDQ2alYVKiTQ9i1jprKerMqMnbn-QMhkLYbX34HvQdHQmz90NHKhgSlXmWGuegbqs9c7oKde7IXtw7HU1ufNblPlGdOjlcGa2f1lmQ1EhgG6wpbxh2wxFz8MKCRkYDIozhLMFtCXT4Q_ULVRVY0o8zO-fq0f_UXfH0ZVALJFAhY3B_YS8D6_r6Fs5xdR4Vk7A-0y-xSxQ37sSesd6JWcNnKUPJ8YNxQVGg0Zk1n6IccNgbNjRBhPQ6i0WEgj5R1U-izQ3ugTMNxQRW_')"></div>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<h3 class="text-white text-sm font-medium truncate">Dr. Sarah Miller</h3>
+<span class="text-[10px] text-[#92c9c9]">Yesterday</span>
+</div>
+<p class="text-[#92c9c9] text-[11px] mb-1">Vaccination Schedule</p>
+<p class="text-[#92c9c9] text-xs truncate font-medium">Buddy is all up to date now!</p>
+</div>
+</div>
+</div>
+<div class="px-3 py-1">
+<div class="p-3 rounded-lg cursor-pointer flex gap-3 hover:bg-[#234848]/30 transition-all conversation" data-name="Emergency Clinic" data-subtitle="Urgent Inquiry" data-profile="doctor_profile_&_appointment_detail.html" data-avatar="">
+<div class="relative flex-shrink-0">
+<div class="h-12 w-12 rounded-full bg-slate-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#92c9c9]">medical_services</span>
+</div>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<h3 class="text-white text-sm font-medium truncate">Emergency Clinic</h3>
+<span class="text-[10px] text-[#92c9c9]">3d ago</span>
+</div>
+<p class="text-[#92c9c9] text-[11px] mb-1">Urgent Inquiry</p>
+<p class="text-[#92c9c9] text-xs truncate">Thank you for your visit.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Active Chat Window (Right Pane) -->
+<section class="flex-1 flex flex-col bg-background-dark/30 relative fade-in-element">
+<!-- Chat Header -->
+<header class="h-20 bg-[#112222] border-b border-[#234848] flex items-center justify-between px-6 flex-shrink-0">
+<a id="chatHeaderLink" href="doctor_profile_&_appointment_detail.html" class="flex items-center gap-4">
+<div id="chatHeaderAvatar" class="h-12 w-12 rounded-full bg-cover bg-center border-2 border-primary/20" data-alt="Active chat portrait Dr. Aris Thorne" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCiJhCif2G6tGL8zjOzYwMazAL7l8E0KmzoQlI0yKK1TGhAf3w1UwDSLkUlphSrZbFaSTY88bWfTWUFdZs87MwX60-lsYsEwBuCHSQuiK0At5g377MZX-sD6yzTwEtyHraNwSGAx8SjsiiaUgPQC4QzRx7F3QGJsXUskSV7LwdSwpSk7ENqqFlfaaG58Foqge1xJy3f7FZEclz9Yn7UFS-BRtJNPHkD27W-MKlq33S2PAzVR7hbd1VDqnzcBKy53IndCI5vSysSOVJ4')"></div>
+<div>
+<h2 id="chatHeaderName" class="text-white font-bold leading-tight">Dr. Aris Thorne</h2>
+<div class="flex items-center gap-2">
+<span class="h-2 w-2 bg-green-500 rounded-full"></span>
+<p id="chatHeaderSubtitle" class="text-[#92c9c9] text-xs font-medium uppercase tracking-wide">Veterinary Surgeon • Surgery Follow-up</p>
+</div>
+</div>
+</a>
+<div class="flex items-center gap-3">
+<a href="pet_records_-_pet_portal.html" class="flex items-center gap-2 bg-[#234848]/50 hover:bg-[#234848] text-white px-4 py-2 rounded-lg text-sm font-medium transition-all">
+<span class="material-symbols-outlined text-lg">medical_information</span>
+                            View Pet Record
+                        </a>
+</div>
+</header>
+<!-- Message Thread Area -->
+<div id="threadScroll" class="flex-1 overflow-y-auto p-6 flex flex-col gap-6 custom-scrollbar">
+<!-- Date Divider -->
+<div class="flex items-center gap-4">
+<div class="h-px flex-1 bg-[#234848]/50"></div>
+<span class="text-[#92c9c9] text-[10px] font-bold uppercase tracking-widest">Today</span>
+<div class="h-px flex-1 bg-[#234848]/50"></div>
+</div>
+<!-- Doctor Message -->
+<div class="flex gap-3 max-w-[80%]">
+<div class="h-8 w-8 rounded-full bg-cover bg-center flex-shrink-0 mt-1" data-alt="Avatar of Dr. Thorne" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqYL2XB-4gFjeTFHQpcX5Bzyo12iv0ESKt0UK3_I8VjDrUQxY7ye-x6hfWyoDBD3nfnT1sbgVuB4lvRnixOKlGffEs_fqGb3xoyMtkvhdj6ZR94CDLABcqGgmGifnJ2l_1K_-AaZWu6kndeKtxJYaeCUA9YcBGxUCEzzR8wYTSUSQkiiBs_cS5ZFjhfGa_xfP4oaOzN71oyCCO2xmsGziOmvP3kWKwN38ctu6s444ThvjpfGKK8pzQFnUlWVZ6HZouXt4jzfnyuOv6')"></div>
+<div class="flex flex-col gap-1">
+<div class="bg-[#234848] text-white p-4 rounded-xl rounded-tl-none">
+<p class="text-sm leading-relaxed">Hi Alex, how is Buddy doing today after his procedure? Is he eating and drinking normally?</p>
+</div>
+<span class="text-[10px] text-[#92c9c9] ml-1">09:12 AM</span>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex gap-3 max-w-[80%] self-end flex-row-reverse">
+<div class="h-8 w-8 rounded-full bg-cover bg-center flex-shrink-0 mt-1" data-alt="User avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCEKRuET7CqL1HQqQG2CH4z3YG_-fjG0aHaPnzCU5kWemaV48HC5rflwJqHrqMfBAkte_ibb8h2GcG2dE13dCvt8orpPzoxnbZhk1VgPq3ArSiJ4xgbPTG2EUzRIdblSNSTAc1PzqRv3FTmz1oK-m7GktVLLBjMwDKNroODfctyg4NK-_xtIKDFPpCD0zPNBha5Qnx5xEYg7W5jey4_nljOQb179RbcfI2twnCLPdfpRVkeNYds6wNVbhoXjgRCgbkCl_4Q_SBB71lN')"></div>
+<div class="flex flex-col gap-1 items-end">
+<div class="bg-primary text-background-dark font-medium p-4 rounded-xl rounded-tr-none">
+<p class="text-sm leading-relaxed">He's doing great! A bit sleepy but he finished his breakfast. I was a little worried about the incision area, though. I've attached a photo for you to see.</p>
+</div>
+<span class="text-[10px] text-[#92c9c9] mr-1">09:15 AM</span>
+</div>
+</div>
+<!-- Image Attachment Message (User) -->
+<div class="flex gap-3 max-w-[80%] self-end flex-row-reverse">
+<div class="h-8 w-8 rounded-full flex-shrink-0 mt-1 opacity-0"></div>
+<div class="flex flex-col gap-1 items-end">
+<div class="p-2 bg-primary/20 rounded-xl rounded-tr-none border border-primary/30">
+<div class="h-48 w-64 rounded-lg bg-cover bg-center border border-primary/50" data-alt="Close up photo of pet recovery area" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAuvPmaUk-hJF8nMPseggIcfGOgbMjPVRHv1qG5M-p6lU49ibAN1ZtUqKXIK4wyNWMv5Vkz7AEZz4bsMjf4JZKzqszcTBJaA2XalSQ2Qkr5EbpBvU3otdK0h-LsD74dVHkVRn1vuFU91y2W0ls2U-qgQRI0AcmCrvIq-riHRuhrTUYeifSC97zyUn8m6BimhvYQF-Uy3lzeh6PjfXEJb4e4smv4tmzkStQ_bDuWpS1AiwaYWJ-eeDm4tEh-FeMnLSCf_YLt8lLP47K8')"></div>
+<p class="text-primary text-[10px] mt-2 font-bold px-1">IMG_2024_05.jpg</p>
+</div>
+<span class="text-[10px] text-[#92c9c9] mr-1">09:16 AM • Sent</span>
+</div>
+</div>
+<!-- Doctor Message -->
+<div class="flex gap-3 max-w-[80%]">
+<div class="h-8 w-8 rounded-full bg-cover bg-center flex-shrink-0 mt-1" data-alt="Avatar of Dr. Thorne" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAuVTcHms6XifTHkWxmiqIsvCqDfF93fdhL6FcKtXGYvFGe6zOpWR54g8Ru-GsVHqvxgUryH71pxuspOrB25SP2GkNEf43XBJL-U6uEqkF_bmkbDYtt7z05OS5KVdipZTV0Yatiasa5Y7bm1UmNlfnqAwMlJanqq7ZK9XI_FZhZSuSp1RXLm5oeqzWkTK78vONQ_pWs3ObHA0Ae7I_OYxqS9oE6F5xwuC6sSsebMPVXvpNw206Lm5etTlXcwnl2RiUGkEiZf5HbfCry')"></div>
+<div class="flex flex-col gap-1">
+<div class="bg-[#234848] text-white p-4 rounded-xl rounded-tl-none">
+<p class="text-sm leading-relaxed">Thank you for the photo. The incision looks healthy and clean. The slight redness is normal at this stage of healing. Keep up with the medication schedule we discussed.</p>
+</div>
+<span class="text-[10px] text-[#92c9c9] ml-1">09:22 AM</span>
+</div>
+</div>
+</div>
+<!-- Message Input Area -->
+<div class="p-4 bg-[#112222] border-t border-[#234848] flex-shrink-0">
+<div class="max-w-4xl mx-auto flex items-end gap-3 bg-[#234848] p-2 rounded-xl border border-[#234848]">
+<div class="flex items-center pb-1">
+<button class="h-10 w-10 flex items-center justify-center text-[#92c9c9] hover:text-primary transition-colors">
+<span class="material-symbols-outlined">attach_file</span>
+</button>
+<button class="h-10 w-10 flex items-center justify-center text-[#92c9c9] hover:text-primary transition-colors">
+<span class="material-symbols-outlined">image</span>
+</button>
+</div>
+<textarea id="messageInput" class="flex-1 bg-transparent border-none text-white text-sm focus:ring-0 placeholder:text-[#92c9c9] py-3 resize-none custom-scrollbar" placeholder="Type your message here..." rows="1"></textarea>
+<button id="sendButton" class="h-10 w-10 bg-primary hover:bg-primary/80 text-background-dark rounded-lg flex items-center justify-center transition-all group">
+<span class="material-symbols-outlined font-bold group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">send</span>
+</button>
+</div>
+<p class="text-center text-[10px] text-[#92c9c9] mt-3 uppercase tracking-widest font-medium">Your conversation is secure and encrypted</p>
+</div>
+<script>
+var convoEls = document.querySelectorAll('.conversation');
+var headerName = document.getElementById('chatHeaderName');
+var headerSubtitle = document.getElementById('chatHeaderSubtitle');
+var headerAvatar = document.getElementById('chatHeaderAvatar');
+var headerLink = document.getElementById('chatHeaderLink');
+var threadScroll = document.getElementById('threadScroll');
+var threadInitial = threadScroll.innerHTML;
+function setThreadFor(name, avatar, subtitle){
+headerName.textContent = name || '';
+headerSubtitle.textContent = subtitle || '';
+if (avatar) headerAvatar.style.backgroundImage = "url('"+avatar+"')";
+}
+function buildSimpleThread(text){
+return '<div class="flex items-center gap-4"><div class="h-px flex-1 bg-[#234848]/50"></div><span class="text-[#92c9c9] text-[10px] font-bold uppercase tracking-widest">Today</span><div class="h-px flex-1 bg-[#234848]/50"></div></div><div class="flex gap-3 max-w-[80%]"><div class="bg-[#234848] text-white p-4 rounded-xl rounded-tl-none"><p class="text-sm leading-relaxed">'+text+'</p></div></div>';
+}
+function loadThread(name){
+if (name === 'Dr. Aris Thorne') {
+threadScroll.innerHTML = threadInitial;
+} else if (name === 'Dr. Sarah Miller') {
+threadScroll.innerHTML = buildSimpleThread('Hi! Buddy is up to date. Next vaccine due in 6 months.');
+} else if (name === 'City Pet Hospital') {
+threadScroll.innerHTML = buildSimpleThread('Your dental cleaning is confirmed for next Tuesday at 10:00 AM.');
+} else {
+threadScroll.innerHTML = buildSimpleThread('Welcome to this chat. Share details and we will respond shortly.');
+}
+threadScroll.scrollTop = threadScroll.scrollHeight;
+}
+convoEls.forEach(function(el){
+el.addEventListener('click', function(){
+convoEls.forEach(function(c){ c.classList.remove('bg-primary/10'); c.classList.remove('border-l-4'); c.classList.remove('border-primary'); });
+el.classList.add('bg-primary/10'); el.classList.add('border-l-4'); el.classList.add('border-primary');
+var name = el.getAttribute('data-name') || '';
+var subtitle = el.getAttribute('data-subtitle') || '';
+var avatar = el.getAttribute('data-avatar') || '';
+var profile = el.getAttribute('data-profile') || 'doctor_profile_&_appointment_detail.html';
+headerLink.setAttribute('href', profile);
+setThreadFor(name, avatar, subtitle);
+loadThread(name);
+});
+});
+var input = document.getElementById('messageInput');
+var sendBtn = document.getElementById('sendButton');
+function autoResize(){
+input.style.height = 'auto';
+input.style.height = Math.min(input.scrollHeight, 180) + 'px';
+}
+function nowTime(){
+var d=new Date();
+var h=d.getHours(); var m=d.getMinutes(); var ampm=h>=12?'PM':'AM'; h=h%12||12; m=m<10?('0'+m):m; return h+':'+m+' '+ampm;
+}
+function sendMessage(){
+var text = (input.value || '').trim();
+if (!text) return;
+var wrapper = document.createElement('div');
+wrapper.className = 'flex gap-3 max-w-[80%] self-end flex-row-reverse';
+var bubble = document.createElement('div');
+bubble.className = 'flex flex-col gap-1 items-end';
+bubble.innerHTML = '<div class="bg-primary text-background-dark font-medium p-4 rounded-xl rounded-tr-none"><p class="text-sm leading-relaxed"></p></div><span class="text-[10px] text-[#92c9c9] mr-1">'+nowTime()+'</span>';
+bubble.querySelector('p').textContent = text;
+wrapper.appendChild(document.createElement('div')).className='h-8 w-8 rounded-full opacity-0 mt-1';
+wrapper.appendChild(bubble);
+threadScroll.appendChild(wrapper);
+threadScroll.scrollTop = threadScroll.scrollHeight;
+input.value=''; autoResize();
+}
+input.addEventListener('input', autoResize);
+input.addEventListener('keydown', function(e){ if (e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); sendMessage(); }});
+sendBtn.addEventListener('click', sendMessage);
+autoResize();
+</script>
+<!-- Floating Pet Quick Info (Context Widget) -->
+<div class="absolute top-24 right-6 w-48 bg-[#112222]/90 backdrop-blur border border-[#234848] rounded-xl p-4 shadow-2xl hidden xl:block">
+<div class="flex flex-col items-center text-center">
+<div class="h-16 w-16 rounded-full border-2 border-primary/50 bg-cover bg-center mb-2" data-alt="Portrait of the pet Buddy" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAUTcLqnoBOn8cQbrouhtKplHmFAyjO1CAj5tEO7sA-ypVW8VSyw3USVtRqd5ZZsMOEUDFxJEhHTPkYH0bUJC3IRLLbKFyE6zJMWe8C0kcJLyDyYNK2wEeAGCX50OoAPynFdU9V2rbCxbghVDB_3WJPWLk1Kpi7cRW2BcQF6eGLF7hTY5zKFC67UBcJQ_VryrIO7Q9jiTiBcY46v24nsN6_s0hzXqZWEGfL1PvhQgS3_cpmGEnXnbaCMnGqru5QWRk1IUNefR0Nxl5y')"></div>
+<h4 class="text-white font-bold text-sm">Buddy</h4>
+<p class="text-primary text-[10px] font-bold uppercase mb-3">Golden Retriever</p>
+<div class="w-full space-y-2">
+<div class="flex justify-between text-[10px]">
+<span class="text-[#92c9c9]">Age:</span>
+<span class="text-white">4 years</span>
+</div>
+<div class="flex justify-between text-[10px]">
+<span class="text-[#92c9c9]">Weight:</span>
+<span class="text-white">32.4 kg</span>
+</div>
+<div class="h-px bg-[#234848] my-1"></div>
+<div class="text-[9px] text-left">
+<span class="text-[#92c9c9] block">Last Surgery:</span>
+<span class="text-white font-medium">Dental Extraction (May 14)</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+    <script src="scroll-animations.js"></script>
+    <script src="page-transitions.js"></script>
+</body></html>

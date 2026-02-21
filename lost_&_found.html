@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lost &amp; Found | Nivâra Pet Care</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="page-transitions.css" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102222",
+                        "card-dark": "#1a2e2e",
+                        "border-dark": "#234848",
+                        "lost-red": "#ff4d4d"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "hand": ["Just Another Hand", "cursive"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-white min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="border-b border-border-dark bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-8">
+<a href="index.html" class="flex items-center gap-3">
+<img src="logo.png" alt="Nivâra Logo" class="h-10">
+<h1 class="text-5xl font-hand tracking-[3px] text-white">nivâra</h1>
+</a>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="doctor_appointments_-_book_now_cta.html">Appointments</a>
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="pet_medicines.html">Pet Medicines</a>
+<a class="text-primary text-sm font-medium border-b-2 border-primary pb-1" href="lost_&_found.html">Lost &amp; Found</a>
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="pet_adoption.html">Adoptions</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button id="locationBtn" class="hidden md:flex items-center gap-2 text-xs font-medium text-white/60 hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-primary text-sm">location_on</span>
+<span id="locationLabel">Mumbai, IN</span>
+</button>
+<div class="hidden lg:flex items-center bg-border-dark rounded-lg px-3 py-1.5 w-64">
+<span class="material-symbols-outlined text-white/50 text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-white placeholder:text-white/40 w-full ml-2" placeholder="Search pets..." type="text"/>
+</div>
+<a href="create_lost_&_found_post.html" class="bg-primary hover:bg-primary/90 text-background-dark font-bold py-2 px-4 rounded-lg text-sm flex items-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-xl">add_circle</span>
+                        Create Post
+                    </a>
+<a href="user_profile_&_management.html" class="h-8 w-8 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center cursor-pointer overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Portrait of a smiling young man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNJFibDTN8qZmMmLhdckI_PGwozot_GUGC08NFOF-k3IHalmfAIcXkvzLDLozBI_mmUZWthMij9-bSvq0kR81kUHrZ6iW4hC582auTLwvyRUBhulZBEEmYMp2Ge9N6UzAJbV_g1PHotOG_aEoIi0E2p3DLUiz5oBA7t3e61VwjLfUOTCXPQ6cbz8b8p0OtQ0gIGw6y9eqmWN2d94XCnQz2NepjfVcXULQDLi-Ga39nGoEY2c0OpJc5vuaLDCnIFzd6m6Uys7eIzlwb"/>
+</a>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+<!-- Hero & Controls Section -->
+<div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-2">
+<h2 class="text-4xl font-extrabold tracking-tight text-white">Lost &amp; Found</h2>
+<p class="text-white/60 max-w-xl">Help reunite local pets with their families. Use the filters below to browse active listings in your area.</p>
+</div>
+<div class="flex flex-wrap gap-3">
+<div class="flex items-center bg-card-dark p-1 rounded-xl border border-border-dark">
+<button id="filterAll" class="bg-primary text-background-dark px-4 py-1.5 rounded-lg text-sm font-bold shadow-lg transition-all">All</button>
+<button id="filterLost" class="text-white/70 hover:text-white px-4 py-1.5 rounded-lg text-sm font-medium transition-all">Lost</button>
+<button id="filterFound" class="text-white/70 hover:text-white px-4 py-1.5 rounded-lg text-sm font-medium transition-all">Found</button>
+</div>
+</div>
+</div>
+<!-- Filter Chips -->
+<div class="flex flex-wrap gap-2 mb-8">
+<span id="chipToday" class="inline-flex items-center gap-1.5 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-semibold border border-primary/20 hidden">
+                Today <span class="material-symbols-outlined text-xs cursor-pointer">close</span>
+</span>
+<span id="chipType" data-type="dog" class="inline-flex items-center gap-1.5 bg-border-dark text-white/70 px-3 py-1 rounded-full text-xs font-semibold border border-white/5 hidden">
+                Dogs <span class="material-symbols-outlined text-xs cursor-pointer">close</span>
+</span>
+<button id="clearFilters" class="text-primary text-xs font-bold hover:underline ml-2">Clear all filters</button>
+</div>
+<!-- Grid of Pet Cards -->
+<div id="lfGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Card 1: Lost Pet -->
+<div id="post-1" data-status="lost" data-type="dog" data-mins="120" class="bg-card-dark border border-border-dark rounded-2xl overflow-hidden hover:border-lost-red/50 transition-all group flex flex-col">
+<div class="relative h-48 overflow-hidden">
+<img alt="Lost Golden Retriever" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A golden retriever dog sitting in grass" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmWz4Uro29krrBTeSxekZAjgN3-r2CBV4tFhao1nP9jRrALLJrrhqXkwDGr2tnb8l4_5YlhLeY4CuD85K6tIXnFnyQNOj1XK5oPgRpcp_mkqFJwHDHBSCl32VnnydYmAMb3gHMdxKpA1jliMM_zmdavJl83uUOyodBHkesCvkLfH-55fp2nS4umZyi8O2X8GSIOIpP8C16PpidqnSYlN4r3Va0Ui3CkJ9kakzC_yaW7zYnNqQG9s6nlBgkvELwDlmRQlAyVnmy0rti"/>
+<div class="absolute top-3 left-3 bg-lost-red text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest shadow-lg">Lost</div>
+<div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary">schedule</span>
+                        2h ago
+                    </div>
+</div>
+<div class="p-5 flex-grow">
+<div class="flex justify-between items-start mb-3">
+<div>
+<h3 class="text-xl font-bold text-white">Buddy</h3>
+<p class="text-primary text-xs font-semibold">Golden Retriever</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-y-3 gap-x-4 mb-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/40 text-sm">cake</span>
+<span class="text-xs text-white/70">3 Years</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/40 text-sm">male</span>
+<span class="text-xs text-white/70">Male</span>
+</div>
+</div>
+<div class="flex items-start gap-2 bg-background-dark/50 p-3 rounded-xl mb-4">
+<span class="material-symbols-outlined text-lost-red text-lg">location_on</span>
+<div class="text-[11px] leading-snug">
+<span class="text-white/40 block mb-0.5">Last Seen</span>
+<span class="text-white/80 font-medium">Near Central Park, East Entrance</span>
+</div>
+</div>
+</div>
+<div class="px-5 pb-5 pt-0 mt-auto">
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-background-dark font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 hover:brightness-110 transition-all" data-owner-name="Priya Sharma" data-owner-phone="+91 98200 12345" data-owner-email="priya@example.com">
+<span class="material-symbols-outlined text-sm">call</span>
+                            Contact Owner
+                        </button>
+</div>
+</div>
+</div>
+<!-- Card 2: Found Pet -->
+<div id="post-2" data-status="found" data-type="cat" data-mins="300" class="bg-card-dark border border-border-dark rounded-2xl overflow-hidden hover:border-primary/50 transition-all group flex flex-col">
+<div class="relative h-48 overflow-hidden">
+<img alt="Found Siamese Cat" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A grey siamese cat with blue eyes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhNVHXgeYeM66VtxHo_faYJKqRhO17TmrbjVDXhZIzJ2OZCK-h_kbbV1GREkEbkhuemXGTdkpfaeWl5sPXFzn5Y-X-qnCYNjYk9RE4zIdbiq-pmnYDrCus3SXsHM9XasIbUCs2pys8cI0c1Xj84O2K3GoguWfq7R1tjQ-cso4k46k8IjNpMa_Ej3IY6q4HWvW0ag3bAj8_xq110r7KOyoG4Ty9juPRcilYHQGObajq_5-LOHdkT0mYQ8XeDoaxRQQPz9Z7nqPBi9C-"/>
+<div class="absolute top-3 left-3 bg-primary text-background-dark text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest shadow-lg">Found</div>
+<div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary">schedule</span>
+                        5h ago
+                    </div>
+</div>
+<div class="p-5 flex-grow">
+<div class="flex justify-between items-start mb-3">
+<div>
+<h3 class="text-xl font-bold text-white uppercase tracking-tight">Unknown (Cat)</h3>
+<p class="text-primary text-xs font-semibold">Siamese Mix</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-y-3 gap-x-4 mb-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/40 text-sm">cake</span>
+<span class="text-xs text-white/70">~1 Year</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/40 text-sm">female</span>
+<span class="text-xs text-white/70">Female</span>
+</div>
+</div>
+<div class="flex items-start gap-2 bg-background-dark/50 p-3 rounded-xl mb-4">
+<span class="material-symbols-outlined text-primary text-lg">location_searching</span>
+<div class="text-[11px] leading-snug">
+<span class="text-white/40 block mb-0.5">Found At</span>
+<span class="text-white/80 font-medium">Riverside Apartments, Building B</span>
+</div>
+</div>
+</div>
+<div class="px-5 pb-5 pt-0 mt-auto">
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-background-dark font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 hover:brightness-110 transition-all" data-owner-name="Community Member" data-owner-phone="+1 (555) 123-4567" data-owner-email="owner.riverside@example.com">
+<span class="material-symbols-outlined text-sm">call</span>
+                            Contact Owner
+                        </button>
+</div>
+</div>
+</div>
+<!-- Card 3: Lost Pet -->
+<div id="post-3" data-status="lost" data-type="dog" data-mins="1440" class="bg-card-dark border border-border-dark rounded-2xl overflow-hidden hover:border-lost-red/50 transition-all group flex flex-col">
+<div class="relative h-48 overflow-hidden">
+<img alt="Lost Beagle" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A cute beagle puppy looking up" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_Ksv7JquvO2Pn1PjiSbeBNK86pYZ7gaOBN-4sH-6X_b9QTiSQ7oO1ugcJDI31T9MMRcsb-9KTf-u3wpq5St9dCCr4Ilnb5P0FavVckkwnXqRYKjbgcyF0AmkIrXuhzTwvH6Tw1FjIR3xpVvDrWqtR9d726w3n9VasTo3AZ2dVm57raIYK5Sv5ARvHZvScgKoMLj3EQRJwxkJkp5uGxvuvXVFQWXIUB8fL07vUk7DFSsk9MN7lX0kd5fhbPMgiEuTNQ2Lh7TsqktCF"/>
+<div class="absolute top-3 left-3 bg-lost-red text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest shadow-lg">Lost</div>
+<div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary">schedule</span>
+                        Yesterday
+                    </div>
+</div>
+<div class="p-5 flex-grow">
+<div class="flex justify-between items-start mb-3">
+<div>
+<h3 class="text-xl font-bold text-white">Max</h3>
+<p class="text-primary text-xs font-semibold">Beagle</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-y-3 gap-x-4 mb-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/40 text-sm">cake</span>
+<span class="text-xs text-white/70">5 Years</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/40 text-sm">male</span>
+<span class="text-xs text-white/70">Male</span>
+</div>
+</div>
+<div class="flex items-start gap-2 bg-background-dark/50 p-3 rounded-xl mb-4">
+<span class="material-symbols-outlined text-lost-red text-lg">location_on</span>
+<div class="text-[11px] leading-snug">
+<span class="text-white/40 block mb-0.5">Last Seen</span>
+<span class="text-white/80 font-medium">Oak Ridge Forest Trailhead</span>
+</div>
+</div>
+</div>
+<div class="px-5 pb-5 pt-0 mt-auto">
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-background-dark font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 hover:brightness-110 transition-all" data-owner-name="Arjun Mehta" data-owner-phone="+91 98765 43210" data-owner-email="arjun@example.com">
+<span class="material-symbols-outlined text-sm">call</span>
+                            Contact Owner
+                        </button>
+</div>
+</div>
+</div>
+<!-- Card 4: Found Pet -->
+<div id="post-4" data-status="found" data-type="rabbit" data-mins="2880" class="bg-card-dark border border-border-dark rounded-2xl overflow-hidden hover:border-primary/50 transition-all group flex flex-col">
+<div class="relative h-48 overflow-hidden">
+<img alt="Found Rabbit" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A white and brown fluffy rabbit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3f03bX-hTrgsUwm20CssEk-u2zeuJH7_Ao1LqKwVLwAB7LwnZ7yrF_xcGqWy0pKw7D92gV1P9t0_Ck6jaWuA5MZ1AuPqzFb5f2wBebiA5z4UfZLwxe5tziTRVpxDAk-oMTxqeeJfedF4jaVaW7jVdPA1DkW-Tp7Y2tK0esW8CteonaEBaVlY2nEBhV8o33wQYQMvGaY-s2pO0CplqSXbjqp7CVeXRB0_zSXQ6f7z-u3G02LZ0NFmzDMyjE0vtRU4vM5M_5Rj4jqnG"/>
+<div class="absolute top-3 left-3 bg-primary text-background-dark text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest shadow-lg">Found</div>
+<div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary">schedule</span>
+                        2 days ago
+                    </div>
+</div>
+<div class="p-5 flex-grow">
+<div class="flex justify-between items-start mb-3">
+<div>
+<h3 class="text-xl font-bold text-white uppercase tracking-tight">Cinnabun?</h3>
+<p class="text-primary text-xs font-semibold">Lop Rabbit</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-y-3 gap-x-4 mb-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/40 text-sm">cake</span>
+<span class="text-xs text-white/70">Adult</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/40 text-sm">question_mark</span>
+<span class="text-xs text-white/70">Unknown</span>
+</div>
+</div>
+<div class="flex items-start gap-2 bg-background-dark/50 p-3 rounded-xl mb-4">
+<span class="material-symbols-outlined text-primary text-lg">location_searching</span>
+<div class="text-[11px] leading-snug">
+<span class="text-white/40 block mb-0.5">Found At</span>
+<span class="text-white/80 font-medium">Community Garden, Plot 14</span>
+</div>
+</div>
+</div>
+<div class="px-5 pb-5 pt-0 mt-auto">
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-background-dark font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 hover:brightness-110 transition-all" data-owner-name="Garden Volunteer" data-owner-phone="+1 (555) 987-6543" data-owner-email="volunteer@example.com">
+<span class="material-symbols-outlined text-sm">call</span>
+                            Contact Owner
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex justify-center items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-dark hover:bg-border-dark transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-background-dark font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-dark hover:bg-border-dark transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-dark hover:bg-border-dark transition-colors">3</button>
+<span class="text-white/30 px-2">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-dark hover:bg-border-dark transition-colors">12</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-dark hover:bg-border-dark transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-card-dark border-t border-border-dark py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 text-primary mb-4">
+<span class="material-symbols-outlined text-2xl">pets</span>
+<h1 class="text-white text-lg font-bold">Nivâra</h1>
+</div>
+<p class="text-white/50 text-sm">Nivâra is a community-driven platform dedicated to providing the best possible care for pets and their owners.</p>
+</div>
+<div>
+<h4 class="text-white font-bold mb-4">Platform</h4>
+<ul class="space-y-2 text-sm text-white/50">
+<li><a class="hover:text-primary transition-colors" href="index.html">Dashboard</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Lost &amp; Found</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Adoption</a></li>
+<!-- Removed unused Community link -->
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold mb-4">Support</h4>
+<ul class="space-y-2 text-sm text-white/50">
+<li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Safety Guidelines</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold mb-4">Stay Connected</h4>
+<div class="flex gap-4 mb-4">
+<a class="text-white/50 hover:text-primary transition-colors" href="#">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+</a>
+<a class="text-white/50 hover:text-primary transition-colors" href="#">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.332 3.608 1.308.975.975 1.245 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.332 2.633-1.308 3.608-.975.975-2.242 1.245-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.332-3.608-1.308-.975-.975-1.245-2.242-1.308-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.332-2.633 1.308-3.608.975-.975 2.242-1.245 3.608-1.308 1.266-.058 1.646-.07 4.85-.07m0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.058-1.281.072-1.689.072-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.058-1.689-.072-4.948-.072l0 0zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zM12 16.012c-2.216 0-4.012-1.796-4.012-4.012s1.796-4.012 4.012-4.012 4.012 1.796 4.012 4.012-1.796 4.012-4.012 4.012zM19.383 3.321c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+</div>
+<label class="block text-xs font-bold uppercase tracking-wider text-white/40 mb-2">Subscribe to alerts</label>
+<div class="flex gap-2">
+<input class="bg-background-dark border-border-dark rounded-lg text-sm flex-1 focus:ring-primary focus:border-primary" placeholder="Email address" type="email"/>
+<button class="bg-primary text-background-dark px-4 py-2 rounded-lg text-xs font-bold">Join</button>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-border-dark flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/30">
+<p>© 2024 Nivâra Pet Care Platform. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Cookies</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Owner Details Modal -->
+<div id="ownerOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-[1200]"></div>
+<div id="ownerModal" class="fixed inset-0 z-[1300] hidden items-center justify-center">
+  <div class="max-w-md w-[92%] sm:w-[28rem] rounded-2xl border border-white/10 bg-background-dark/90 shadow-2xl p-6">
+    <div class="flex items-start justify-between mb-4">
+      <h3 class="text-2xl font-bold">Owner Details</h3>
+      <button id="ownerClose" class="p-2 text-white/60 hover:text-white rounded"><span class="material-symbols-outlined">close</span></button>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+      <div>
+        <p class="text-xs text-white/40 mb-1">Owner Name</p>
+        <p id="ownerName" class="text-white font-semibold">—</p>
+      </div>
+      <div>
+        <p class="text-xs text-white/40 mb-1">Email</p>
+        <p id="ownerEmail" class="text-white font-semibold">—</p>
+      </div>
+      <div class="sm:col-span-2">
+        <p class="text-xs text-white/40 mb-1">Phone</p>
+        <p id="ownerPhone" class="text-white font-semibold">—</p>
+      </div>
+    </div>
+    <div class="flex justify-end gap-2">
+      <button id="ownerCancel" class="px-4 py-2 rounded-lg border border-white/10 text-white/70 hover:text-white hover:bg-white/5">Cancel</button>
+      <a id="ownerCall" href="#" class="px-4 py-2 rounded-lg bg-primary text-background-dark font-bold hover:brightness-110 flex items-center gap-2"><span class="material-symbols-outlined text-sm">call</span>Call</a>
+    </div>
+  </div>
+</div>
+<div id="locOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-[1200]"></div>
+<div id="locModal" class="fixed inset-0 z-[1300] hidden items-center justify-center">
+<div class="max-w-md w-[92%] sm:w-[28rem] rounded-2xl border border-white/10 bg-background-dark/90 shadow-2xl p-6">
+<div class="flex items-start justify-between mb-4">
+<h3 class="text-2xl font-bold">Change Your Location</h3>
+<button id="locClose" class="p-2 text-white/60 hover:text-white rounded"><span class="material-symbols-outlined">close</span></button>
+</div>
+<p class="text-white/60 text-sm mb-6">Enter your PIN code to see nearby posts.</p>
+<label class="block text-xs font-semibold text-white/50 mb-2">Enter PIN Code</label>
+<div class="flex items-center gap-2 mb-4">
+<input id="pinInput" type="text" inputmode="numeric" placeholder="e.g. 400001" class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"/>
+<button id="useCurrent" class="px-3 py-3 rounded-lg border border-primary/30 bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20 flex items-center gap-1"><span class="material-symbols-outlined text-sm">my_location</span>Use Current</button>
+</div>
+<button id="updateLoc" class="w-full py-3 rounded-xl bg-primary text-background-dark font-black text-sm hover:shadow-[0_0_20px_rgba(19,236,236,0.3)] transition-all">UPDATE LOCATION</button>
+<div class="mt-6 text-center">
+<p class="text-[11px] text-white/40 mb-2">POPULAR CITIES</p>
+<div class="flex items-center justify-center gap-2">
+<button class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 hover:bg-white/10" data-pin="400001" data-label="Mumbai, IN">Mumbai</button>
+<button class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 hover:bg-white/10" data-pin="110001" data-label="Delhi, IN">Delhi</button>
+<button class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 hover:bg-white/10" data-pin="560001" data-label="Bangalore, IN">Bangalore</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var locationBtn = document.getElementById('locationBtn');
+  var locationLabel = document.getElementById('locationLabel');
+  var locOverlay = document.getElementById('locOverlay');
+  var locModal = document.getElementById('locModal');
+  var locClose = document.getElementById('locClose');
+  var pinInput = document.getElementById('pinInput');
+  var updateLoc = document.getElementById('updateLoc');
+  var useCurrent = document.getElementById('useCurrent');
+  function openLoc(){
+    locOverlay?.classList.remove('hidden');
+    locModal?.classList.remove('hidden');
+    locModal?.classList.add('flex');
+    document.body.classList.add('overflow-hidden');
+    var savedPin = sessionStorage.getItem('userPin') || '';
+    if(pinInput && savedPin) pinInput.value = savedPin;
+  }
+  function closeLoc(){
+    locOverlay?.classList.add('hidden');
+    locModal?.classList.add('hidden');
+    locModal?.classList.remove('flex');
+    document.body.classList.remove('overflow-hidden');
+  }
+  function pinToLabel(pin){
+    var map = { '400001': 'Mumbai, IN', '110001': 'Delhi, IN', '560001': 'Bangalore, IN' };
+    return map[pin] || ('PIN ' + pin);
+  }
+  function applyPin(pin){
+    if(!/^\d{5,6}$/.test(pin)) return false;
+    try { sessionStorage.setItem('userPin', pin); } catch {}
+    if(locationLabel) locationLabel.textContent = pinToLabel(pin);
+    closeLoc();
+    return true;
+  }
+  locationBtn?.addEventListener('click', openLoc);
+  locOverlay?.addEventListener('click', closeLoc);
+  locClose?.addEventListener('click', closeLoc);
+  updateLoc?.addEventListener('click', function(){
+    var pin = (pinInput?.value || '').trim();
+    if(!applyPin(pin)){
+      pinInput?.classList.add('ring-1','ring-red-400');
+      setTimeout(function(){ pinInput?.classList.remove('ring-1','ring-red-400'); }, 600);
+    }
+  });
+  useCurrent?.addEventListener('click', function(){
+    (async function(){
+      try{
+        await new Promise(function(res, rej){ return navigator.geolocation ? navigator.geolocation.getCurrentPosition(res, rej, { timeout: 5000 }) : rej(); });
+        if(locationLabel) locationLabel.textContent = 'Current Location';
+        closeLoc();
+      } catch { pinInput?.focus(); }
+    })();
+  });
+  Array.prototype.slice.call(document.querySelectorAll('#locModal [data-pin]')).forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pin = btn.getAttribute('data-pin') || '';
+      if(pinInput) pinInput.value = pin;
+    });
+  });
+  Array.prototype.slice.call(document.querySelectorAll('button[data-card-id]')).forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var id = btn.getAttribute('data-card-id');
+      var url = window.location.origin + window.location.pathname + '#post-' + id;
+      (async function(){
+        try {
+          await navigator.clipboard.writeText(url);
+          btn.classList.add('bg-border-dark');
+          setTimeout(function(){ btn.classList.remove('bg-border-dark'); }, 600);
+        } catch {
+          var fallback = document.createElement('input');
+          fallback.value = url;
+          document.body.appendChild(fallback);
+          fallback.select();
+          document.execCommand('copy');
+          document.body.removeChild(fallback);
+        }
+      })();
+    });
+  });
+  (function(){
+    function minsAgo(ts){
+      var t = typeof ts === 'number' ? ts : Date.now();
+      var diff = Math.max(0, Date.now() - t);
+      return Math.floor(diff/60000);
+    }
+    function timeLabel(mins){
+      if(mins < 60) return mins + 'm ago';
+      if(mins < 1440) return Math.round(mins/60) + 'h ago';
+      if(mins < 2880) return 'Yesterday';
+      return Math.round(mins/1440) + ' days ago';
+    }
+    function createLfCard(p){
+      var status = (p.status||'lost').toLowerCase();
+      var type = (p.type||'').toLowerCase();
+      var mins = minsAgo(p.createdAt||Date.now());
+      var card = document.createElement('div');
+      card.setAttribute('data-status', status==='resolved' ? 'found' : status);
+      card.setAttribute('data-type', type || 'other');
+      card.setAttribute('data-mins', String(mins));
+      var hoverCls = status==='lost' ? 'hover:border-lost-red/50' : 'hover:border-primary/50';
+      card.className = 'bg-card-dark border border-border-dark rounded-2xl overflow-hidden ' + hoverCls + ' transition-all group flex flex-col';
+      var rel = document.createElement('div');
+      rel.className = 'relative h-48 overflow-hidden';
+      var img = document.createElement('img');
+      img.className = 'w-full h-full object-cover group-hover:scale-110 transition-transform duration-500';
+      img.src = p.photo || 'https://lh3.googleusercontent.com/aida-public/AB6AXuD2qI2H-1xWmJ0HqZFqgWwcwPSv_RfOqYwYzJm6eY7aF8fLx1oQ4k2mD0W6Lu3G0qH9uM7P8h9tC1yG0k3mZKj8o-9kP7M2y3KxXkz9';
+      rel.appendChild(img);
+      var badge = document.createElement('div');
+      if(status==='lost'){
+        badge.className = 'absolute top-3 left-3 bg-lost-red text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest shadow-lg';
+        badge.textContent = 'Lost';
+      } else {
+        badge.className = 'absolute top-3 left-3 bg-primary text-background-dark text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest shadow-lg';
+        badge.textContent = 'Found';
+      }
+      rel.appendChild(badge);
+      var time = document.createElement('div');
+      time.className = 'absolute bottom-3 right-3 bg-black/60 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] flex items-center gap-1';
+      time.innerHTML = '<span class=\"material-symbols-outlined text-xs text-primary\">schedule</span>' + timeLabel(mins);
+      rel.appendChild(time);
+      card.appendChild(rel);
+      var body = document.createElement('div');
+      body.className = 'p-5 flex-grow';
+      var head = document.createElement('div');
+      head.className = 'flex justify-between items-start mb-3';
+      var left = document.createElement('div');
+      var h3 = document.createElement('h3');
+      h3.className = 'text-xl font-bold text-white';
+      h3.textContent = p.name || (status==='lost' ? 'Lost Pet' : 'Found Pet');
+      var small = document.createElement('p');
+      small.className = 'text-primary text-xs font-semibold';
+      small.textContent = p.breed || (p.type ? p.type.charAt(0).toUpperCase()+p.type.slice(1) : 'Unknown');
+      left.appendChild(h3); left.appendChild(small);
+      head.appendChild(left);
+      body.appendChild(head);
+      var loc = document.createElement('div');
+      loc.className = 'flex items-start gap-2 bg-background-dark/50 p-3 rounded-xl mb-4';
+      var locIcon = document.createElement('span');
+      locIcon.className = 'material-symbols-outlined ' + (status==='lost' ? 'text-lost-red' : 'text-primary') + ' text-lg';
+      locIcon.textContent = status==='lost' ? 'location_on' : 'location_searching';
+      var locBox = document.createElement('div');
+      locBox.className = 'text-[11px] leading-snug';
+      var locLbl = document.createElement('span');
+      locLbl.className = 'text-white/40 block mb-0.5';
+      locLbl.textContent = status==='lost' ? 'Last Seen' : 'Found At';
+      var locVal = document.createElement('span');
+      locVal.className = 'text-white/80 font-medium';
+      locVal.textContent = p.location || '—';
+      locBox.appendChild(locLbl); locBox.appendChild(locVal);
+      loc.appendChild(locIcon); loc.appendChild(locBox);
+      body.appendChild(loc);
+      card.appendChild(body);
+      var actions = document.createElement('div');
+      actions.className = 'px-5 pb-5 pt-0 mt-auto';
+      var row = document.createElement('div');
+      row.className = 'flex gap-2';
+      var contact = document.createElement('button');
+      contact.className = 'flex-1 bg-primary text-background-dark font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 hover:brightness-110 transition-all';
+      contact.setAttribute('data-owner-name', p.ownerName || '');
+      contact.setAttribute('data-owner-email', p.ownerEmail || '');
+      contact.setAttribute('data-owner-phone', p.ownerPhone || '');
+      contact.innerHTML = '<span class=\"material-symbols-outlined text-sm\">call</span>Contact Owner';
+      row.appendChild(contact);
+      actions.appendChild(row);
+      card.appendChild(actions);
+      return card;
+    }
+    try{
+      var raw = sessionStorage.getItem('lostFoundPosts');
+      var arr = raw ? JSON.parse(raw) : [];
+      if(!Array.isArray(arr)) arr = [];
+      var grid = document.getElementById('lfGrid');
+      if(grid){
+        arr.forEach(function(p){ grid.appendChild(createLfCard(p)); });
+      }
+    } catch {}
+  })();
+  (function(){
+    var filters = { status: 'all', type: null, maxMins: null };
+    var cards = Array.prototype.slice.call(document.querySelectorAll('[data-status]'));
+    function highlightStatus(){
+      document.getElementById('filterAll')?.classList.toggle('bg-primary', filters.status==='all');
+      document.getElementById('filterAll')?.classList.toggle('text-background-dark', filters.status==='all');
+      document.getElementById('filterLost')?.classList.toggle('bg-primary', filters.status==='lost');
+      document.getElementById('filterLost')?.classList.toggle('text-background-dark', filters.status==='lost');
+      document.getElementById('filterFound')?.classList.toggle('bg-primary', filters.status==='found');
+      document.getElementById('filterFound')?.classList.toggle('text-background-dark', filters.status==='found');
+    }
+    function applyFilters(){
+      cards.forEach(function(card){
+        var s = card.getAttribute('data-status');
+        var t = (card.getAttribute('data-type')||'').toLowerCase();
+        var m = parseInt(card.getAttribute('data-mins')||'999999', 10);
+        var show = (filters.status==='all' || s===filters.status)
+          && (filters.type===null || t===filters.type)
+          && (filters.maxMins===null || m <= filters.maxMins);
+        card.classList.toggle('hidden', !show);
+      });
+      highlightStatus();
+      document.getElementById('chipToday')?.classList.toggle('hidden', filters.maxMins===null);
+      var chipType = document.getElementById('chipType');
+      chipType?.classList.toggle('hidden', filters.type===null);
+    }
+    document.getElementById('filterAll')?.addEventListener('click', function(){ filters.status='all'; applyFilters(); });
+    document.getElementById('filterLost')?.addEventListener('click', function(){ filters.status='lost'; applyFilters(); });
+    document.getElementById('filterFound')?.addEventListener('click', function(){ filters.status='found'; applyFilters(); });
+    document.getElementById('timeFilterBtn')?.addEventListener('click', function(){
+      filters.maxMins = filters.maxMins===null ? 1440 : null;
+      applyFilters();
+    });
+    document.querySelector('#chipToday .material-symbols-outlined')?.addEventListener('click', function(){
+      filters.maxMins = null; applyFilters();
+    });
+    document.querySelector('#chipType .material-symbols-outlined')?.addEventListener('click', function(){
+      filters.type = null; applyFilters();
+    });
+    document.getElementById('clearFilters')?.addEventListener('click', function(){
+      filters = { status: 'all', type: null, maxMins: null };
+      applyFilters();
+    });
+    applyFilters();
+  })();
+  (function(){
+    var overlay = document.getElementById('ownerOverlay');
+    var modal = document.getElementById('ownerModal');
+    var closeBtn = document.getElementById('ownerClose');
+    var cancelBtn = document.getElementById('ownerCancel');
+    var nameEl = document.getElementById('ownerName');
+    var emailEl = document.getElementById('ownerEmail');
+    var phoneEl = document.getElementById('ownerPhone');
+    var callLink = document.getElementById('ownerCall');
+    function openOwner(name, email, phone){
+      nameEl.textContent = name || '—';
+      emailEl.textContent = email || '—';
+      phoneEl.textContent = phone || '—';
+      callLink.href = phone ? ('tel:' + phone.replace(/[^0-9+]/g,'')) : '#';
+      overlay?.classList.remove('hidden');
+      modal?.classList.remove('hidden');
+      modal?.classList.add('flex');
+      document.body.classList.add('overflow-hidden');
+    }
+    function closeOwner(){
+      overlay?.classList.add('hidden');
+      modal?.classList.add('hidden');
+      modal?.classList.remove('flex');
+      document.body.classList.remove('overflow-hidden');
+    }
+    overlay?.addEventListener('click', closeOwner);
+    closeBtn?.addEventListener('click', closeOwner);
+    cancelBtn?.addEventListener('click', closeOwner);
+    Array.prototype.slice.call(document.querySelectorAll('button[data-owner-name]')).forEach(function(btn){
+      btn.addEventListener('click', function(){
+        openOwner(btn.getAttribute('data-owner-name'), btn.getAttribute('data-owner-email'), btn.getAttribute('data-owner-phone'));
+      });
+    });
+  })();
+  (function(){
+    var savedPin = sessionStorage.getItem('userPin');
+    if(savedPin && locationLabel) locationLabel.textContent = pinToLabel(savedPin);
+  })();
+});
+</script>
+<script src="page-transitions.js"></script>
+</body></html>

@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nivâra Pet Medicines | Pharmacy Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102222",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"],
+                        "hand": ["Just Another Hand", "cursive"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #102222;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #234848;
+            border-radius: 10px;
+        }
+        .clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-white min-h-screen flex flex-col font-display">
+<!-- Persistent Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/10 px-4 md:px-10 py-3">
+<div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+<!-- Brand Logo -->
+<a href="index.html" class="flex items-center gap-2 shrink-0">
+<img src="logo.png" alt="Nivâra Logo" class="h-10">
+<h1 class="text-5xl font-hand tracking-[3px] text-white">nivâra</h1>
+</a>
+<!-- Primary Navigation -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="index.html">Home</a>
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="doctor_appointments_-_book_now_cta.html">Appointments</a>
+<a class="text-white text-sm font-medium border-b-2 border-primary pb-1" href="pet_medicines.html">Medicines</a>
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="lost_&_found.html">Lost &amp; Found</a>
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="pet_adoption.html">Adoptions</a>
+</nav>
+<!-- Global Search Bar -->
+<div class="flex-1 max-w-xl">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-white/40 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input id="medSearch" class="block w-full bg-white/5 border border-white/10 rounded-lg py-2 pl-10 pr-3 text-sm placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all" placeholder="Search for flea meds, heartworm, or antibiotics..." type="text"/>
+</div>
+</div>
+<!-- User Actions -->
+<div class="flex items-center gap-3 sm:gap-6">
+<button id="locationBtn" class="hidden md:flex items-center gap-2 text-xs font-medium text-white/60 hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-primary text-sm">location_on</span>
+<span id="locationLabel">Mumbai, IN</span>
+</button>
+<div class="flex items-center gap-2 sm:gap-4">
+<a id="cartLink" href="#" class="relative p-2 text-white/80 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span id="cartBadge" class="absolute top-1 right-1 size-4 bg-primary text-background-dark text-[10px] font-bold rounded-full flex items-center justify-center">0</span>
+</a>
+<a href="user_profile_&_management.html" class="hidden sm:flex items-center gap-2 bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 transition-colors">
+<div class="size-6 rounded-full bg-primary/20 flex items-center justify-center text-primary overflow-hidden">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+<span class="text-xs font-semibold">Account</span>
+</a>
+<button class="sm:hidden p-2 text-white/80">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl mx-auto w-full px-4 md:px-10 py-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Marketplace Main Section -->
+<div class="lg:col-span-12 space-y-8">
+<!-- Header Info -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-3xl font-800 tracking-tight">Available Medicines</h2>
+<p class="text-white/40 text-sm mt-1">Showing 42 products from 12 verified pharmacies near you.</p>
+</div>
+<div class="flex gap-2"></div>
+</div>
+<!-- Upload Prescription Section (Prominent Gate) -->
+<div id="uploadGate" class="border-2 border-dashed border-primary/40 rounded-2xl p-8 bg-primary/5 flex flex-col md:flex-row items-center gap-8 group">
+<div class="size-20 bg-primary/20 rounded-full flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">upload_file</span>
+</div>
+<div class="flex-1 text-center md:text-left">
+<h3 class="text-xl font-bold">Fast-Track Your Order</h3>
+<p class="text-white/60 text-sm mt-1">Found something you need? Upload your vet prescription to unlock pharmacy checkouts instantly.</p>
+</div>
+<div class="shrink-0 w-full md:w-auto">
+<button id="uploadCta" class="w-full md:px-8 py-3 rounded-xl bg-primary text-background-dark font-black text-sm hover:shadow-[0_0_20px_rgba(19,236,236,0.3)] transition-all">
+                        UPLOAD NOW
+                    </button>
+</div>
+</div>
+<!-- Medicine Grid + Right Panel -->
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+<div class="lg:col-span-3">
+<div id="medicineGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-primary/50 transition-all flex flex-col h-full">
+<figure class="relative h-48 bg-white/5 p-8 flex items-center justify-center overflow-hidden">
+<figcaption class="absolute top-3 left-3 flex gap-2">
+<span class="px-2 py-1 rounded bg-background-dark/80 backdrop-blur-md text-primary text-[10px] font-bold border border-primary/20">DOGS</span>
+<span class="px-2 py-1 rounded bg-yellow-500/20 text-yellow-500 text-[10px] font-bold border border-yellow-500/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] fill-1">verified</span> VET REC
+                            </span>
+</figcaption>
+<div class="w-32 h-32 bg-primary/10 rounded-full blur-2xl absolute group-hover:bg-primary/20 transition-all"></div>
+<img alt="Pet Medicine Bottle Layout" class="relative z-10 w-24 h-auto drop-shadow-2xl group-hover:scale-110 transition-transform" data-alt="Bottle of pet antibiotic medicine" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3H8H8SNrl7kXWQCg1qocPE5mRlgjkz0pEyXIiaL4WDPjrpAOUYxqsoIMAtT6FdwVx8QKC7KfWvANKNIgtvG0ORK6csHWZS18fjHPTRK7YkMUOPwKIfU_PMn0umyMd6TvI655NqTapMqbm6NIBzSZn6tFsPnkBruei2caaAHwyvA2_GEGWRYJtU4P0EeU36qSNywzErfKNH8bfW7aTGdlW2ZImOvmL0MXdK6X_xOawiUxIg7DcFPMNaYPn_9lkXf9O7LdKoRBbkSUc"/>
+</figure>
+<section class="p-5 space-y-4 flex-1 flex flex-col">
+<header class="flex justify-between items-start">
+<h4 class="font-bold text-lg group-hover:text-primary transition-colors">Apoquel 16mg</h4>
+<span class="text-xl font-black text-primary">$45.99</span>
+</header>
+<p class="text-xs text-white/40 mt-1 clamp-2">Targeted relief for canine allergic and atopic dermatitis. Fast acting.</p>
+<div class="space-y-2 pt-2 border-t border-white/5">
+<div class="flex items-center gap-2 text-xs font-medium text-white/60">
+<span class="material-symbols-outlined text-sm text-primary">local_pharmacy</span>
+<span>Wellness Pet Pharmacy</span>
+</div>
+<div class="flex items-center gap-2 text-[11px] text-white/40">
+<span class="material-symbols-outlined text-sm">near_me</span>
+<span>1.2 km away • Delivers in 2 hrs</span>
+</div>
+</div>
+<footer class="mt-auto min-h-[56px]">
+<button class="add-to-cart w-full text-center py-3 rounded-lg bg-white/5 hover:bg-primary hover:text-background-dark font-bold text-xs flex items-center justify-center gap-2 transition-all border border-white/10 group-hover:border-primary">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                            ADD TO CART
+                        </button>
+<div class="qty-control hidden w-full mt-2 bg-white/5 border border-white/10 rounded-lg flex items-center justify-between px-3 py-2">
+<button class="decrease px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-bold">-</button>
+<span class="qty text-sm font-bold">1</span>
+<button class="increase px-3 py-1 rounded bg-primary/20 text-primary hover:bg-primary/30 font-bold">+</button>
+</div>
+</footer>
+</section>
+</div>
+<!-- Card 2 -->
+<div class="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-primary/50 transition-all flex flex-col h-full">
+<figure class="relative h-48 bg-white/5 p-8 flex items-center justify-center overflow-hidden">
+<figcaption class="absolute top-3 left-3 flex gap-2">
+<span class="px-2 py-1 rounded bg-background-dark/80 backdrop-blur-md text-primary text-[10px] font-bold border border-primary/20">CATS</span>
+<span class="px-2 py-1 rounded bg-red-500/20 text-red-500 text-[10px] font-bold border border-red-500/20">PRESCRIPTION</span>
+</figcaption>
+<div class="w-32 h-32 bg-primary/10 rounded-full blur-2xl absolute group-hover:bg-primary/20 transition-all"></div>
+<img alt="Ointment Tube for Pets" class="relative z-10 w-24 h-auto drop-shadow-2xl group-hover:scale-110 transition-transform" data-alt="Tube of feline antibiotic ointment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKOk2iFVdBjjnaxA_uGXmEJPB7YKOOlZ5EKxdW2M9V1n6fOj_KQbUGlgUEuwhj_T3lnXDW-5StcOMDazOPiNgZaxKB9OQcjIbAjMqmPVYlJ21Pcn5mrzgamWQE-jMG4ke-0syS5iwszC9WozXmYHQIWHUPEc3jVQWvje_YM_0hsGIGsTf_e6uQOUilbfGwRE3AN7l2KmeQmARCTmSaXRc9Q8HCImFoAmCRqffZ_ecYsJ6ICGGEcwpoG6Tgzs2uPT5QCGHEygWwXfZZ"/>
+</figure>
+<section class="p-5 space-y-4 flex-1 flex flex-col">
+<header class="flex justify-between items-start">
+<h4 class="font-bold text-lg group-hover:text-primary transition-colors">Mirataz Ointment</h4>
+<span class="text-xl font-black text-primary">$32.50</span>
+</header>
+<p class="text-xs text-white/40 mt-1 clamp-2">Transdermal weight management support for cats with poor appetite.</p>
+<div class="space-y-2 pt-2 border-t border-white/5">
+<div class="flex items-center gap-2 text-xs font-medium text-white/60">
+<span class="material-symbols-outlined text-sm text-primary">local_pharmacy</span>
+<span>Metro Veterinary Care</span>
+</div>
+<div class="flex items-center gap-2 text-[11px] text-white/40">
+<span class="material-symbols-outlined text-sm">near_me</span>
+<span>3.5 km away • Delivers in 4 hrs</span>
+</div>
+</div>
+<footer class="mt-auto min-h-[56px]">
+<button class="add-to-cart w-full text-center py-3 rounded-lg bg-white/5 hover:bg-primary hover:text-background-dark font-bold text-xs flex items-center justify-center gap-2 transition-all border border-white/10 group-hover:border-primary">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                            ADD TO CART
+                        </button>
+<div class="qty-control hidden w-full mt-2 bg-white/5 border border-white/10 rounded-lg flex items-center justify-between px-3 py-2">
+<button class="decrease px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-bold">-</button>
+<span class="qty text-sm font-bold">1</span>
+<button class="increase px-3 py-1 rounded bg-primary/20 text-primary hover:bg-primary/30 font-bold">+</button>
+</div>
+</footer>
+</section>
+</div>
+<!-- Card 3 -->
+<div class="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-primary/50 transition-all flex flex-col h-full">
+<figure class="relative h-48 bg-white/5 p-8 flex items-center justify-center overflow-hidden">
+<figcaption class="absolute top-3 left-3 flex gap-2">
+<span class="px-2 py-1 rounded bg-background-dark/80 backdrop-blur-md text-primary text-[10px] font-bold border border-primary/20">DOGS/CATS</span>
+<span class="px-2 py-1 rounded bg-green-500/20 text-green-500 text-[10px] font-bold border border-green-500/20">OTC</span>
+</figcaption>
+<div class="w-32 h-32 bg-primary/10 rounded-full blur-2xl absolute group-hover:bg-primary/20 transition-all"></div>
+<img alt="Flea and Tick Box" class="relative z-10 w-24 h-auto drop-shadow-2xl group-hover:scale-110 transition-transform" data-alt="Box of flea and tick treatment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9z3luLcYpl2KAG8QC4sh__aW9Twd1_SW-VqNV_WIRgBgBWkPBjUBZAhSRtnruc_0VfdSzYZLFbm1vCMKmEfFV2ppCPrL4yl9WiQpbtcOIZRykcmxf1PQjdBBaj0bsBDpgLJOeunlV10Je3MjAxbfIRINHtut_DXa7g4E_cP5vcoF7-P3RQycTUf2P-NhaQRybMFGLMctVgAIqT15w53cIkEcmHx1C9vRWuUc8wAdP4JNSL4_UU_4mV4CggdUXXC0nUv1zpvBkchVq"/>
+</figure>
+<section class="p-5 space-y-4 flex-1 flex flex-col">
+<header class="flex justify-between items-start">
+<h4 class="font-bold text-lg group-hover:text-primary transition-colors">Bravecto Chewable</h4>
+<span class="text-xl font-black text-primary">$58.00</span>
+</header>
+<p class="text-xs text-white/40 mt-1 clamp-2">12-week protection against fleas and ticks in a single chewable tablet.</p>
+<div class="space-y-2 pt-2 border-t border-white/5">
+<div class="flex items-center gap-2 text-xs font-medium text-white/60">
+<span class="material-symbols-outlined text-sm text-primary">local_pharmacy</span>
+<span>Green Leaf Pharma</span>
+</div>
+<div class="flex items-center gap-2 text-[11px] text-white/40">
+<span class="material-symbols-outlined text-sm">near_me</span>
+<span>0.8 km away • Instant Pickup</span>
+</div>
+</div>
+<footer class="mt-auto min-h-[56px]">
+<button class="add-to-cart w-full text-center py-3 rounded-lg bg-white/5 hover:bg-primary hover:text-background-dark font-bold text-xs flex items-center justify-center gap-2 transition-all border border-white/10 group-hover:border-primary">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                            ADD TO CART
+                        </button>
+<div class="qty-control hidden w-full mt-2 bg-white/5 border border-white/10 rounded-lg flex items-center justify-between px-3 py-2">
+<button class="decrease px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-bold">-</button>
+<span class="qty text-sm font-bold">1</span>
+<button class="increase px-3 py-1 rounded bg-primary/20 text-primary hover:bg-primary/30 font-bold">+</button>
+</div>
+</footer>
+</section>
+</div>
+ 
+<!-- Repeat Card 1 for Grid Layout Balance -->
+<div class="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-primary/50 transition-all flex flex-col h-full">
+<figure class="relative h-48 bg-white/5 p-8 flex items-center justify-center overflow-hidden">
+<figcaption class="absolute top-3 left-3 flex gap-2">
+<span class="px-2 py-1 rounded bg-background-dark/80 backdrop-blur-md text-primary text-[10px] font-bold border border-primary/20">DOGS</span>
+</figcaption>
+<img alt="Generic Medicine Box" class="relative z-10 w-24 h-auto drop-shadow-2xl group-hover:scale-110 transition-transform" data-alt="Box of pet pain relief pills" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVLpuGnVllLT7dqPMO9Mkv9qo7iEnzJdfJhx86_NRhzXjA8dFDE2anMMRzEhs6w8-RQheOFJRkrGNj8GJaOobK54oBIhIxbxTLQsWOkk5KYmeCOPhGnteu-5KRPNyNJfwSLTRxWnlu9Tnv4-qMfisn7PXtU9AHaAvTgjqhZgDjwDOSDlRIReQu9M7htD30Pao0FvvGo6i8-vLgrvQL8zqCUWJGgdZzCaO3fPKhyTn7OQYwTXhfVD5KWlF3wCOrcNLhntyf4TCeGWKi"/>
+</figure>
+<section class="p-5 space-y-4 flex-1 flex flex-col">
+<header class="flex justify-between items-start">
+<h4 class="font-bold text-lg group-hover:text-primary transition-colors">Carprofen 100mg</h4>
+<span class="text-xl font-black text-primary">$18.25</span>
+</header>
+<p class="text-xs text-white/40 mt-1 clamp-2">Non-steroidal anti-inflammatory drug for pain and inflammation.</p>
+<div class="space-y-2 pt-2 border-t border-white/5">
+<div class="flex items-center gap-2 text-xs font-medium text-white/60">
+<span class="material-symbols-outlined text-sm text-primary">local_pharmacy</span>
+<span>City Vet Pharmacy</span>
+</div>
+<div class="flex items-center gap-2 text-[11px] text-white/40">
+<span class="material-symbols-outlined text-sm">near_me</span>
+<span>2.1 km away • Delivers in 3 hrs</span>
+</div>
+</div>
+<footer class="mt-auto min-h-[56px]">
+<button class="add-to-cart w-full text-center py-3 rounded-lg bg-white/5 hover:bg-primary hover:text-background-dark font-bold text-xs flex items-center justify-center gap-2 transition-all border border-white/10 group-hover:border-primary">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                            ADD TO CART
+                        </button>
+<div class="qty-control hidden w-full mt-2 bg-white/5 border border-white/10 rounded-lg flex items-center justify-between px-3 py-2">
+<button class="decrease px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-bold">-</button>
+<span class="qty text-sm font-bold">1</span>
+<button class="increase px-3 py-1 rounded bg-primary/20 text-primary hover:bg-primary/30 font-bold">+</button>
+</div>
+</footer>
+</section>
+</div>
+<!-- Repeat Card 2 for Grid Layout Balance -->
+<div class="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-primary/50 transition-all flex flex-col h-full">
+<figure class="relative h-48 bg-white/5 p-8 flex items-center justify-center overflow-hidden">
+<figcaption class="absolute top-3 left-3 flex gap-2">
+<span class="px-2 py-1 rounded bg-background-dark/80 backdrop-blur-md text-primary text-[10px] font-bold border border-primary/20">EXOTIC</span>
+</figcaption>
+<img alt="Liquid Medicine Dropper" class="relative z-10 w-24 h-auto drop-shadow-2xl group-hover:scale-110 transition-transform" data-alt="Liquid medicine dropper bottle for exotic pets" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEJDgLiOZxpZzObuH_mQzojVupB9thxWohIFUTXsZYBNfBM0u0AzwkcB4fPkja9bd40N19aoXyiaHTSWjOB6GTy18fUB86jEWCSCJG-qe2ii8pRFLgnPaRPw_dnL8EONj3fN1PQjiDALxH8Gl8b5eARrlq_46CzIsIibOKoK_pz4ofFHm9HLhYyFV5IVsFMJJE4NknbZslbFRPwL_To9Jh1RsiBwblML50YB2K0cVmoG7OfzXwr7oW4wSrXlaZgpzbKuTBfIR5umpg"/>
+</figure>
+<section class="p-5 space-y-4 flex-1 flex flex-col">
+<header class="flex justify-between items-start">
+<h4 class="font-bold text-lg group-hover:text-primary transition-colors">Enrofloxacin Drops</h4>
+<span class="text-xl font-black text-primary">$12.40</span>
+</header>
+<p class="text-xs text-white/40 mt-1 clamp-2">Broad spectrum antibiotic for small mammals and reptiles.</p>
+<div class="space-y-2 pt-2 border-t border-white/5">
+<div class="flex items-center gap-2 text-xs font-medium text-white/60">
+<span class="material-symbols-outlined text-sm text-primary">local_pharmacy</span>
+<span>Universal Pet Apothecary</span>
+</div>
+<div class="flex items-center gap-2 text-[11px] text-white/40">
+<span class="material-symbols-outlined text-sm">near_me</span>
+<span>15 km away • Delivery Tomorrow</span>
+</div>
+</div>
+<footer class="mt-auto min-h-[56px]">
+<button class="add-to-cart w-full text-center py-3 rounded-lg bg-white/5 hover:bg-primary hover:text-background-dark font-bold text-xs flex items-center justify-center gap-2 transition-all border border-white/10 group-hover:border-primary">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                            ADD TO CART
+                        </button>
+<div class="qty-control hidden w-full mt-2 bg-white/5 border border-white/10 rounded-lg flex items-center justify-between px-3 py-2">
+<button class="decrease px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-bold">-</button>
+<span class="qty text-sm font-bold">1</span>
+<button class="increase px-3 py-1 rounded bg-primary/20 text-primary hover:bg-primary/30 font-bold">+</button>
+</div>
+</footer>
+</section>
+</div>
+</div>
+<!-- Trust Badges Footer Area -->
+<div class="pt-8 border-t border-white/10 flex flex-wrap gap-10 items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-3xl">verified_user</span>
+<span class="font-black text-xs tracking-tighter">SECURE PAYMENTS</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-3xl">health_metrics</span>
+<span class="font-black text-xs tracking-tighter">VET VERIFIED</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-3xl">local_shipping</span>
+<span class="font-black text-xs tracking-tighter">FAST HOME DELIVERY</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Location Modal -->
+<div id="locOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-[60]"></div>
+<div id="locModal" class="fixed inset-0 z-[70] hidden items-center justify-center">
+<div class="max-w-md w-[92%] sm:w-[28rem] rounded-2xl border border-white/10 bg-background-dark/90 shadow-2xl p-6">
+<div class="flex items-start justify-between mb-4">
+<h3 class="text-2xl font-bold">Change Your Location</h3>
+<button id="locClose" class="p-2 text-white/60 hover:text-white rounded"><span class="material-symbols-outlined">close</span></button>
+</div>
+<p class="text-white/60 text-sm mb-6">Enter your PIN code to find pharmacies and medicine shops near you.</p>
+<label class="block text-xs font-semibold text-white/50 mb-2">Enter PIN Code</label>
+<div class="flex items-center gap-2 mb-4">
+<input id="pinInput" type="text" inputmode="numeric" placeholder="e.g. 400001" class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"/>
+<button id="useCurrent" class="px-3 py-3 rounded-lg border border-primary/30 bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20 flex items-center gap-1"><span class="material-symbols-outlined text-sm">my_location</span>Use Current</button>
+</div>
+<button id="updateLoc" class="w-full py-3 rounded-xl bg-primary text-background-dark font-black text-sm hover:shadow-[0_0_20px_rgba(19,236,236,0.3)] transition-all">UPDATE LOCATION</button>
+<div class="mt-6 text-center">
+<p class="text-[11px] text-white/40 mb-2">POPULAR CITIES</p>
+<div class="flex items-center justify-center gap-2">
+<button class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 hover:bg-white/10" data-pin="400001" data-label="Mumbai, IN">Mumbai</button>
+<button class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 hover:bg-white/10" data-pin="110001" data-label="Delhi, IN">Delhi</button>
+<button class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 hover:bg-white/10" data-pin="560001" data-label="Bangalore, IN">Bangalore</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Global Upload Progress Indicator (Sticky Mobile Bottom) -->
+<div class="md:hidden sticky bottom-4 left-4 right-4 z-40">
+<div class="bg-primary p-4 rounded-xl shadow-2xl flex items-center justify-between text-background-dark">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined font-bold">clinical_notes</span>
+<div>
+<p class="text-xs font-black leading-none">Prescription Required</p>
+<p id="uploadStatus" class="text-[10px] opacity-80">Tap to upload before checkout</p>
+</div>
+</div>
+<button id="uploadPdfBtn" class="bg-background-dark text-primary px-4 py-1.5 rounded-lg text-[10px] font-black uppercase">Upload</button>
+<input id="prescriptionInput" type="file" accept="application/pdf" class="hidden"/>
+</div>
+</div>
+<!-- Main Footer -->
+<footer class="bg-background-dark border-t border-white/5 py-12 px-10 mt-12">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-10">
+<div class="space-y-4 max-w-xs">
+<div class="flex items-center gap-2">
+<div class="size-6 bg-primary rounded-md flex items-center justify-center text-background-dark">
+<span class="material-symbols-outlined text-sm font-bold">pets</span>
+</div>
+<span class="font-bold text-lg">Nivâra</span>
+</div>
+<p class="text-xs text-white/40 leading-relaxed">The safest and fastest way to get verified pet medications from licensed local pharmacies to your doorstep.</p>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-10">
+<div class="space-y-3">
+<h5 class="text-xs font-bold uppercase text-white/20">Marketplace</h5>
+<ul class="text-xs space-y-2 text-white/60">
+<li class="hover:text-primary cursor-pointer">All Medicines</li>
+<li class="hover:text-primary cursor-pointer">Pharmacies</li>
+<li class="hover:text-primary cursor-pointer">Refills</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h5 class="text-xs font-bold uppercase text-white/20">Legal</h5>
+<ul class="text-xs space-y-2 text-white/60">
+<li class="hover:text-primary cursor-pointer">Prescription Policy</li>
+<li class="hover:text-primary cursor-pointer">Privacy</li>
+<li class="hover:text-primary cursor-pointer">Terms of Service</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h5 class="text-xs font-bold uppercase text-white/20">Support</h5>
+<ul class="text-xs space-y-2 text-white/60">
+<li class="hover:text-primary cursor-pointer">Help Center</li>
+<li class="hover:text-primary cursor-pointer">Pharmacy Login</li>
+<li class="hover:text-primary cursor-pointer">Contact Us</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] font-medium text-white/20">
+<p>© 2024 Nivâra Pet Medicines. All rights reserved.</p>
+<div class="flex gap-4">
+<span>Facebook</span>
+<span>Twitter</span>
+<span>Instagram</span>
+</div>
+</div>
+</footer>
+<script>
+(function() {
+  const norm = (s) => (s || '').toLowerCase().trim();
+  const grid = document.getElementById('medicineGrid');
+  const search = document.getElementById('medSearch');
+  const badge = document.getElementById('cartBadge');
+  const cartLink = document.getElementById('cartLink');
+  const locationBtn = document.getElementById('locationBtn');
+  const locationLabel = document.getElementById('locationLabel');
+  const locModal = document.getElementById('locModal');
+  const locOverlay = document.getElementById('locOverlay');
+  const locClose = document.getElementById('locClose');
+  const pinInput = document.getElementById('pinInput');
+  const useCurrent = document.getElementById('useCurrent');
+  const updateLoc = document.getElementById('updateLoc');
+  const cart = new Map();
+  const uploadPdfBtn = document.getElementById('uploadPdfBtn');
+  const presInput = document.getElementById('prescriptionInput');
+  const uploadStatus = document.getElementById('uploadStatus');
+
+  const totalQty = () => {
+    let t = 0;
+    for (const q of cart.values()) t += q;
+    return t;
+  };
+  const distinctCount = () => {
+    let c = 0;
+    for (const q of cart.values()) if (q > 0) c++;
+    return c;
+  };
+
+  const updateBadge = () => {
+    if (!badge) return;
+    badge.textContent = String(distinctCount());
+  };
+
+  const getCards = () => Array.from(grid?.querySelectorAll('.group.border') || []);
+
+  const setupCard = (card) => {
+    if (card.dataset.wired === '1') return;
+    const titleEl = card.querySelector('h4');
+    const title = titleEl ? titleEl.textContent.trim() : '';
+    const id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    card.dataset.medicineId = id;
+
+    const addBtn = card.querySelector('.add-to-cart');
+    const qtyWrap = card.querySelector('.qty-control');
+    const qtyEl = card.querySelector('.qty');
+    const dec = card.querySelector('.decrease');
+    const inc = card.querySelector('.increase');
+
+    const showAdd = () => {
+      addBtn?.classList.remove('hidden');
+      qtyWrap?.classList.add('hidden');
+    };
+    const showQty = () => {
+      addBtn?.classList.add('hidden');
+      qtyWrap?.classList.remove('hidden');
+    };
+    const setQty = (q) => {
+      if (q <= 0) {
+        cart.delete(id);
+        showAdd();
+      } else {
+        cart.set(id, q);
+        if (qtyEl) qtyEl.textContent = String(q);
+        showQty();
+      }
+      updateBadge();
+    };
+
+    addBtn?.addEventListener('click', () => setQty(1));
+    inc?.addEventListener('click', () => {
+      const cur = cart.get(id) || 0;
+      setQty(cur + 1);
+    });
+    dec?.addEventListener('click', () => {
+      const cur = cart.get(id) || 0;
+      setQty(cur - 1);
+    });
+
+    card.dataset.wired = '1';
+  };
+
+  const filterCards = (q) => {
+    const query = norm(q);
+    getCards().forEach((card) => {
+      const hay = norm(card.innerText);
+      const match = !query || hay.includes(query);
+      card.classList.toggle('hidden', !match);
+    });
+  };
+
+  // Initialize
+  getCards().forEach(setupCard);
+  updateBadge();
+
+  // Cart nav
+  cartLink?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (totalQty() >= 1) {
+      try {
+        sessionStorage.setItem('petCart', JSON.stringify(Object.fromEntries(cart)));
+      } catch {}
+      location.href = 'medicine_cart_&_checkout.html';
+    } else {
+      cartLink.classList.add('opacity-50');
+      setTimeout(() => cartLink.classList.remove('opacity-50'), 300);
+    }
+  });
+
+  // Prescription PDF upload
+  function setUploaded(name){
+    try { sessionStorage.setItem('prescriptionPdf', 'true'); sessionStorage.setItem('prescriptionPdfName', name || ''); } catch {}
+    if (uploadStatus) uploadStatus.textContent = name ? ('Uploaded: ' + name) : 'Uploaded';
+  }
+  uploadPdfBtn?.addEventListener('click', function(){ presInput?.click(); });
+  presInput?.addEventListener('change', function(){
+    const f = presInput.files && presInput.files[0];
+    if (!f) return;
+    const okType = f.type === 'application/pdf' || /\.pdf$/i.test(f.name);
+    const okSize = f.size <= 10 * 1024 * 1024;
+    if (!okType || !okSize) {
+      uploadStatus?.classList.add('opacity-100');
+      uploadStatus?.classList.add('text-red-200');
+      uploadStatus && (uploadStatus.textContent = 'Invalid file. Upload a PDF under 10MB.');
+      setTimeout(function(){
+        uploadStatus?.classList.remove('text-red-200');
+      }, 1500);
+      return;
+    }
+    setUploaded(f.name);
+  });
+
+  // Location modal helpers
+  const openLoc = () => {
+    locOverlay?.classList.remove('hidden');
+    locModal?.classList.remove('hidden');
+    locModal?.classList.add('flex');
+    document.body.classList.add('overflow-hidden');
+    const savedPin = sessionStorage.getItem('userPin') || '';
+    if (pinInput && savedPin) pinInput.value = savedPin;
+  };
+  const closeLoc = () => {
+    locOverlay?.classList.add('hidden');
+    locModal?.classList.add('hidden');
+    locModal?.classList.remove('flex');
+    document.body.classList.remove('overflow-hidden');
+  };
+  const pinToLabel = (pin) => {
+    const map = { '400001': 'Mumbai, IN', '110001': 'Delhi, IN', '560001': 'Bangalore, IN' };
+    return map[pin] || `PIN ${pin}`;
+  };
+  const applyPin = (pin) => {
+    if (!/^\d{5,6}$/.test(pin)) return false;
+    try { sessionStorage.setItem('userPin', pin); } catch {}
+    if (locationLabel) locationLabel.textContent = pinToLabel(pin);
+    closeLoc();
+    return true;
+  };
+
+  // Wire location UI
+  locationBtn?.addEventListener('click', openLoc);
+  locOverlay?.addEventListener('click', closeLoc);
+  locClose?.addEventListener('click', closeLoc);
+  updateLoc?.addEventListener('click', () => {
+    const pin = (pinInput?.value || '').trim();
+    if (!applyPin(pin)) {
+      pinInput?.classList.add('ring-1', 'ring-red-400');
+      setTimeout(() => pinInput?.classList.remove('ring-1', 'ring-red-400'), 600);
+    }
+  });
+  useCurrent?.addEventListener('click', async () => {
+    try {
+      await new Promise((res, rej) => navigator.geolocation ? navigator.geolocation.getCurrentPosition(res, rej, { timeout: 5000 }) : rej());
+      if (locationLabel) locationLabel.textContent = 'Current Location';
+      closeLoc();
+    } catch {
+      pinInput?.focus();
+    }
+  });
+  locModal?.querySelectorAll('[data-pin]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const pin = btn.getAttribute('data-pin') || '';
+      if (pinInput) pinInput.value = pin;
+    });
+  });
+  // Apply saved pin on load
+  (() => {
+    const savedPin = sessionStorage.getItem('userPin');
+    if (savedPin && locationLabel) locationLabel.textContent = pinToLabel(savedPin);
+  })();
+
+  // Search
+  search?.addEventListener('input', (e) => {
+    filterCards(e.target.value);
+  });
+
+  // Right panel actions
+  const uploadBtn = document.getElementById('uploadCta');
+  uploadBtn?.addEventListener('click', () => {
+    const gate = document.getElementById('uploadGate');
+    gate?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  const broadenBtn = document.getElementById('broadCta');
+  broadenBtn?.addEventListener('click', () => {
+    search?.focus();
+  });
+})();
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const cartLink = document.getElementById('cartLink');
+        cartLink.href = `medicine_cart_&_checkout.html`;
+    const medicineGrid = document.getElementById('medicineGrid');
+    const cartBadge = document.getElementById('cartBadge');
+
+    const updateCartBadge = () => {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const totalItems = cart.length;
+        cartBadge.textContent = totalItems;
+        cartBadge.classList.toggle('hidden', totalItems === 0);
+    };
+
+    medicineGrid.addEventListener('click', (e) => {
+        const target = e.target;
+        const productCard = target.closest('.group');
+        if (!productCard) return;
+
+        const productId = productCard.querySelector('h4').textContent.trim();
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const existingProductIndex = cart.findIndex(item => item.id === productId);
+
+        const getProductData = (card) => {
+            const id = card.querySelector('h4').textContent.trim();
+            const name = card.querySelector('h4').textContent.trim();
+            const price = parseFloat(card.querySelector('span.text-xl').textContent.replace('$', ''));
+            const image = card.querySelector('img').src;
+            const description = card.querySelector('p.text-xs').textContent.trim();
+            return { id, name, price, image, description, quantity: 1 };
+        };
+
+        if (target.closest('.add-to-cart')) {
+            e.preventDefault();
+            if (existingProductIndex > -1) {
+                cart[existingProductIndex].quantity++;
+            } else {
+                const newProduct = getProductData(productCard);
+                cart.push(newProduct);
+            }
+            target.closest('footer').querySelector('.add-to-cart').classList.add('hidden');
+            target.closest('footer').querySelector('.qty-control').classList.remove('hidden');
+        }
+
+        if (target.closest('.increase')) {
+            e.preventDefault();
+            cart[existingProductIndex].quantity++;
+        }
+
+        if (target.closest('.decrease')) {
+            e.preventDefault();
+            if (cart[existingProductIndex].quantity > 1) {
+                cart[existingProductIndex].quantity--;
+            } else {
+                cart.splice(existingProductIndex, 1);
+                productCard.querySelector('.add-to-cart').classList.remove('hidden');
+                productCard.querySelector('.qty-control').classList.add('hidden');
+            }
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCart(productCard, productId);
+        updateCartBadge();
+    });
+
+    const updateCart = (card, productId) => {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const productInCart = cart.find(item => item.id === productId);
+        const qtySpan = card.querySelector('.qty');
+        const addToCartBtn = card.querySelector('.add-to-cart');
+        const qtyControl = card.querySelector('.qty-control');
+
+        if (productInCart) {
+            qtySpan.textContent = productInCart.quantity;
+            addToCartBtn.classList.add('hidden');
+            qtyControl.classList.remove('hidden');
+        } else {
+            addToCartBtn.classList.remove('hidden');
+            qtyControl.classList.add('hidden');
+        }
+    };
+
+    const initializeCartControls = () => {
+        const productCards = document.querySelectorAll('#medicineGrid .group');
+        productCards.forEach(card => {
+            const productId = card.querySelector('h4').textContent.trim();
+            updateCart(card, productId);
+        });
+        updateCartBadge();
+    };
+
+    initializeCartControls();
+});
+</script>
+</body></html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dr. Aris Thorne | Nivâra Pet Care</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102222",
+                        "surface-dark": "#1a3333",
+                        "border-dark": "#234848",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #102222;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #234848;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-border-dark bg-background-dark/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex h-16 items-center justify-between gap-8">
+<!-- Logo & Search -->
+<div class="flex items-center gap-8 flex-1">
+<a href="index.html" class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl">pets</span>
+<span class="text-xl font-extrabold tracking-tight text-white">Nivâra</span>
+</a>
+<div class="hidden md:flex flex-1 max-w-md relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-primary/60">
+<span class="material-symbols-outlined text-sm">search</span>
+</div>
+<input class="block w-full rounded-lg bg-surface-dark border-none py-2 pl-10 pr-3 text-sm text-white placeholder-primary/40 focus:ring-2 focus:ring-primary/50" placeholder="Search doctors, clinics, or pet services..." type="text"/>
+</div>
+</div>
+<!-- Nav Links & Profile -->
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-sm font-semibold text-white/80 hover:text-primary transition-colors" href="doctor_appointments_-_book_now_cta.html">Find Doctors</a>
+<a class="text-sm font-semibold text-white/80 hover:text-primary transition-colors" href="#">Clinics</a>
+<div class="h-6 w-px bg-border-dark"></div>
+<div class="flex items-center gap-3">
+<a href="user_profile_&_management.html" class="h-8 w-8 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center overflow-hidden">
+<img alt="Profile" class="h-full w-full object-cover" data-alt="User profile avatar photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-AGB-U9qlCx229juxjKnWc_ShAYWa8Pcx-NsFUZcHs2uugevvbN4swhwSEuPGA_X9sapd6IOn59tx6FJCEe4kvQJ0VWBOoZQgy6TK5ze7BtI65q7vwBvWqd0YxA1qywF7LLb_9ElAb1J1YMdlfb3br3zzfFl4Je5BZ2vAhyPBEaHHa_giT2dWGAigtMn43ptrcI7i0C6og__mXr4JLKFdsAXIAz8o9-2UJ-Mzgjhbpv2jLI5pBXXS7c6-7kbxJTgL1gFXrOO-lUPU"/>
+</a>
+</div>
+</nav>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-xs font-medium text-primary/60 mb-6 uppercase tracking-widest">
+<a class="hover:text-primary" href="index.html">Home</a>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<a class="hover:text-primary" href="doctor_appointments_-_book_now_cta.html">Veterinary Surgeons</a>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span class="text-white">Dr. Aris Thorne</span>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Main Content (Left) -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Hero Profile Section -->
+<section class="bg-surface-dark rounded-xl p-6 border border-border-dark overflow-hidden relative">
+<div class="absolute top-0 right-0 p-4">
+<span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/20">
+                            Verified Expert
+                        </span>
+</div>
+<div class="flex flex-col md:flex-row gap-8 items-center md:items-start">
+<div class="relative">
+<div class="h-48 w-48 rounded-2xl overflow-hidden border-2 border-primary/30">
+<img alt="Doctor" class="h-full w-full object-cover" data-alt="Professional portrait of a veterinary surgeon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDer099gXeiG60YX-wbjNkllLO_OhyohZet9wpYaEil4Ki7sZxZkq7RrRIJ3gQUTfNntyq4GjVD1wGhAkdW-5ku0Z-fCsRpQ0tXyR7kWzcxysKIYO6qswxPakB-6cmw_FgznSWf2S0ph1-UPLJAY7aqbkWm3E8iIWjiC4xvyQzukZ8tO_1xGZs0CvAm9C7TYjxnZTqF_40XAALwKR2VjcikQpim2vfIknVF1rmcwfzzispKR36eCic_5l2fJ1iZ7isXZ1EBUlF37GUS"/>
+</div>
+<div class="absolute -bottom-3 -right-3 bg-background-dark border border-border-dark rounded-lg p-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+<span class="text-xs font-bold text-white">4.9 (128)</span>
+</div>
+</div>
+<div class="flex-1 text-center md:text-left">
+<h2 class="text-3xl font-extrabold text-white mb-2">Dr. Aris Thorne</h2>
+<p class="text-primary font-semibold text-lg mb-4">Senior Veterinary Surgeon | Specialist in Soft Tissue Surgery</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+<div class="flex items-center gap-3 text-white/70">
+<span class="material-symbols-outlined text-primary">school</span>
+<span class="text-sm">BVSc, MVSc - Royal Vet College</span>
+</div>
+<div class="flex items-center gap-3 text-white/70">
+<span class="material-symbols-outlined text-primary">work_history</span>
+<span class="text-sm">12+ Years Professional Experience</span>
+</div>
+</div>
+<p class="text-sm text-white/60 leading-relaxed max-w-2xl">
+                                Dedicated to providing compassionate care for your animal companions. Specializing in advanced surgical procedures and chronic pain management for dogs and cats.
+                            </p>
+</div>
+</div>
+</section>
+<!-- Availability Section -->
+<section class="bg-surface-dark rounded-xl border border-border-dark overflow-hidden">
+<div class="px-6 py-4 border-b border-border-dark flex items-center justify-between">
+<h3 class="text-lg font-bold text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">calendar_month</span>
+                            Availability &amp; Timings
+                        </h3>
+<span class="text-xs font-medium text-primary">Next available: Today, 4:00 PM</span>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3 mb-6">
+<!-- Mon -->
+<button class="flex flex-col items-center p-3 rounded-lg border border-border-dark bg-background-dark/50 hover:border-primary transition-all group">
+<span class="text-[10px] uppercase font-bold text-white/40 group-hover:text-primary/60">Mon</span>
+<span class="text-sm font-bold text-white">12 Jun</span>
+</button>
+<!-- Tue - Selected -->
+<button class="flex flex-col items-center p-3 rounded-lg border-2 border-primary bg-primary/10 transition-all shadow-[0_0_15px_rgba(19,236,236,0.1)]">
+<span class="text-[10px] uppercase font-bold text-primary/80">Tue</span>
+<span class="text-sm font-bold text-white">13 Jun</span>
+</button>
+<!-- Wed -->
+<button class="flex flex-col items-center p-3 rounded-lg border border-border-dark bg-background-dark/50 hover:border-primary transition-all group">
+<span class="text-[10px] uppercase font-bold text-white/40 group-hover:text-primary/60">Wed</span>
+<span class="text-sm font-bold text-white">14 Jun</span>
+</button>
+<!-- Thu -->
+<button class="flex flex-col items-center p-3 rounded-lg border border-border-dark bg-background-dark/50 hover:border-primary transition-all group">
+<span class="text-[10px] uppercase font-bold text-white/40 group-hover:text-primary/60">Thu</span>
+<span class="text-sm font-bold text-white">15 Jun</span>
+</button>
+<!-- Fri -->
+<button class="flex flex-col items-center p-3 rounded-lg border border-border-dark bg-background-dark/50 hover:border-primary transition-all group">
+<span class="text-[10px] uppercase font-bold text-white/40 group-hover:text-primary/60">Fri</span>
+<span class="text-sm font-bold text-white">16 Jun</span>
+</button>
+<!-- Sat -->
+<button class="flex flex-col items-center p-3 rounded-lg border border-border-dark bg-background-dark/50 hover:border-primary transition-all group opacity-50">
+<span class="text-[10px] uppercase font-bold text-white/40 group-hover:text-primary/60">Sat</span>
+<span class="text-sm font-bold text-white">17 Jun</span>
+</button>
+<!-- Sun -->
+<button class="flex flex-col items-center p-3 rounded-lg border border-border-dark bg-background-dark/50 hover:border-primary transition-all group opacity-50">
+<span class="text-[10px] uppercase font-bold text-white/40 group-hover:text-primary/60">Sun</span>
+<span class="text-sm font-bold text-white">18 Jun</span>
+</button>
+</div>
+<div class="space-y-4">
+<p class="text-xs font-bold text-primary/60 uppercase tracking-widest">Available Slots</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<button class="py-2 px-4 rounded-lg bg-background-dark border border-border-dark text-white text-sm hover:border-primary transition-colors">09:00 AM</button>
+<button class="py-2 px-4 rounded-lg bg-background-dark border border-border-dark text-white text-sm hover:border-primary transition-colors">10:30 AM</button>
+<button class="py-2 px-4 rounded-lg bg-primary text-background-dark font-bold text-sm shadow-lg shadow-primary/20">04:00 PM</button>
+<button class="py-2 px-4 rounded-lg bg-background-dark border border-border-dark text-white text-sm hover:border-primary transition-colors">05:30 PM</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Reviews Section -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">reviews</span>
+                            Pet Parent Reviews
+                        </h3>
+<button class="text-sm font-semibold text-primary hover:underline">Write a Review</button>
+</div>
+<div class="grid gap-4">
+<!-- Review 1 -->
+<div class="bg-surface-dark p-6 rounded-xl border border-border-dark">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-border-dark flex items-center justify-center text-primary font-bold">SM</div>
+<div>
+<p class="text-sm font-bold text-white">Sarah Miller</p>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center rounded-full bg-border-dark px-2 py-0.5 text-[10px] font-medium text-white/60">Dog Parent</span>
+<span class="text-[10px] text-white/40">2 weeks ago</span>
+</div>
+</div>
+</div>
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+</div>
+</div>
+<p class="text-sm text-white/70 leading-relaxed italic">
+                                "Dr. Thorne was incredible with Cooper. He was patient, explained the surgery in detail, and the recovery has been smooth. Truly one of the best vets we've visited."
+                            </p>
+</div>
+<!-- Review 2 -->
+<div class="bg-surface-dark p-6 rounded-xl border border-border-dark">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-border-dark flex items-center justify-center text-primary font-bold">JR</div>
+<div>
+<p class="text-sm font-bold text-white">James Reed</p>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center rounded-full bg-border-dark px-2 py-0.5 text-[10px] font-medium text-white/60">Cat Parent</span>
+<span class="text-[10px] text-white/40">1 month ago</span>
+</div>
+</div>
+</div>
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm">star_half</span>
+</div>
+</div>
+<p class="text-sm text-white/70 leading-relaxed italic">
+                                "Very professional clinic. Luna felt very comfortable with him. The only issue was the wait time but the care was top-notch."
+                            </p>
+</div>
+</div>
+<button class="w-full py-3 text-sm font-bold text-white/60 hover:text-primary transition-colors bg-surface-dark rounded-xl border border-border-dark hover:border-primary">
+                        View All 128 Reviews
+                    </button>
+</section>
+</div>
+<!-- Sidebar (Right) -->
+<aside class="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
+<!-- Booking Card -->
+<div class="bg-surface-dark rounded-xl border border-border-dark overflow-hidden shadow-2xl">
+<div class="p-6 bg-primary/10 border-b border-border-dark">
+<p class="text-xs font-bold text-primary uppercase tracking-widest mb-1">Consultation Fee</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-extrabold text-white">$65.00</span>
+<span class="text-sm text-white/60">per session</span>
+</div>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex items-center gap-3 p-3 bg-background-dark rounded-lg border border-border-dark">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<div>
+<p class="text-xs font-bold text-white">100% Secure Booking</p>
+<p class="text-[10px] text-white/40">Instant confirmation via email</p>
+</div>
+</div>
+<a id="bookAppointment" href="doctor_appointments_-_book_now_cta.html" class="w-full inline-block text-center bg-primary text-background-dark font-extrabold py-4 rounded-xl shadow-[0_4px_20px_rgba(19,236,236,0.3)] hover:translate-y-[-2px] transition-all">
+                            BOOK APPOINTMENT
+                        </a>
+<p class="text-center text-[10px] text-white/40">No cancellation fee up to 24h before</p>
+</div>
+</div>
+<!-- Clinic Details -->
+<div class="bg-surface-dark rounded-xl border border-border-dark overflow-hidden">
+<div class="px-6 py-4 border-b border-border-dark">
+<h3 class="text-sm font-bold text-white uppercase tracking-wider">Clinic Information</h3>
+</div>
+<div class="p-6 space-y-6">
+<div>
+<p class="text-lg font-bold text-white mb-1">Nivâra Care Center</p>
+<div class="flex items-start gap-2 text-white/60">
+<span class="material-symbols-outlined text-sm text-primary mt-0.5">location_on</span>
+<p class="text-sm leading-snug">452 Vet Avenue, West Side, New York, NY 10014</p>
+</div>
+</div>
+<!-- Map Placeholder -->
+<div class="h-32 w-full rounded-lg bg-background-dark border border-border-dark relative group overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center grayscale opacity-60 group-hover:opacity-100 transition-opacity" data-alt="Map showing location of Nivâra Care Center" data-location="New York City" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCuxT8GEr2KbZoePqB0T_1PL0_5yYW3oDALcOZ4C1Jd5k0_nNF6DYDrHoGbNt9rHq3qoKt7zYnVR1b-Sn0aBOFF0p5dNZRfB8vIvx2CVbjuvbVVQXi8AlO4qXT9xsDmB717RXeNrvi5I05eVbGEv4Q__O0--MPH909b68n2ySeG_GnIbSC7XMiAGdowUWYeQR19eQVNxw4Kqpn5ZBn_Xh7UsFbAE7sMzUVkv-SeqgKOd-7JuF5s_5SWRgActMkg_OtvyMdoMNNTlehb')"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="h-8 w-8 bg-primary rounded-full border-4 border-white shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-background-dark text-xs font-bold">pets</span>
+</div>
+</div>
+</div>
+<div class="space-y-3">
+<a class="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg border border-primary/30 text-primary text-sm font-bold hover:bg-primary/10 transition-colors" href="tel:+12125550198">
+<span class="material-symbols-outlined text-sm">call</span>
+                                +1 (212) 555-0198
+                            </a>
+<button class="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg border border-border-dark text-white/60 text-sm font-bold hover:text-white hover:border-white transition-all">
+<span class="material-symbols-outlined text-sm">directions</span>
+                                Get Directions
+                            </button>
+</div>
+</div>
+</div>
+<!-- Pet Perks Card -->
+<div class="bg-gradient-to-br from-primary/20 to-surface-dark rounded-xl border border-primary/20 p-6">
+<div class="flex items-center gap-3 mb-3">
+<div class="p-2 bg-primary rounded-lg text-background-dark">
+<span class="material-symbols-outlined">card_membership</span>
+</div>
+<p class="text-sm font-bold text-white">Nivâra Plus Members</p>
+</div>
+<p class="text-xs text-white/60 mb-4">Members get 15% off consultations and priority scheduling with Dr. Thorne.</p>
+<a class="text-xs font-extrabold text-primary hover:underline" href="#">Learn More →</a>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-dark border-t border-border-dark mt-16 py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<div class="flex items-center justify-center gap-2 text-primary/40 mb-4">
+<span class="material-symbols-outlined">pets</span>
+<p class="font-extrabold tracking-widest text-lg">Nivâra</p>
+</div>
+<p class="text-sm text-white/40 mb-6">Redefining modern veterinary care for your beloved companions.</p>
+<div class="flex justify-center gap-6">
+<a class="text-white/40 hover:text-primary transition-colors text-xs font-bold" href="#">Privacy Policy</a>
+<a class="text-white/40 hover:text-primary transition-colors text-xs font-bold" href="#">Terms of Service</a>
+<a class="text-white/40 hover:text-primary transition-colors text-xs font-bold" href="#">Support</a>
+</div>
+<p class="mt-8 text-[10px] text-white/20 uppercase tracking-widest">© 2024 Nivâra Inc. All rights reserved.</p>
+</div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var dateButtons = Array.prototype.slice.call(document.querySelectorAll('.grid.grid-cols-2.sm\\:grid-cols-4.md\\:grid-cols-7 button'));
+  var slotButtons = Array.prototype.slice.call(document.querySelectorAll('.grid.grid-cols-2.sm\\:grid-cols-4.gap-3 button'));
+  var bookBtn = document.getElementById('bookAppointment');
+  function pickDate(btn){
+    dateButtons.forEach(function(b){ b.classList.remove('border-2','border-primary','bg-primary/10','shadow-[0_0_15px_rgba(19,236,236,0.1)]'); b.classList.add('border','border-border-dark','bg-background-dark/50'); });
+    btn.classList.remove('border','border-border-dark','bg-background-dark/50');
+    btn.classList.add('border-2','border-primary','bg-primary/10');
+    try {
+      var day = btn.querySelector('span.text-sm.font-bold.text-white')?.textContent || '';
+      var dow = btn.querySelector('span.text-\\[10px\\].uppercase')?.textContent || '';
+      sessionStorage.setItem('apptDate', (dow||'')+' '+(day||''));
+    } catch {}
+  }
+  function pickSlot(btn){
+    slotButtons.forEach(function(b){ b.classList.remove('bg-primary','text-background-dark','shadow-lg','shadow-primary/20'); b.classList.add('bg-background-dark','border','border-border-dark','text-white'); });
+    btn.classList.remove('bg-background-dark','border','border-border-dark','text-white');
+    btn.classList.add('bg-primary','text-background-dark','shadow-lg','shadow-primary/20');
+    try { sessionStorage.setItem('apptTime', btn.textContent.trim()); } catch {}
+  }
+  dateButtons.forEach(function(b){ b.addEventListener('click', function(){ pickDate(b); }); });
+  slotButtons.forEach(function(b){ b.addEventListener('click', function(){ pickSlot(b); }); });
+  if(dateButtons[0]) pickDate(dateButtons[0]);
+  if(slotButtons[0]) pickSlot(slotButtons[0]);
+  bookBtn?.addEventListener('click', function(e){
+    e.preventDefault();
+    if(!(sessionStorage.getItem('apptDate')||'') && dateButtons[0]) pickDate(dateButtons[0]);
+    if(!(sessionStorage.getItem('apptTime')||'') && slotButtons[0]) pickSlot(slotButtons[0]);
+    var doctorNameEl = document.querySelector('h1.text-3xl.font-extrabold.text-white');
+    var specEl = document.querySelector('.text-primary.text-xs.font-extrabold.uppercase.tracking-wider');
+    var payload = {
+      doctor: (doctorNameEl && doctorNameEl.textContent) || 'Doctor',
+      specialty: (specEl && specEl.textContent) || '',
+      date: sessionStorage.getItem('apptDate') || 'TBD',
+      time: sessionStorage.getItem('apptTime') || 'TBD',
+      status: 'CONFIRMED'
+    };
+    try {
+      sessionStorage.setItem('selectedAppointment', JSON.stringify(payload));
+      var raw = sessionStorage.getItem('appointments');
+      var arr = raw ? JSON.parse(raw) : [];
+      if(!Array.isArray(arr)) arr = [];
+      arr.push(payload);
+      sessionStorage.setItem('appointments', JSON.stringify(arr));
+    } catch {}
+    var href = (bookBtn && bookBtn.getAttribute('href')) || 'doctor_appointments_-_book_now_cta.html';
+    window.location.href = href;
+  });
+});
+</script>
+</body></html>

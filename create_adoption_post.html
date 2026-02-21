@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nivâra - Create Adoption Post</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="animations.css">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102222",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "hand": ["Just Another Hand", "cursive"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<link rel="stylesheet" href="page-transitions.css">
+<link href="page-transitions.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1a3333;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #234848;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Navigation Header -->
+<header class="border-b border-border-dark bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-6 lg:px-20">
+<div class="flex items-center justify-between h-16 gap-6">
+<div class="flex items-center gap-8">
+<a href="index.html" class="flex items-center gap-3">
+<img src="logo.png" alt="Nivâra Logo" class="h-10">
+<h1 class="text-5xl font-hand tracking-[3px] text-white">nivâra</h1>
+</a>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="doctor_appointments_-_book_now_cta.html">Appointments</a>
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="pet_medicines.html">Pet Medicines</a>
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="lost_&_found.html">Lost &amp; Found</a>
+<a class="text-primary text-sm font-medium border-b-2 border-primary pb-1" href="pet_adoption.html">Adoptions</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button id="locationBtn" class="hidden md:flex items-center gap-2 text-xs font-medium text-white/60 hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-primary text-sm">location_on</span>
+<span id="locationLabel">Mumbai, IN</span>
+</button>
+<div class="hidden lg:flex items-center bg-border-dark rounded-lg px-3 py-1.5 w-64">
+<span class="material-symbols-outlined text-white/50 text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-white placeholder:text-white/40 w-full ml-2" placeholder="Search pets..." type="text"/>
+</div>
+<a href="create_adoption_post.html" class="bg-primary hover:bg-primary/90 text-background-dark font-bold py-2 px-4 rounded-lg text-sm flex items-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-xl">add_circle</span>
+Create Post
+</a>
+<div class="h-10 w-10 rounded-full border-2 border-primary/30 overflow-hidden">
+<img class="rounded-full w-full h-full object-cover" data-alt="User profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0olcw0pb1uydhgLMa8yvXlu6XVGCCftoHhspmuLttyTyy_jo168jaihkLhr3nCreiRJ75LkEnfh73IzlSBz3lxdrm9y4AIxF-35vxZkj4_eSPOKN2n5Zgd80V0OzFlW484XfjQy0rAHsHCSai8QkDfvERdsQUZL_FrRsinzfRXyVFxUAAk49a8l-FGlyBLYFc2rBejLvRrWIn9hoGRvVzQ_jyr3P5Snszii6INKg7zwAuOMOocoDqw0VdFau_VYTGBATgx2xexkUZ"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col items-center py-8 px-4 lg:px-20">
+<div class="w-full max-w-5xl">
+<!-- Breadcrumbs & Title -->
+<div class="flex flex-col gap-2 mb-8">
+<div class="flex items-center gap-2 text-primary/70 text-sm font-medium">
+<a class="hover:underline" href="pet_adoption.html">Adoptions</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-white">Create New Post</span>
+</div>
+<h1 class="text-white text-4xl font-extrabold tracking-tight">Create New Adoption Post</h1>
+<p class="text-slate-400 text-lg">Provide detailed information to help a pet find their forever home.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Main Form Section -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Image Upload Card -->
+<section class="bg-[#1a3333] border border-[#234848] rounded-xl p-6">
+<h3 class="text-white text-xl font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">add_a_photo</span>
+                                Pet Media
+                            </h3>
+<div id="adoptDrop" class="flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed border-[#326767] bg-[#122a2a] px-6 py-10 group hover:border-primary/50 transition-all cursor-pointer">
+<div class="size-16 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">upload_file</span>
+</div>
+<div class="text-center">
+<p class="text-white text-lg font-bold">Upload Pet Photos</p>
+<p class="text-slate-400 text-sm mt-1">Drag and drop up to 5 high-quality photos (JPG, PNG).</p>
+<p class="text-primary text-xs mt-2 italic font-medium">Tip: High-quality images increase adoption rates by 70%.</p>
+</div>
+<button id="adoptBrowse" class="mt-2 flex items-center justify-center rounded-lg h-10 px-6 bg-primary text-background-dark text-sm font-bold hover:bg-[#0fd9d9] transition-all">
+                                    Browse Files
+                                </button>
+</div>
+<input id="adoptImagesInput" type="file" accept="image/*" multiple class="hidden"/>
+<!-- Thumbnails Preview (Placeholder) -->
+<div id="adoptPreview" class="flex gap-3 mt-6">
+<div class="relative size-20 rounded-lg overflow-hidden border border-primary">
+<img class="w-full h-full object-cover" data-alt="Preview of uploaded dog photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBtSHj-Vwzt3IsU_ZBNOhtkQqRuY4fSnB1rxsuBpVbb61-FsQHtv8geUS2DWds-addPNZUz_xglFoMTEwpy6sTN3eVRde6jilMNla8GASLv-qHMXCh_9aHKjEBhfe1i-bwHDN6UbipG5iUVPhu2ylMTawSeAjgmerSOHl6-BvMap1HYenIANelwmKsjTQ2CJC3FncwubsuqnDFhaMIPaj1VTXVLEdf-lz-GTkfGup6sZpTul6lFWh7DYkS_5wt8U7vPCmDzzviYtuM"/>
+<button class="absolute top-1 right-1 size-5 bg-red-500 rounded-full text-white flex items-center justify-center shadow-lg" data-remove="1">
+<span class="material-symbols-outlined text-[12px] font-bold">close</span>
+</button>
+</div>
+<div class="size-20 rounded-lg bg-[#234848] flex items-center justify-center border border-dashed border-[#326767]">
+<span class="material-symbols-outlined text-slate-500">image</span>
+</div>
+<div class="size-20 rounded-lg bg-[#234848] flex items-center justify-center border border-dashed border-[#326767]">
+<span class="material-symbols-outlined text-slate-500">image</span>
+</div>
+</div>
+</section>
+<!-- Basic Information Form -->
+<section class="bg-[#1a3333] border border-[#234848] rounded-xl p-6">
+<h3 class="text-white text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">info</span>
+                                Basic Information
+                            </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-slate-300 text-sm font-semibold">Pet Name</label>
+<input id="adoptName" class="bg-[#122a2a] border border-[#326767] rounded-lg h-12 px-4 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="e.g. Buddy" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-slate-300 text-sm font-semibold">Pet Type</label>
+<input id="adoptType" class="bg-[#122a2a] border border-[#326767] rounded-lg h-12 px-4 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="e.g. Dog, Cat, Rabbit..." type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-slate-300 text-sm font-semibold">Breed</label>
+<input id="adoptBreed" class="bg-[#122a2a] border border-[#326767] rounded-lg h-12 px-4 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="e.g. Golden Retriever" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-slate-300 text-sm font-semibold">Age (Years)</label>
+<input id="adoptAge" type="number" inputmode="numeric" pattern="\\d*" min="0" step="1" class="bg-[#122a2a] border border-[#326767] rounded-lg h-12 px-4 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Numbers only"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-slate-300 text-sm font-semibold">Gender</label>
+<select id="adoptGender" class="bg-[#122a2a] border border-[#326767] rounded-lg h-12 px-4 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+<option>Male</option>
+<option>Female</option>
+<option>Unidentified</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-slate-300 text-sm font-semibold">Status</label>
+<select id="adoptStatus" class="bg-[#122a2a] border border-[#326767] rounded-lg h-12 px-4 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all appearance-none">
+<option class="text-emerald-400" value="available">Available</option>
+<option class="text-slate-500" value="adopted">Adopted</option>
+<option class="text-amber-400" value="pending">Pending</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Personality Section -->
+<section class="bg-[#1a3333] border border-[#234848] rounded-xl p-6">
+<h3 class="text-white text-xl font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">description</span>
+                                Personality &amp; Story
+                            </h3>
+<div class="flex flex-col gap-2">
+<label class="text-slate-300 text-sm font-semibold">Tell us about them</label>
+<textarea id="adoptStory" class="bg-[#122a2a] border border-[#326767] rounded-lg p-4 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none custom-scrollbar" placeholder="Describe their personality, energy level, history, and medical needs..." rows="6"></textarea>
+</div>
+</section>
+<!-- Contact Details -->
+<section class="bg-[#1a3333] border border-[#234848] rounded-xl p-6">
+<h3 class="text-white text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">contact_phone</span>
+                                Contact Information
+                            </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-slate-300 text-sm font-semibold">Shelter/Owner Name</label>
+<input id="adoptOwner" class="bg-[#122a2a] border border-[#326767] rounded-lg h-12 px-4 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Entity name" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-slate-300 text-sm font-semibold">Location</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">location_on</span>
+<input id="adoptLocation" class="w-full bg-[#122a2a] border border-[#326767] rounded-lg h-12 pl-10 pr-4 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="City, State" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="text-slate-300 text-sm font-semibold">Contact Email/Phone</label>
+<input id="adoptContact" class="bg-[#122a2a] border border-[#326767] rounded-lg h-12 px-4 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="How should adopters reach you?" type="text"/>
+</div>
+</div>
+</section>
+</div>
+<!-- Sidebar: Live Preview & Actions -->
+<div class="space-y-6">
+<!-- Sticky Wrapper -->
+<div class="lg:sticky lg:top-24 space-y-6">
+<!-- Preview Card removed -->
+<!-- Final Actions -->
+<div class="bg-[#1a3333] border border-[#234848] rounded-xl p-6 flex flex-col gap-4">
+<a id="adoptPublish" href="pet_adoption.html" class="w-full flex items-center justify-center gap-2 rounded-lg h-14 bg-primary text-background-dark text-lg font-extrabold hover:bg-[#0fd9d9] hover:shadow-[0_0_20px_rgba(19,236,236,0.3)] transition-all text-center">
+<span class="material-symbols-outlined">publish</span>
+                                    List for Adoption
+                                </a>
+<button class="w-full flex items-center justify-center gap-2 rounded-lg h-12 bg-[#234848] text-white text-sm font-bold hover:bg-[#2d5a5a] transition-all">
+<span class="material-symbols-outlined text-[20px]">save</span>
+                                    Save as Draft
+                                </button>
+<a href="pet_adoption.html" class="w-full text-center text-slate-500 hover:text-white text-sm font-semibold transition-colors pt-2">
+                                    Cancel &amp; Return
+                                </a>
+</div>
+<!-- Tips Card -->
+<div class="bg-primary/5 border border-primary/20 rounded-xl p-4">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+<div>
+<p class="text-white text-sm font-bold">Pro Tip</p>
+<p class="text-slate-400 text-xs leading-relaxed mt-1">Posts with at least 3 photos and a detailed personality description get adopted 3x faster.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="mt-20 border-t border-[#234848] py-10 px-6 lg:px-20 bg-background-dark/50">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 opacity-50">
+<span class="material-symbols-outlined text-primary">pets</span>
+<span class="text-white font-bold">Nivâra</span>
+</div>
+<div class="flex gap-8 text-slate-500 text-sm font-medium">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Help Center</a>
+</div>
+<p class="text-slate-600 text-xs">© 2024 Nivâra Pet Care Inc. All rights reserved.</p>
+</div>
+</footer>
+</div>
+<div id="locOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-[1200]"></div>
+<div id="locModal" class="fixed inset-0 z-[1300] hidden items-center justify-center">
+<div class="max-w-md w-[92%] sm:w-[28rem] rounded-2xl border border-white/10 bg-background-dark/90 shadow-2xl p-6">
+<div class="flex items-start justify-between mb-4">
+<h3 class="text-2xl font-bold">Change Your Location</h3>
+<button id="locClose" class="p-2 text-white/60 hover:text-white rounded"><span class="material-symbols-outlined">close</span></button>
+</div>
+<p class="text-white/60 text-sm mb-6">Enter your PIN code to find nearby pets.</p>
+<label class="block text-xs font-semibold text-white/50 mb-2">Enter PIN Code</label>
+<div class="flex items-center gap-2 mb-4">
+<input id="pinInput" type="text" inputmode="numeric" placeholder="e.g. 400001" class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"/>
+<button id="useCurrent" class="px-3 py-3 rounded-lg border border-primary/30 bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20 flex items-center gap-1"><span class="material-symbols-outlined text-sm">my_location</span>Use Current</button>
+</div>
+<button id="updateLoc" class="w-full py-3 rounded-xl bg-primary text-background-dark font-black text-sm hover:shadow-[0_0_20px_rgba(19,236,236,0.3)] transition-all">UPDATE LOCATION</button>
+<div class="mt-6 text-center">
+<p class="text-[11px] text-white/40 mb-2">POPULAR CITIES</p>
+<div class="flex items-center justify-center gap-2">
+<button class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 hover:bg-white/10" data-pin="400001" data-label="Mumbai, IN">Mumbai</button>
+<button class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 hover:bg-white/10" data-pin="110001" data-label="Delhi, IN">Delhi</button>
+<button class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 hover:bg-white/10" data-pin="560001" data-label="Bangalore, IN">Bangalore</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var drop = document.getElementById('adoptDrop');
+  var locationBtn = document.getElementById('locationBtn');
+  var locationLabel = document.getElementById('locationLabel');
+  var locOverlay = document.getElementById('locOverlay');
+  var locModal = document.getElementById('locModal');
+  var locClose = document.getElementById('locClose');
+  var pinInput = document.getElementById('pinInput');
+  var updateLoc = document.getElementById('updateLoc');
+  var useCurrent = document.getElementById('useCurrent');
+  function openLoc(){
+    locOverlay?.classList.remove('hidden');
+    locModal?.classList.remove('hidden');
+    locModal?.classList.add('flex');
+    document.body.classList.add('overflow-hidden');
+    var savedPin = sessionStorage.getItem('userPin') || '';
+    if(pinInput && savedPin) pinInput.value = savedPin;
+  }
+  function closeLoc(){
+    locOverlay?.classList.add('hidden');
+    locModal?.classList.add('hidden');
+    locModal?.classList.remove('flex');
+    document.body.classList.remove('overflow-hidden');
+  }
+  function pinToLabel(pin){
+    var map = { '400001': 'Mumbai, IN', '110001': 'Delhi, IN', '560001': 'Bangalore, IN' };
+    return map[pin] || ('PIN ' + pin);
+  }
+  function applyPin(pin){
+    if(!/^\d{5,6}$/.test(pin)) return false;
+    try { sessionStorage.setItem('userPin', pin); } catch {}
+    if(locationLabel) locationLabel.textContent = pinToLabel(pin);
+    closeLoc();
+    return true;
+  }
+  locationBtn?.addEventListener('click', openLoc);
+  locOverlay?.addEventListener('click', closeLoc);
+  locClose?.addEventListener('click', closeLoc);
+  updateLoc?.addEventListener('click', function(){
+    var pin = (pinInput?.value || '').trim();
+    if(!applyPin(pin)){
+      pinInput?.classList.add('ring-1','ring-red-400');
+      setTimeout(function(){ pinInput?.classList.remove('ring-1','ring-red-400'); }, 600);
+    }
+  });
+  useCurrent?.addEventListener('click', function(){
+    (async function(){
+      try{
+        await new Promise(function(res, rej){ return navigator.geolocation ? navigator.geolocation.getCurrentPosition(res, rej, { timeout: 5000 }) : rej(); });
+        if(locationLabel) locationLabel.textContent = 'Current Location';
+        closeLoc();
+      } catch { pinInput?.focus(); }
+    })();
+  });
+  Array.prototype.slice.call(document.querySelectorAll('#locModal [data-pin]')).forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pin = btn.getAttribute('data-pin') || '';
+      if(pinInput) pinInput.value = pin;
+    });
+  });
+  var browse = document.getElementById('adoptBrowse');
+  var input = document.getElementById('adoptImagesInput');
+  var preview = document.getElementById('adoptPreview');
+  var items = [];
+  function addFiles(files){
+    if(!files || !files.length) return;
+    var max = 5;
+    var pending = Math.max(0, max - items.length);
+    Array.prototype.slice.call(files, 0, pending).forEach(function(f){
+      if(!(f.type||'').startsWith('image/')) return;
+      if(f.size > 5*1024*1024) return;
+      var reader = new FileReader();
+      reader.onload = function(e){
+        items.push({ name: f.name, data: e.target.result });
+        render();
+        try { sessionStorage.setItem('adoptImages', JSON.stringify(items.map(function(i){ return { name:i.name, data:i.data }; }))); } catch {}
+      };
+      reader.readAsDataURL(f);
+    });
+  }
+  function render(){
+    if(!preview) return;
+    preview.innerHTML = '';
+    items.forEach(function(i, idx){
+      var wrap = document.createElement('div');
+      wrap.className = 'relative size-20 rounded-lg overflow-hidden border border-primary';
+      var img = document.createElement('img');
+      img.className = 'w-full h-full object-cover';
+      img.src = i.data;
+      var close = document.createElement('button');
+      close.className = 'absolute top-1 right-1 size-5 bg-red-500 rounded-full text-white flex items-center justify-center shadow-lg';
+      close.setAttribute('data-remove','1');
+      close.innerHTML = '<span class="material-symbols-outlined text-[12px] font-bold">close</span>';
+      close.addEventListener('click', function(){ items.splice(idx,1); render(); try { sessionStorage.setItem('adoptImages', JSON.stringify(items)); } catch {} });
+      wrap.appendChild(img); wrap.appendChild(close);
+      preview.appendChild(wrap);
+    });
+  }
+  preview?.addEventListener('click', function(e){
+    var el = e.target;
+    if(!(el instanceof Element)) return;
+    var btn = el.closest('button[data-remove]');
+    if(!btn) return;
+    var wrap = btn.closest('.relative');
+    if(!wrap) return;
+    var imgEl = wrap.querySelector('img');
+    if(imgEl){
+      var idx = items.findIndex(function(it){ return it.data === imgEl.src; });
+      if(idx >= 0){
+        items.splice(idx,1);
+        try { sessionStorage.setItem('adoptImages', JSON.stringify(items)); } catch {}
+      }
+    }
+    wrap.remove();
+  });
+  drop?.addEventListener('click', function(){ browse?.click(); });
+  browse?.addEventListener('click', function(){ input?.click(); });
+  input?.addEventListener('change', function(){ addFiles(input.files); input.value=''; });
+  drop?.addEventListener('dragover', function(e){ e.preventDefault(); });
+  drop?.addEventListener('drop', function(e){ e.preventDefault(); addFiles(e.dataTransfer && e.dataTransfer.files); });
+  try {
+    var raw = sessionStorage.getItem('adoptImages');
+    var arr = raw ? JSON.parse(raw) : [];
+    if(Array.isArray(arr)) { items = arr; render(); }
+  } catch {}
+  (function(){
+    var savedPin = sessionStorage.getItem('userPin');
+    if(savedPin && locationLabel) locationLabel.textContent = pinToLabel(savedPin);
+  })();
+  var publish = document.getElementById('adoptPublish');
+  var ageInput = document.getElementById('adoptAge');
+  ageInput?.addEventListener('input', function(e){ e.target.value = (e.target.value || '').replace(/\D/g,''); });
+  publish?.addEventListener('click', function(e){
+    e.preventDefault();
+    var genderSelect = document.getElementById('adoptGender');
+    var genderText = (genderSelect && genderSelect.value) ? genderSelect.value : '';
+    var typeText = (document.getElementById('adoptType')?.value || '');
+    var ageNum = (document.getElementById('adoptAge')?.value || '').replace(/\D/g,'');
+    var ageLabel = ageNum ? (ageNum === '1' ? '1 Year' : (ageNum + ' Years')) : '';
+    var post = {
+      name: (document.getElementById('adoptName')?.value || '').trim(),
+      type: typeText.trim(),
+      breed: (document.getElementById('adoptBreed')?.value || '').trim(),
+      ageBracket: ageLabel || 'Age Unknown',
+      gender: genderText || '',
+      status: (document.getElementById('adoptStatus')?.value || '').trim(),
+      story: (document.getElementById('adoptStory')?.value || '').trim(),
+      owner: (document.getElementById('adoptOwner')?.value || '').trim(),
+      location: (document.getElementById('adoptLocation')?.value || '').trim(),
+      contact: (document.getElementById('adoptContact')?.value || '').trim(),
+      photo: (items[0] && items[0].data) || '',
+      createdAt: Date.now()
+    };
+    try{
+      var rawPosts = sessionStorage.getItem('adoptionPosts');
+      var arrPosts = rawPosts ? JSON.parse(rawPosts) : [];
+      if(!Array.isArray(arrPosts)) arrPosts = [];
+      post.id = String(Date.now()) + '-' + String(Math.random()).slice(2,8);
+      arrPosts.push(post);
+      sessionStorage.setItem('adoptionPosts', JSON.stringify(arrPosts));
+    } catch {}
+    window.location.href = 'pet_adoption.html';
+  });
+});
+</script>
+<script src="page-transitions.js"></script>
+</body></html>

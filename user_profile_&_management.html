@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nivâra | Premium Pet Care Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="animations.css">
+<link rel="stylesheet" href="page-transitions.css">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102222",
+                        "card-dark": "#1a2f2f",
+                        "border-dark": "#234848",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "hand": ["Just Another Hand", "cursive"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #112222;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #234848;
+            border-radius: 10px;
+        }
+        .glow-cyan:hover {
+            box-shadow: 0 0 15px rgba(19, 236, 236, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-solid border-border-dark bg-background-dark/80 backdrop-blur-md px-6 md:px-10 py-3">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-8">
+<a href="index.html" class="flex items-center gap-2 shrink-0">
+<img src="logo.png" alt="Nivâra Logo" class="h-10">
+<h1 class="text-5xl font-hand tracking-[3px] text-white">nivâra</h1>
+</a>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-400 hover:text-primary text-sm font-medium transition-colors" href="index.html">Home</a>
+<a class="text-slate-400 hover:text-primary text-sm font-medium transition-colors" href="doctor_appointments_-_book_now_cta.html">Appointments</a>
+<a class="text-slate-400 hover:text-primary text-sm font-medium transition-colors" href="pet_medicines.html">Medicines</a>
+<a class="text-slate-400 hover:text-primary text-sm font-medium transition-colors" href="lost_&_found.html">Lost &amp; Found</a>
+<a class="text-slate-400 hover:text-primary text-sm font-medium transition-colors" href="pet_adoption.html">Adoption</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-full border-2 border-primary overflow-hidden">
+<img id="headerAvatar" class="w-full h-full object-cover" data-alt="Close up portrait of a male user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBY4RBwk5K5z0EzKd9t2-w5vtWrSj2nl53pvJIHluSSR17S5EJ8Xvjm2xhhvrtALInDqfjTDNtPzv9Ma-RprxenC7Rispg-xYoEVeWp9UqOS8-VLBiriXU_X_XkrneDZM_l_rHEtZ8ZQkjNyx_4qXX9C3zqPwUa247_qQL-_bcSWRE8Zd34T46JWacCqcfWH4HBNvEXcpkGLR9ALyNfx2vkVMRqyJbjdQo7jlhIUZX6O-TjXRBXL3bGwGrsTOaaSgcMfslFRAlCjBOw"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 md:px-10 py-8 fade-in-element">
+<!-- Profile Header -->
+<div class="bg-card-dark rounded-xl p-6 md:p-8 mb-8 flex flex-col md:flex-row items-center gap-8 border border-border-dark/50">
+<div class="relative group">
+<div class="size-32 rounded-full overflow-hidden border-4 border-border-dark relative">
+<img id="profileAvatar" class="w-full h-full object-cover" data-alt="User profile picture of a premium member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb2uqKnJ89rRS0ZgR-K5FyKH5IHZiGr7EyrGUBGgZqJ-bKTVdgRalNNS_C9hbMaguSqdPyPHm0WSnSO28k9J2vlF3MlLRUZIAttWBRephrf-bKfIBV3_UJtk21GdQZcxmzKhOtLgcyJDjLeKx6YPgcfVhbXvumbLtTqX0wBhcwP657QSwtd41aSZxc1FgXtx_aETfZGUltdWsF0cAsFkuZRMkhAQLta1nlW_2rrlN2BaSuOMtZ6I1ns9z7BZrydXMkvTghH3tG7oY5"/>
+<div id="pfpOverlay" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined text-white text-3xl">photo_camera</span>
+</div>
+</div>
+<input id="pfpInput" type="file" accept="image/*" class="hidden"/>
+<div class="absolute -bottom-2 -right-2 bg-primary text-background-dark p-1.5 rounded-full border-4 border-card-dark">
+<span class="material-symbols-outlined text-base font-bold leading-none">verified</span>
+</div>
+</div>
+<div class="text-center md:text-left flex-1">
+<h1 class="text-3xl font-bold text-white mb-1">Alex Johnson</h1>
+<p class="text-primary text-sm font-semibold tracking-wide uppercase">Premium Member since Oct 2023</p>
+<div class="mt-4 flex flex-wrap justify-center md:justify-start gap-3">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-medium border border-primary/20">3 Active Listings</span>
+<span class="bg-white/5 text-slate-300 px-3 py-1 rounded-full text-xs font-medium border border-border-dark">5 Appointments</span>
+</div>
+</div>
+<div class="flex gap-3">
+<button id="saveProfileBtn" class="px-6 py-2.5 bg-primary text-background-dark font-bold rounded-lg hover:brightness-110 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">save</span>
+                    Save Changes
+                </button>
+</div>
+</div>
+<div class="max-w-3xl mx-auto space-y-8">
+<!-- Main Content Area -->
+<div class="space-y-8">
+<!-- Section 1: Personal Info -->
+<section class="bg-card-dark rounded-xl border border-border-dark/50 overflow-hidden fade-in-element">
+<div class="px-6 py-4 border-b border-border-dark flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+<h3 class="text-lg font-bold text-white">Personal Information</h3>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-400">Full Name</label>
+<input id="profileName" class="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="Alex Johnson"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-400">Phone Number</label>
+<input id="profilePhone" class="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" type="tel" value="+1 (555) 0123-4567"/>
+</div>
+<div class="space-y-2 md:col-span-2">
+<label class="text-sm font-semibold text-slate-400">Email Address</label>
+<input id="profileEmail" class="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" type="email" value="alex.j@nivara-premium.com"/>
+</div>
+</div>
+</section>
+<!-- Section 2: Security & Location -->
+<section class="bg-card-dark rounded-xl border border-border-dark/50 overflow-hidden">
+<div class="px-6 py-4 border-b border-border-dark flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">shield</span>
+<h3 class="text-lg font-bold text-white">Security &amp; Location</h3>
+</div>
+<div class="p-6 space-y-8">
+<!-- Password Management -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-400">New Password</label>
+<div class="relative">
+<input class="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="••••••••" type="password"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 cursor-pointer hover:text-primary">visibility</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-400">Confirm Password</label>
+<input class="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<!-- PIN Code and Verification Status -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<label class="text-sm font-semibold text-slate-400">Area PIN Code</label>
+<span class="flex items-center gap-1 text-[10px] font-bold text-primary uppercase bg-primary/10 px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-xs">location_on</span> Live
+                                    </span>
+</div>
+<input id="profilePin" class="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-center tracking-[1em] font-bold text-xl" maxlength="6" type="text" value="10001"/>
+<div class="bg-primary/5 border border-primary/20 rounded-lg p-3 flex gap-3">
+<span class="material-symbols-outlined text-primary text-xl">info</span>
+<p class="text-xs text-slate-300 leading-relaxed">
+                                        This code is used to automatically filter and show clinics, pharmacies, and pet shops within your immediate vicinity.
+                                    </p>
+</div>
+</div>
+<div class="space-y-4">
+<label class="text-sm font-semibold text-slate-400">OTP Verification Status</label>
+<div class="bg-background-dark rounded-xl border border-border-dark p-6 flex flex-col items-center justify-center text-center relative overflow-hidden group">
+<!-- Glow Effect -->
+<div class="absolute -top-10 -right-10 size-24 bg-primary/10 blur-3xl rounded-full"></div>
+<div class="size-14 rounded-full bg-primary/20 flex items-center justify-center text-primary mb-3 shadow-[0_0_20px_rgba(19,236,236,0.15)] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl font-bold">check_circle</span>
+</div>
+<h4 class="text-white font-bold mb-1">Account Verified</h4>
+<p class="text-xs text-slate-400 mb-4">Secured via +1 (555) ••• 4567</p>
+<button class="text-xs font-bold text-primary hover:underline transition-all">Resend OTP Verification</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: My Activities Dashboard -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-white px-2">My Activities Dashboard</h3>
+<button class="text-sm font-bold text-primary flex items-center gap-1 hover:underline">
+                            View All History <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+<!-- Lost & Found -->
+<div class="bg-card-dark border border-border-dark/50 rounded-xl p-5 glow-cyan transition-all group cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<div class="size-10 rounded-lg bg-orange-500/10 text-orange-500 flex items-center justify-center">
+<span class="material-symbols-outlined">search_check</span>
+</div>
+<span class="text-2xl font-black text-white">02</span>
+</div>
+<h4 class="font-bold text-white mb-1">Lost &amp; Found</h4>
+<p class="text-xs text-slate-400 mb-4">Active posts regarding lost pets.</p>
+<a href="lost_&_found.html" class="flex items-center gap-1 text-primary text-[10px] font-bold group-hover:gap-2 transition-all">
+                                MANAGE POSTS <span class="material-symbols-outlined text-sm">chevron_right</span>
+</a>
+</div>
+<!-- Adoptions -->
+<div class="bg-card-dark border border-border-dark/50 rounded-xl p-5 glow-cyan transition-all group cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<div class="size-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined">favorite</span>
+</div>
+<span class="text-2xl font-black text-white">01</span>
+</div>
+<h4 class="font-bold text-white mb-1">My Adoptions</h4>
+<p class="text-xs text-slate-400 mb-4">Pet adoption listings you've created.</p>
+<a href="pet_adoption.html" class="flex items-center gap-1 text-primary text-[10px] font-bold group-hover:gap-2 transition-all">
+                                VIEW LISTINGS <span class="material-symbols-outlined text-sm">chevron_right</span>
+</a>
+</div>
+
+<!-- Appointments -->
+<div class="bg-card-dark border border-border-dark/50 rounded-xl p-5 glow-cyan transition-all group cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<div class="size-10 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
+<span class="material-symbols-outlined">event</span>
+</div>
+<span class="text-2xl font-black text-white">03</span>
+</div>
+<h4 class="font-bold text-white mb-1">Appointments</h4>
+<p class="text-xs text-slate-400 mb-4">Upcoming vet &amp; grooming visits.</p>
+<a href="doctor_appointments_-_book_now_cta.html" class="flex items-center gap-1 text-primary text-[10px] font-bold group-hover:gap-2 transition-all">
+                                VIEW CALENDAR <span class="material-symbols-outlined text-sm">chevron_right</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Secondary Quick Action Card -->
+<div class="bg-gradient-to-r from-primary/20 to-transparent border border-primary/30 rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex gap-4 items-center">
+<div class="size-14 bg-background-dark rounded-full flex items-center justify-center text-primary shadow-lg">
+<span class="material-symbols-outlined text-3xl">add_circle</span>
+</div>
+<div>
+<h4 class="text-white font-bold text-lg">Have a new pet activity?</h4>
+<p class="text-slate-300 text-sm">List a new adoption or report a lost pet instantly.</p>
+</div>
+</div>
+<a href="create_adoption_post.html" class="bg-white text-background-dark px-8 py-3 rounded-lg font-bold text-sm hover:bg-primary transition-colors whitespace-nowrap">
+                        Start New Entry
+                    </a>
+</div>
+</div>
+</div>
+<!-- Account Actions -->
+<div class="max-w-3xl mx-auto mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+<button class="px-6 py-3 rounded-lg border border-white/10 bg-white/5 text-white/80 hover:text-white hover:bg-white/10 font-bold text-sm transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">logout</span> Log Out
+</button>
+<button class="px-6 py-3 rounded-lg border border-rose-500/30 bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 font-bold text-sm transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">delete</span> Delete Account
+</button>
+</div>
+<!-- Toast: Changes Saved -->
+<div id="toastSaved" class="hidden fixed bottom-6 right-6 z-[2000]">
+<div class="flex items-center gap-2 bg-background-dark/90 border border-primary/30 text-white rounded-lg px-4 py-2 shadow-xl">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<span class="text-sm font-semibold">Changes saved</span>
+</div>
+</div>
+<!-- Footer Help Link -->
+<footer class="mt-16 pt-8 border-t border-border-dark text-center pb-12">
+<p class="text-slate-500 text-sm">
+                Need help with your profile? <a class="text-primary hover:underline font-bold" href="#">Visit Support Center</a>
+</p>
+<p class="text-slate-600 text-xs mt-2">© 2024 Nivâra Pet Care Platforms Inc. All Rights Reserved.</p>
+</footer>
+</main>
+<!-- Floating Sticky Action Bar for Mobile/Tablet -->
+<div class="fixed bottom-6 right-6 md:hidden">
+<button class="size-14 rounded-full bg-primary text-background-dark shadow-xl shadow-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl font-bold">save</span>
+</button>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var pfpOverlay = document.getElementById('pfpOverlay');
+  var pfpInput = document.getElementById('pfpInput');
+  var profileAvatar = document.getElementById('profileAvatar');
+  var headerAvatar = document.getElementById('headerAvatar');
+  var nameInput = document.getElementById('profileName');
+  var phoneInput = document.getElementById('profilePhone');
+  var emailInput = document.getElementById('profileEmail');
+  var pinInput = document.getElementById('profilePin');
+  var saveBtn = document.getElementById('saveProfileBtn');
+  function loadProfile(){
+    try {
+      var raw = localStorage.getItem('userProfile') || sessionStorage.getItem('userProfile');
+      var data = raw ? JSON.parse(raw) : {};
+      if(data.name && nameInput) nameInput.value = data.name;
+      if(data.phone && phoneInput) phoneInput.value = data.phone;
+      if(data.email && emailInput) emailInput.value = data.email;
+      if(data.pin && pinInput) pinInput.value = data.pin;
+      if(data.avatar){
+        if(profileAvatar) profileAvatar.src = data.avatar;
+        if(headerAvatar) headerAvatar.src = data.avatar;
+      }
+    } catch {}
+  }
+  function persistProfile(data){
+    try {
+      localStorage.setItem('userProfile', JSON.stringify(data));
+      sessionStorage.setItem('userProfile', JSON.stringify(data));
+      if(data.pin) sessionStorage.setItem('userPin', data.pin);
+    } catch {}
+  }
+  pfpOverlay?.addEventListener('click', function(){ pfpInput?.click(); });
+  pfpInput?.addEventListener('change', function(){
+    var f = (pfpInput.files && pfpInput.files[0]);
+    if(!f) return;
+    var reader = new FileReader();
+    reader.onload = function(){
+      var url = reader.result || '';
+      if(profileAvatar) profileAvatar.src = url;
+      if(headerAvatar) headerAvatar.src = url;
+      try {
+        var raw = localStorage.getItem('userProfile') || sessionStorage.getItem('userProfile');
+        var data = raw ? JSON.parse(raw) : {};
+        data.avatar = url;
+        persistProfile(data);
+      } catch {}
+    };
+    reader.readAsDataURL(f);
+  });
+  saveBtn?.addEventListener('click', function(){
+    var data = {};
+    try {
+      var raw = localStorage.getItem('userProfile') || sessionStorage.getItem('userProfile');
+      data = raw ? JSON.parse(raw) : {};
+    } catch {}
+    data.name = (nameInput?.value || '').trim();
+    data.phone = (phoneInput?.value || '').trim();
+    data.email = (emailInput?.value || '').trim() || data.email || '';
+    data.pin = (pinInput?.value || '').trim();
+    persistProfile(data);
+    saveBtn.classList.add('ring-2','ring-primary/50');
+    setTimeout(function(){ saveBtn.classList.remove('ring-2','ring-primary/50'); }, 600);
+    var toast = document.getElementById('toastSaved');
+    if(toast){
+      toast.classList.remove('hidden');
+      setTimeout(function(){ toast.classList.add('hidden'); }, 1400);
+    }
+  });
+  loadProfile();
+});
+</script>
+<script src="scroll-animations.js"></script>
+<script src="page-transitions.js"></script>
+</body></html>

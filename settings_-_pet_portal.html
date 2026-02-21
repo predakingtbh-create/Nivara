@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings - Nivâra Pet Care</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102222",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #102222;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #326767;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 left-0 right-0 z-50 border-b border-primary/10 bg-background-dark/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-6">
+<div class="flex items-center gap-8">
+<a href="index.html" class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl">pets</span>
+<span class="text-white text-xl font-extrabold tracking-tight">Nivâra</span>
+</a>
+<nav class="hidden md:flex items-center gap-8">
+
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="doctor_appointments_-_book_now_cta.html">Appointments</a>
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="pet_medicines.html">Medicines</a>
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="lost_&_found.html">Lost &amp; Found</a>
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="pet_adoption.html">Adoption</a>
+</nav>
+</div>
+<div class="hidden sm:flex items-center gap-2 text-xs font-medium text-white/60">
+<span class="material-symbols-outlined text-primary text-sm">location_on</span>
+<span>Mumbai, IN</span>
+</div>
+</div>
+</nav>
+<div class="flex h-screen overflow-hidden mt-16">
+<!-- Sidebar Navigation -->
+<aside class="w-72 flex-shrink-0 border-r border-[#326767]/30 bg-[#112222] hidden md:flex flex-col">
+<div class="p-6 flex flex-col h-full">
+<!-- Brand -->
+<a href="index.html" class="flex items-center gap-3 mb-10">
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">pets</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-white text-lg font-bold leading-tight">Nivâra</h1>
+<p class="text-[#92c9c9] text-xs font-medium uppercase tracking-wider">Pet Care Portal</p>
+</div>
+</a>
+<!-- Nav Links -->
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-[#92c9c9] hover:bg-white/5 hover:text-white rounded-lg transition-all duration-200" href="doctor_appointments_-_book_now_cta.html">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-medium text-sm">Appointments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#92c9c9] hover:bg-white/5 hover:text-white rounded-lg transition-all duration-200" href="pet_medicines.html">
+<span class="material-symbols-outlined">medication</span>
+<span class="font-medium text-sm">Medicines</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#92c9c9] hover:bg-white/5 hover:text-white rounded-lg transition-all duration-200" href="pet_records_-_pet_portal.html">
+<span class="material-symbols-outlined">folder_shared</span>
+<span class="font-medium text-sm">Pet Records</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-[#112222] rounded-lg shadow-lg shadow-primary/20" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium text-sm">Settings</span>
+</a>
+</nav>
+<!-- Profile & Logout -->
+<div class="pt-6 mt-auto border-t border-[#326767]/30">
+<button class="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-white/5 hover:bg-red-500/10 text-white hover:text-red-400 rounded-lg border border-white/10 transition-all duration-200 text-sm font-semibold">
+<span class="material-symbols-outlined text-lg">logout</span>
+                        Logout
+                    </button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto custom-scrollbar bg-background-dark">
+<div class="max-w-4xl mx-auto px-6 py-10 lg:px-12">
+<!-- Page Header -->
+<header class="mb-10">
+<h2 class="text-white text-4xl font-extrabold tracking-tight mb-2">Settings</h2>
+<p class="text-[#92c9c9] text-lg">Manage your account preferences, security, and notifications.</p>
+</header>
+<div class="space-y-10">
+<!-- Section: Account Settings -->
+<section>
+<div class="flex items-center gap-2 mb-6 border-b border-[#326767]/30 pb-4">
+<span class="material-symbols-outlined text-primary">person</span>
+<h3 class="text-xl font-bold text-white">Account Settings</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-[#92c9c9]">Email Address</label>
+<input class="w-full bg-[#193333] border border-[#326767] rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all placeholder:text-[#326767]" placeholder="alex.h@example.com" type="email"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-[#92c9c9]">Phone Number</label>
+<input class="w-full bg-[#193333] border border-[#326767] rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all placeholder:text-[#326767]" placeholder="+1 (555) 000-0000" type="tel"/>
+</div>
+<div class="space-y-2 md:col-span-2">
+<label class="text-sm font-semibold text-[#92c9c9]">Security PIN</label>
+<div class="flex gap-4">
+<input class="flex-1 bg-[#193333]/50 border border-[#326767] rounded-lg px-4 py-3 text-white cursor-not-allowed" readonly="" type="password" value="••••"/>
+<button class="px-6 py-3 border border-primary text-primary hover:bg-primary/10 rounded-lg font-bold text-sm transition-all">
+                                        Change PIN
+                                    </button>
+</div>
+<p class="text-xs text-[#92c9c9]/60">Your PIN is required for secure pet check-ins.</p>
+</div>
+</div>
+</section>
+<!-- Section: Notification Preferences -->
+<section>
+<div class="flex items-center gap-2 mb-6 border-b border-[#326767]/30 pb-4">
+<span class="material-symbols-outlined text-primary">notifications</span>
+<h3 class="text-xl font-bold text-white">Notification Preferences</h3>
+</div>
+<div class="bg-[#193333]/30 rounded-xl overflow-hidden border border-[#326767]/20">
+<table class="w-full text-left">
+<thead class="bg-[#193333] text-[#92c9c9] text-xs uppercase tracking-wider font-bold">
+<tr>
+<th class="px-6 py-4">Trigger</th>
+<th class="px-6 py-4 text-center">Email</th>
+<th class="px-6 py-4 text-center">SMS</th>
+<th class="px-6 py-4 text-center">App Push</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#326767]/20 text-sm">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 text-white font-medium">Appointment Reminders</td>
+<td class="px-6 py-4 text-center align-middle">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-[#102222] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</td>
+<td class="px-6 py-4 text-center align-middle">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-[#102222] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</td>
+<td class="px-6 py-4 text-center align-middle">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-[#102222] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 text-white font-medium">Health Updates</td>
+<td class="px-6 py-4 text-center align-middle">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-[#102222] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</td>
+<td class="px-6 py-4 text-center align-middle">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-[#102222] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</td>
+<td class="px-6 py-4 text-center align-middle">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-[#102222] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 text-white font-medium">Promotional Offers</td>
+<td class="px-6 py-4 text-center align-middle">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-[#102222] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</td>
+<td class="px-6 py-4 text-center align-middle">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-[#102222] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</td>
+<td class="px-6 py-4 text-center align-middle">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-[#102222] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Section: Privacy Settings -->
+<section>
+<div class="flex items-center gap-2 mb-6 border-b border-[#326767]/30 pb-4">
+<span class="material-symbols-outlined text-primary">lock</span>
+<h3 class="text-xl font-bold text-white">Privacy Settings</h3>
+</div>
+<div class="space-y-6">
+<div class="flex items-start justify-between p-4 bg-[#193333]/20 rounded-xl border border-[#326767]/20">
+<div>
+<h4 class="text-white font-bold">Public Profile Visibility</h4>
+<p class="text-sm text-[#92c9c9] max-w-md mt-1">Allow other pet owners to see your pet's public medical history (anonymous).</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-[#102222] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-start justify-between p-4 bg-[#193333]/20 rounded-xl border border-[#326767]/20">
+<div>
+<h4 class="text-white font-bold">Anonymous Data Sharing</h4>
+<p class="text-sm text-[#92c9c9] max-w-md mt-1">Help Nivâra improve care by sharing anonymous veterinary data with our researchers.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-[#102222] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="pt-4 space-y-4">
+<h4 class="text-red-400 font-bold uppercase text-xs tracking-widest">Danger Zone</h4>
+<div class="flex flex-wrap gap-4">
+<button class="text-sm text-[#92c9c9] hover:text-white underline decoration-[#326767] transition-all">Deactivate Account</button>
+<button class="text-sm text-red-400 hover:text-red-300 underline decoration-red-900/50 transition-all">Delete All Personal Data</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Form Actions -->
+<footer class="pt-8 flex items-center justify-end gap-4 sticky bottom-0 bg-background-dark/95 backdrop-blur-md pb-10 border-t border-[#326767]/20 mt-12">
+<button class="px-8 py-3 text-[#92c9c9] hover:text-white font-bold transition-all">
+                            Cancel
+                        </button>
+<button class="px-10 py-3 bg-primary text-[#112222] rounded-lg font-bold shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all hover:-translate-y-0.5 active:translate-y-0">
+                            Save Changes
+                        </button>
+</footer>
+</div>
+</div>
+</main>
+</div>
+</body></html>

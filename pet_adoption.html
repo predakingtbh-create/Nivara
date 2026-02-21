@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nivâra | Adopt a Pet</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="page-transitions.css">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102222",
+                        "surface-dark": "#1a2e2e",
+                        "border-dark": "#234848",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "hand": ["Just Another Hand", "cursive"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pet-card:hover {
+            box-shadow: 0 0 15px rgba(19, 236, 236, 0.2);
+            border-color: #13ecec;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-white font-display min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="border-b border-border-dark bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-6 lg:px-20">
+<div class="flex items-center justify-between h-16 gap-6">
+<div class="flex items-center gap-8">
+<a href="index.html" class="flex items-center gap-3">
+<img src="logo.png" alt="Nivâra Logo" class="h-10">
+<h1 class="text-5xl font-hand tracking-[3px] text-white">nivâra</h1>
+</a>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="doctor_appointments_-_book_now_cta.html">Appointments</a>
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="pet_medicines.html">Pet Medicines</a>
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="lost_&_found.html">Lost &amp; Found</a>
+<a class="text-primary text-sm font-medium border-b-2 border-primary pb-1" href="pet_adoption.html">Adoptions</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button id="locationBtn" class="hidden md:flex items-center gap-2 text-xs font-medium text-white/60 hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-primary text-sm">location_on</span>
+<span id="locationLabel">Mumbai, IN</span>
+</button>
+<div class="hidden lg:flex items-center bg-border-dark rounded-lg px-3 py-1.5 w-64">
+<span class="material-symbols-outlined text-white/50 text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-white placeholder:text-white/40 w-full ml-2" placeholder="Search pets..." type="text"/>
+</div>
+<a href="create_adoption_post.html" class="bg-primary hover:bg-primary/90 text-background-dark font-bold py-2 px-4 rounded-lg text-sm flex items-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-xl">add_circle</span>
+Create Post
+</a>
+<a href="user_profile_&_management.html" class="w-10 h-10 rounded-full bg-surface-dark border border-border-dark overflow-hidden bg-cover bg-center" data-alt="User profile picture placeholder" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBhs-4apE0OuaAaryRHBvmUNpHhH3bjvBPykJTsY6dUDG5YckWZYxrZnakYgZQrSlrhFkGdTd_0K-576iuzC7dpeLW8aaaBfyVJwzIemQWLWc-HeM1Hq4lRHCDUu9lSq45hwo37Qv_uKJwmBl0m7vVNHjLu2_dWjalpwuWl-fPB6nF3Mpn5VDIHdARnd5r0KkVQH58JmbQ6LiZUKkvi8BCUB0VgbLqAEWZyUlKU2i_Qx0TViskheog4XO6Nw27xIg4YwlEyxjlT0fAc')"></a>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl mx-auto w-full px-6 lg:px-20 py-10 fade-in-element">
+<!-- Hero Title Section -->
+<div class="mb-10">
+<h2 class="text-4xl lg:text-5xl font-black mb-3">Find Your New Best Friend</h2>
+<p class="text-primary/60 text-lg">Every pet deserves a loving home. Discover companions near you.</p>
+</div>
+<!-- Filter Bar -->
+<div class="flex flex-wrap items-center gap-3 mb-12 bg-surface-dark/40 p-2 rounded-xl border border-border-dark/50">
+<div class="relative group" id="petTypeFilter">
+    <button class="flex items-center gap-2 bg-surface-dark px-4 py-2.5 rounded-lg border border-border-dark text-sm hover:border-primary transition-all">
+        <span class="material-symbols-outlined text-primary text-lg">category</span>
+        <span>Pet Type</span>
+        <span class="material-symbols-outlined text-xs">expand_more</span>
+    </button>
+    <div class="absolute top-full mt-2 w-48 bg-surface-dark border border-border-dark rounded-lg shadow-lg z-10 hidden">
+        <a href="#" class="block px-4 py-2 text-sm text-white/80 hover:bg-primary/10" data-value="all">All Types</a>
+        <a href="#" class="block px-4 py-2 text-sm text-white/80 hover:bg-primary/10" data-value="dog">Dogs</a>
+        <a href="#" class="block px-4 py-2 text-sm text-white/80 hover:bg-primary/10" data-value="cat">Cats</a>
+        <a href="#" class="block px-4 py-2 text-sm text-white/80 hover:bg-primary/10" data-value="rabbit">Rabbits</a>
+        <a href="#" class="block px-4 py-2 text-sm text-white/80 hover:bg-primary/10" data-value="bird">Birds</a>
+    </div>
+</div>
+<div class="relative group" id="ageGroupFilter">
+    <button class="flex items-center gap-2 bg-surface-dark px-4 py-2.5 rounded-lg border border-border-dark text-sm hover:border-primary transition-all">
+        <span class="material-symbols-outlined text-primary text-lg">cake</span>
+        <span>Age Group</span>
+        <span class="material-symbols-outlined text-xs">expand_more</span>
+    </button>
+    <div class="absolute top-full mt-2 w-48 bg-surface-dark border border-border-dark rounded-lg shadow-lg z-10 hidden">
+        <a href="#" class="block px-4 py-2 text-sm text-white/80 hover:bg-primary/10" data-value="all">All Ages</a>
+        <a href="#" class="block px-4 py-2 text-sm text-white/80 hover:bg-primary/10" data-value="puppy">Puppy / Kitten (0-1 yrs)</a>
+        <a href="#" class="block px-4 py-2 text-sm text-white/80 hover:bg-primary/10" data-value="young">Young (1-3 yrs)</a>
+        <a href="#" class="block px-4 py-2 text-sm text-white/80 hover:bg-primary/10" data-value="adult">Adult (3-8 yrs)</a>
+        <a href="#" class="block px-4 py-2 text-sm text-white/80 hover:bg-primary/10" data-value="senior">Senior (8+ yrs)</a>
+    </div>
+</div>
+<div class="relative group" id="timeListedFilter">
+    <button class="flex items-center gap-2 bg-surface-dark px-4 py-2.5 rounded-lg border border-border-dark text-sm hover:border-primary transition-all">
+        <span class="material-symbols-outlined text-primary text-lg">schedule</span>
+        <span>Time Listed</span>
+        <span class="material-symbols-outlined text-xs">expand_more</span>
+    </button>
+    <div class="absolute top-full mt-2 w-48 bg-surface-dark border border-border-dark rounded-lg shadow-lg z-10 hidden">
+        <a href="#" class="block px-4 py-2 text-sm text-white/80 hover:bg-primary/10" data-value="all">Anytime</a>
+        <a href="#" class="block px-4 py-2 text-sm text-white/80 hover:bg-primary/10" data-value="day">Last 24 hours</a>
+        <a href="#" class="block px-4 py-2 text-sm text-white/80 hover:bg-primary/10" data-value="week">Last week</a>
+        <a href="#" class="block px-4 py-2 text-sm text-white/80 hover:bg-primary/10" data-value="month">Last month</a>
+    </div>
+</div>
+
+</div>
+<!-- Pet Grid -->
+<div id="adoptGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 fade-in-element">
+
+<!-- Modal for Contact Info -->
+<div id="contactModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+    <div class="bg-surface-dark rounded-xl border border-border-dark p-8 max-w-sm w-full m-4">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-2xl font-bold">Contact Owner</h3>
+            <button id="closeModal" class="text-white/50 hover:text-white">&times;</button>
+        </div>
+        <div>
+            <p class="text-sm text-white/60 mb-1">Name</p>
+            <p id="ownerName" class="font-semibold text-lg mb-4"></p>
+            <p class="text-sm text-white/60 mb-1">Email</p>
+            <p id="ownerEmail" class="font-semibold text-lg mb-4"></p>
+            <p class="text-sm text-white/60 mb-1">Phone</p>
+            <p id="ownerPhone" class="font-semibold text-lg"></p>
+        </div>
+    </div>
+</div>
+
+    <script src="scroll-animations.js"></script>
+    <script src="page-transitions.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('contactModal');
+    const closeModal = document.getElementById('closeModal');
+    const ownerName = document.getElementById('ownerName');
+    const ownerEmail = document.getElementById('ownerEmail');
+    const ownerPhone = document.getElementById('ownerPhone');
+
+    function attachContactListeners() {
+        const contactButtons = document.querySelectorAll('.contact-btn');
+        contactButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                ownerName.textContent = button.dataset.ownerName;
+                ownerEmail.textContent = button.dataset.ownerEmail;
+                ownerPhone.textContent = button.dataset.ownerPhone;
+                modal.classList.remove('hidden');
+            });
+        });
+    }
+
+    closeModal.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
+
+    const filters = {
+        petType: 'all',
+        ageGroup: 'all',
+        timeListed: 'all'
+    };
+
+    const petData = [
+    const filters = {
+        petType: 'all',
+        ageGroup: 'all',
+        timeListed: 'all'
+    };
+
+    const petData = [
+        {
+            name: 'Buddy',
+            type: 'dog',
+            breed: 'Golden Retriever',
+            age: 2, // years
+            gender: 'male',
+            status: 'new',
+            location: 'Seattle, WA',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBH2KaqozSl01xrzYs015svGk9HWFota8w8C7ClAiRMxkxilYba8mOQkbGfdxjMl5_xrmgDJMQWIBmoqCRT4cCVxDteNwyn8ICc7PcCb8lOKYOLHmz3EXuzWPNq7ZBDXMV812mSZh3T3uAdyOIC0sYaxYCRwxRGFn7c2bPQ4cFh8cEU4pFDyU75oBf4y81VfRRiIzOOF2TiQKb5me8QPiq5BUHnpLKYV7JgzAH7qjVVU24RdhbhBIyVWXtUhl7d0w5z3B1z_yPUQC3c',
+            listedDate: new Date('2024-07-20T10:00:00Z'),
+            owner: { name: 'Nivâra Shelter', email: 'shelter@nivara.org', phone: '+1-555-0101' }
+        },
+        {
+            name: 'Luna',
+            type: 'cat',
+            breed: 'Siamese Mix',
+            age: 1, // years
+            gender: 'female',
+            status: null,
+            location: 'Portland, OR',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDnwUnfs-K1-lRI1dEQe9tGFzgiv09vYmtLzmPqDgErjyAaQH9Cjcy7KuA4tli-pC0NR1zAIu5sV3xMedleDPsDKxf5U_Bfb1TTMkOwprJcNppW0hE9eBBJaV3xi3lRg4moRqUgo9NGSctY8QjRu0LBS2vl0hZA5cYYDVZIUsVdPcZay_2tXeh_9LSa-vFO70QTWeNBZp1HTBzZwOgc_OQQ7yKNYhMMFQtMYo31iceHboixYLzRvrMUS0LmqHguYVeEubV8woDi5iEs',
+            listedDate: new Date('2024-07-18T14:30:00Z'),
+            owner: { name: 'Sarah Jenkins', email: 'sarah@example.com', phone: '+1-555-0102' }
+        },
+        {
+            name: 'Max',
+            type: 'dog',
+            breed: 'Beagle',
+            age: 4, // years
+            gender: 'male',
+            status: null,
+            location: 'City Rescue',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAn5-TaJqRu3vnNOdVBa6PJxpAfWviYmbIEgQr5FznylYokOoENxiIDGmyJ_Di6cCCmWwzooGyN48aOOZvwcaT3qQ6D0fo4sdtJtGCIFJc_rfd_T6vNdg-3mEuCiM0qtvd8DF_3JxlTYJy7KJ8dghnPT4AEX3yN9kMSJCW8gJKrmhvJcpwu073Fth4nSAs3L8BjeQ_XtI5UV7UxRpf3OK5lIse2bFawBg2DqRZjwzYw6joocQDhQDHD2YJwzxu0RxNN7TXuFeNV34qK',
+            listedDate: new Date('2024-06-25T09:00:00Z'),
+            owner: { name: 'Mike T.', email: 'mike@example.com', phone: '+1-555-0103' }
+        },
+        {
+            name: 'Bella',
+            type: 'cat',
+            breed: 'Maine Coon',
+            age: 3, // years
+            gender: 'female',
+            status: null,
+            location: 'Bellevue, WA',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDvH6VV_n6CqJgDoNeaiNLWPdiUj7YjePIg3OWR1xp151Rfg5PxjBiHwI6NeA_U3j1Wa8VMZJ_L5UKV3Drr3obm5alcZ7nQdBNtrsrTkMNWlUlQlatkA6HQKYyzBNYqOSxI4ReUNidJ43bz5qYIGYqiMRNxVrsiDIlRUglrXS9-jpB-wBUKiYefh4GQkGwH6BBdrj9zIIAH0SgaFCuht6k2B2hq7M---DV5muUoZBR2a9OFbjqoHFyM_ddMGEfuy0d43R6QQ_dpA-0O',
+            listedDate: new Date('2024-07-15T11:00:00Z'),
+            owner: { name: 'Nivâra Shelter', email: 'shelter@nivara.org', phone: '+1-555-0104' }
+        },
+        {
+            name: 'Charlie',
+            type: 'dog',
+            breed: 'Toy Poodle',
+            age: 5, // years
+            gender: 'male',
+            status: null,
+            location: 'Vancouver, WA',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBeecFLRILfgC6e9fuAmnHi7z6NbnsoMjXyTvKX6sKDeXXt_kpT0E0KZHzA0dNrntUXF1X_wlV_s5vkNJeydZh79cMKv_Al7D5zFjub87u6brRyClDDCz0mXJTMeyAN6c_4q9HT0Q-JuLHup0B8Y9d7CLPKf4bcfmG0Icv__fmz-Vgsb0KT3Y2gKZ49paQsyJ3LhWjiw7J8smGTTAobJGewUqcbVF2gvjUK8lSnbJ2f3xvxjxru_jRY7u1W8WvwnMlYzlRuxtsJmQ34',
+            listedDate: new Date('2024-07-01T18:00:00Z'),
+            owner: { name: 'Robert Wilson', email: 'robert@example.com', phone: '+1-555-0105' }
+        },
+        {
+            name: 'Daisy',
+            type: 'rabbit',
+            breed: 'Holland Lop',
+            age: 0.5, // years (6 months)
+            gender: 'female',
+            status: null,
+            location: 'Salem, OR',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDKqyIJXbolTsU0J5RYyT31GS14RTtdrul-5b9K8YrdPYZqPHqubpHsKxj74F5bDddQC9KFwfjYWgpeVhhCbpXmPJyFpUfPHrNqHEnYKzICaHjAMs8PNr-iNdAh1JR2KJceFgRtrKfAkUOJMkZbvy-AuHlKljlvzttc7iaW6ziMRr_qoiL5GnkQcSCxEeE0kgRsizHoIyva_TeNMymByMrV-GVRH82ZDQ5vUVIC-VhYdJcQ_bYOAbSX7nKKMbpkPoClmWi5WiQWV4Jw',
+            listedDate: new Date('2024-07-19T12:00:00Z'),
+            owner: { name: 'Animal Friends', email: 'friends@example.com', phone: '+1-555-0106' }
+        }
+    ];
+
+    function setupFilter(filterId, filterKey) {
+        const filterElement = document.getElementById(filterId);
+        const button = filterElement.querySelector('button');
+        const dropdown = filterElement.querySelector('.absolute');
+        const links = dropdown.querySelectorAll('a');
+        const filterNameSpan = button.querySelector('span:nth-child(2)');
+
+        button.addEventListener('click', (event) => {
+            event.stopPropagation();
+            closeAllDropdowns(filterId);
+            dropdown.classList.toggle('hidden');
+        });
+
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const selectedValue = link.dataset.value;
+                filters[filterKey] = selectedValue;
+                filterNameSpan.textContent = link.textContent;
+                dropdown.classList.add('hidden');
+                renderGrid();
+            });
+        });
+    }
+
+    function closeAllDropdowns(exceptId = null) {
+        ['petTypeFilter', 'ageGroupFilter', 'timeListedFilter'].forEach(id => {
+            if (id !== exceptId) {
+                document.getElementById(id).querySelector('.absolute').classList.add('hidden');
+            }
+        });
+    }
+
+    document.addEventListener('click', () => {
+        closeAllDropdowns();
+    });
+
+    function getAgeGroup(age) {
+        if (age <= 1) return 'puppy';
+        if (age <= 3) return 'young';
+        if (age <= 8) return 'adult';
+        return 'senior';
+    }
+
+    function getTimeListed(date) {
+        const now = new Date();
+        const diff = now.getTime() - date.getTime();
+        const days = diff / (1000 * 3600 * 24);
+        if (days <= 1) return 'day';
+        if (days <= 7) return 'week';
+        if (days <= 30) return 'month';
+        return 'all';
+    }
+
+    function renderGrid() {
+        const grid = document.getElementById('adoptGrid');
+        grid.innerHTML = '';
+
+        const filteredPets = petData.filter(pet => {
+            const petTypeMatch = filters.petType === 'all' || pet.type === filters.petType;
+            const ageGroupMatch = filters.ageGroup === 'all' || getAgeGroup(pet.age) === filters.ageGroup;
+            const timeListedMatch = filters.timeListed === 'all' || getTimeListed(pet.listedDate) === filters.timeListed;
+            return petTypeMatch && ageGroupMatch && timeListedMatch;
+        });
+
+        if (filteredPets.length === 0) {
+            grid.innerHTML = `<p class="text-white/60 col-span-full text-center">No pets found matching your criteria.</p>`;
+            return;
+        }
+
+        filteredPets.forEach(pet => {
+            const card = `
+                <div class="pet-card flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all duration-300">
+                    <div class="relative h-64 overflow-hidden">
+                        <img class="w-full h-full object-cover" src="${pet.image}" alt="${pet.breed}"/>
+                        <div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1.5 border border-primary/20">
+                            <span class="material-symbols-outlined text-sm ${pet.gender === 'male' ? 'text-primary' : 'text-pink-400'}">${pet.gender}</span>
+                            <span class="text-[10px] uppercase font-bold tracking-wider">${pet.gender}</span>
+                        </div>
+                        ${pet.status === 'new' ? `<span class="absolute top-3 left-3 text-primary text-xs font-bold bg-primary/10 px-2 py-1 rounded">New</span>` : ''}
+                    </div>
+                    <div class="p-5 flex flex-col flex-1">
+                        <div class="mb-4">
+                            <h3 class="text-xl font-bold">${pet.name}</h3>
+                            <p class="text-primary/70 text-sm font-medium">${pet.type.charAt(0).toUpperCase() + pet.type.slice(1)} • ${pet.breed}</p>
+                        </div>
+                        <div class="flex items-center gap-4 text-xs text-white/60 mb-4">
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">event</span>
+                                ${pet.age} ${pet.age > 1 ? 'Years' : 'Year'} Old
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">male</span>
+                                ${pet.gender.charAt(0).toUpperCase() + pet.gender.slice(1)}
+                            </div>
+                        </div>
+                        <div class="bg-surface-dark/60 border border-border-dark/50 rounded-xl px-4 py-3 mb-6 flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary">location_searching</span>
+                            <div>
+                                <p class="text-[11px] text-white/40 font-bold">Located At</p>
+                                <p class="text-sm text-white">${pet.location}</p>
+                            </div>
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-border-dark">
+                            <button class="contact-btn w-full py-3 rounded-full bg-primary text-background-dark font-black text-sm hover:shadow-[0_0_20px_rgba(19,236,236,0.3)] transition-all flex items-center justify-center gap-2" data-owner-name="${pet.owner.name}" data-owner-email="${pet.owner.email}" data-owner-phone="${pet.owner.phone}">
+                                <span class="material-symbols-outlined text-background-dark text-base">call</span>
+                                Contact Owner
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            grid.innerHTML += card;
+        });
+
+        // Re-attach event listeners for the new buttons
+        attachContactListeners();
+    }
+
+    setupFilter('petTypeFilter', 'petType');
+    setupFilter('ageGroupFilter', 'ageGroup');
+    setupFilter('timeListedFilter', 'timeListed');
+
+    // Initial render
+    renderGrid();
+});
+</script>
+<!-- Card 1 -->
+<div class="pet-card flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all duration-300">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Golden Retriever puppy sitting on grass" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH2KaqozSl01xrzYs015svGk9HWFota8w8C7ClAiRMxkxilYba8mOQkbGfdxjMl5_xrmgDJMQWIBmoqCRT4cCVxDteNwyn8ICc7PcCb8lOKYOLHmz3EXuzWPNq7ZBDXMV812mSZh3T3uAdyOIC0sYaxYCRwxRGFn7c2bPQ4cFh8cEU4pFDyU75oBf4y81VfRRiIzOOF2TiQKb5me8QPiq5BUHnpLKYV7JgzAH7qjVVU24RdhbhBIyVWXtUhl7d0w5z3B1z_yPUQC3c"/>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1.5 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm">male</span>
+<span class="text-[10px] uppercase font-bold tracking-wider">Male</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="mb-4">
+<div class="flex justify-between items-start">
+<h3 class="text-xl font-bold">Buddy</h3>
+<span class="text-primary text-xs font-bold bg-primary/10 px-2 py-1 rounded">New</span>
+</div>
+<p class="text-primary/70 text-sm font-medium">Dog • Golden Retriever</p>
+</div>
+<div class="flex items-center gap-4 text-xs text-white/60 mb-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">event</span>
+                            2 Years Old
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">male</span>
+                            Male
+                        </div>
+</div>
+<div class="bg-surface-dark/60 border border-border-dark/50 rounded-xl px-4 py-3 mb-6 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">location_searching</span>
+<div>
+<p class="text-[11px] text-white/40 font-bold">Located At</p>
+<p class="text-sm text-white">Seattle, WA</p>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-border-dark">
+<button class="w-full py-3 rounded-full bg-primary text-background-dark font-black text-sm hover:shadow-[0_0_20px_rgba(19,236,236,0.3)] transition-all flex items-center justify-center gap-2" data-owner-name="Nivâra Shelter" data-owner-email="shelter@nivara.org" data-owner-phone="+1-555-0101">
+<span class="material-symbols-outlined text-background-dark text-base">call</span>
+Contact Owner
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="pet-card flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all duration-300">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Siamese cat looking at camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnwUnfs-K1-lRI1dEQe9tGFzgiv09vYmtLzmPqDgErjyAaQH9Cjcy7KuA4tli-pC0NR1zAIu5sV3xMedleDPsDKxf5U_Bfb1TTMkOwprJcNppW0hE9eBBJaV3xi3lRg4moRqUgo9NGSctY8QjRu0LBS2vl0hZA5cYYDVZIUsVdPcZay_2tXeh_9LSa-vFO70QTWeNBZp1HTBzZwOgc_OQQ7yKNYhMMFQtMYo31iceHboixYLzRvrMUS0LmqHguYVeEubV8woDi5iEs"/>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1.5 border border-primary/20">
+<span class="material-symbols-outlined text-pink-400 text-sm">female</span>
+<span class="text-[10px] uppercase font-bold tracking-wider">Female</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="mb-4">
+<h3 class="text-xl font-bold">Luna</h3>
+<p class="text-primary/70 text-sm font-medium">Cat • Siamese Mix</p>
+</div>
+<div class="flex items-center gap-4 text-xs text-white/60 mb-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">event</span>
+                            1 Year Old
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">female</span>
+                            Female
+                        </div>
+</div>
+<div class="bg-surface-dark/60 border border-border-dark/50 rounded-xl px-4 py-3 mb-6 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">location_searching</span>
+<div>
+<p class="text-[11px] text-white/40 font-bold">Located At</p>
+<p class="text-sm text-white">Portland, OR</p>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-border-dark">
+<button class="w-full py-3 rounded-full bg-primary text-background-dark font-black text-sm hover:shadow-[0_0_20px_rgba(19,236,236,0.3)] transition-all flex items-center justify-center gap-2" data-owner-name="Sarah Jenkins" data-owner-email="sarah@example.com" data-owner-phone="+1-555-0102">
+<span class="material-symbols-outlined text-background-dark text-base">call</span>
+Contact Owner
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="pet-card flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all duration-300">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Beagle dog sitting outside" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn5-TaJqRu3vnNOdVBa6PJxpAfWviYmbIEgQr5FznylYokOoENxiIDGmyJ_Di6cCCmWwzooGyN48aOOZvwcaT3qQ6D0fo4sdtJtGCIFJc_rfd_T6vNdg-3mEuCiM0qtvd8DF_3JxlTYJy7KJ8dghnPT4AEX3yN9kMSJCW8gJKrmhvJcpwu073Fth4nSAs3L8BjeQ_XtI5UV7UxRpf3OK5lIse2bFawBg2DqRZjwzYw6joocQDhQDHD2YJwzxu0RxNN7TXuFeNV34qK"/>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1.5 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm">male</span>
+<span class="text-[10px] uppercase font-bold tracking-wider">Male</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="mb-4">
+<h3 class="text-xl font-bold">Max</h3>
+<p class="text-primary/70 text-sm font-medium">Dog • Beagle</p>
+</div>
+<div class="flex items-center gap-4 text-xs text-white/60 mb-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">event</span>
+                            4 Years Old
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">male</span>
+                            Male
+                        </div>
+</div>
+<div class="bg-surface-dark/60 border border-border-dark/50 rounded-xl px-4 py-3 mb-6 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">location_searching</span>
+<div>
+<p class="text-[11px] text-white/40 font-bold">Located At</p>
+<p class="text-sm text-white">City Rescue</p>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-border-dark">
+<button class="w-full py-3 rounded-full bg-primary text-background-dark font-black text-sm hover:shadow-[0_0_20px_rgba(19,236,236,0.3)] transition-all flex items-center justify-center gap-2" data-owner-name="Mike T." data-owner-email="mike@example.com" data-owner-phone="+1-555-0103">
+<span class="material-symbols-outlined text-background-dark text-base">call</span>
+Contact Owner
+</button>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="pet-card flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all duration-300">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Fluffy Maine Coon cat" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvH6VV_n6CqJgDoNeaiNLWPdiUj7YjePIg3OWR1xp151Rfg5PxjBiHwI6NeA_U3j1Wa8VMZJ_L5UKV3Drr3obm5alcZ7nQdBNtrsrTkMNWlUlQlatkA6HQKYyzBNYqOSxI4ReUNidJ43bz5qYIGYqiMRNxVrsiDIlRUglrXS9-jpB-wBUKiYefh4GQkGwH6BBdrj9zIIAH0SgaFCuht6k2B2hq7M---DV5muUoZBR2a9OFbjqoHFyM_ddMGEfuy0d43R6QQ_dpA-0O"/>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1.5 border border-primary/20">
+<span class="material-symbols-outlined text-pink-400 text-sm">female</span>
+<span class="text-[10px] uppercase font-bold tracking-wider">Female</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="mb-4">
+<h3 class="text-xl font-bold">Bella</h3>
+<p class="text-primary/70 text-sm font-medium">Cat • Maine Coon</p>
+</div>
+<div class="flex items-center gap-4 text-xs text-white/60 mb-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">event</span>
+                            3 Years Old
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">female</span>
+                            Female
+                        </div>
+</div>
+<div class="bg-surface-dark/60 border border-border-dark/50 rounded-xl px-4 py-3 mb-6 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">location_searching</span>
+<div>
+<p class="text-[11px] text-white/40 font-bold">Located At</p>
+<p class="text-sm text-white">Bellevue, WA</p>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-border-dark">
+<button class="w-full py-3 rounded-full bg-primary text-background-dark font-black text-sm hover:shadow-[0_0_20px_rgba(19,236,236,0.3)] transition-all flex items-center justify-center gap-2" data-owner-name="Nivâra Shelter" data-owner-email="shelter@nivara.org" data-owner-phone="+1-555-0104">
+<span class="material-symbols-outlined text-background-dark text-base">call</span>
+Contact Owner
+</button>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="pet-card flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all duration-300">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="White toy poodle on pink background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeecFLRILfgC6e9fuAmnHi7z6NbnsoMjXyTvKX6sKDeXXt_kpT0E0KZHzA0dNrntUXF1X_wlV_s5vkNJeydZh79cMKv_Al7D5zFjub87u6brRyClDDCz0mXJTMeyAN6c_4q9HT0Q-JuLHup0B8Y9d7CLPKf4bcfmG0Icv__fmz-Vgsb0KT3Y2gKZ49paQsyJ3LhWjiw7J8smGTTAobJGewUqcbVF2gvjUK8lSnbJ2f3xvxjxru_jRY7u1W8WvwnMlYzlRuxtsJmQ34"/>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1.5 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm">male</span>
+<span class="text-[10px] uppercase font-bold tracking-wider">Male</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="mb-4">
+<h3 class="text-xl font-bold">Charlie</h3>
+<p class="text-primary/70 text-sm font-medium">Dog • Toy Poodle</p>
+</div>
+<div class="flex items-center gap-4 text-xs text-white/60 mb-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">event</span>
+                            5 Years Old
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">male</span>
+                            Male
+                        </div>
+</div>
+<div class="bg-surface-dark/60 border border-border-dark/50 rounded-xl px-4 py-3 mb-6 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">location_searching</span>
+<div>
+<p class="text-[11px] text-white/40 font-bold">Located At</p>
+<p class="text-sm text-white">Vancouver, WA</p>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-border-dark">
+<button class="w-full py-3 rounded-full bg-primary text-background-dark font-black text-sm hover:shadow-[0_0_20px_rgba(19,236,236,0.3)] transition-all flex items-center justify-center gap-2" data-owner-name="Robert Wilson" data-owner-email="robert@example.com" data-owner-phone="+1-555-0105">
+<span class="material-symbols-outlined text-background-dark text-base">call</span>
+Contact Owner
+</button>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="pet-card flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all duration-300">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Small rabbit with floppy ears" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKqyIJXbolTsU0J5RYyT31GS14RTtdrul-5b9K8YrdPYZqPHqubpHsKxj74F5bDddQC9KFwfjYWgpeVhhCbpXmPJyFpUfPHrNqHEnYKzICaHjAMs8PNr-iNdAh1JR2KJceFgRtrKfAkUOJMkZbvy-AuHlKljlvzttc7iaW6ziMRr_qoiL5GnkQcSCxEeE0kgRsizHoIyva_TeNMymByMrV-GVRH82ZDQ5vUVIC-VhYdJcQ_bYOAbSX7nKKMbpkPoClmWi5WiQWV4Jw"/>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1.5 border border-primary/20">
+<span class="material-symbols-outlined text-pink-400 text-sm">female</span>
+<span class="text-[10px] uppercase font-bold tracking-wider">Female</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="mb-4">
+<h3 class="text-xl font-bold">Daisy</h3>
+<p class="text-primary/70 text-sm font-medium">Rabbit • Holland Lop</p>
+</div>
+<div class="flex items-center gap-4 text-xs text-white/60 mb-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">event</span>
+                            6 Months Old
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">female</span>
+                            Female
+                        </div>
+</div>
+<div class="bg-surface-dark/60 border border-border-dark/50 rounded-xl px-4 py-3 mb-6 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">location_searching</span>
+<div>
+<p class="text-[11px] text-white/40 font-bold">Located At</p>
+<p class="text-sm text-white">Salem, OR</p>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-border-dark">
+<button class="w-full py-3 rounded-full bg-primary text-background-dark font-black text-sm hover:shadow-[0_0_20px_rgba(19,236,236,0.3)] transition-all flex items-center justify-center gap-2" data-owner-name="City Rescue Center" data-owner-email="desk@cityrescue.org" data-owner-phone="+1-555-0106">
+<span class="material-symbols-outlined text-background-dark text-base">call</span>
+Contact Owner
+</button>
+</div>
+</div>
+</div>
+<!-- Add More Placeholder Cards to fill grid -->
+<div class="pet-card flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all duration-300 hidden xl:flex">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Tabby kitten playing" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeMPes7jiSt6VY4ky67mzyKA08Yn7a2J-lmSSNmskjokR5UWqJtwtKxjzu7nsagRKtdXebaqavnEJFm9fEFznJ4p7_FyPJVGN_5f-lWh5e35yde--lm6mxuKR8nlhU_5PREckk-YkmVsRxe3rwQSb1Sl5rgjHhl1mYUK37apQQMVy_F2t1ODNfqGYoE2xYlKIXZWd9ZgO1HKgJn0FkHIO6-QiB9QKptlf1Ho8S_Uk13YbFnlek4-6ERXl5cBkL779JI9GnBmZ9dqcE"/>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1.5 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm">male</span>
+<span class="text-[10px] uppercase font-bold tracking-wider">Male</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="mb-4">
+<h3 class="text-xl font-bold">Oliver</h3>
+<p class="text-primary/70 text-sm font-medium">Cat • Domestic Shorthair</p>
+</div>
+<div class="flex items-center gap-4 text-xs text-white/60 mb-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">event</span>
+                            3 Months Old
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                            Tacoma, WA
+                        </div>
+</div>
+<div class="mt-auto pt-4 border-t border-border-dark">
+<button class="w-full py-3 rounded-full bg-primary text-background-dark font-black text-sm hover:shadow-[0_0_20px_rgba(19,236,236,0.3)] transition-all flex items-center justify-center gap-2" data-owner-name="Nivâra Shelter" data-owner-email="info@nivara.org" data-owner-phone="+1-555-0100">
+<span class="material-symbols-outlined text-background-dark text-base">call</span>
+Contact Owner
+</button>
+</div>
+</div>
+</div>
+<div class="pet-card flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all duration-300 hidden xl:flex">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Two puppies playing together" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtJuwnjdQkls7ZjRwBPbcaMl-TUjdLeY35DV3UIB6Muy7p4sTklVe6E_95xWS8OAl1gyXpOMKZ4qkvHUSCZx4ZX2Lr9KmHq2Rf9KLW3HebwhAH0TB6O8kuVgb699VDLR2rf1HIhycx5DALqZpPBQ457K71_2ItFa6W2DIK99tyDGhHV5RgMZt2N_ChHsPSTq4TvPsLMCGtUP9nC5iSBNEmPZwvi0Ez0MdaKShxiA8_Mm0TWp_j_COXLZK4b01Qrtr4j59JEhinzdRA"/>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1.5 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm">male</span>
+<span class="text-[10px] uppercase font-bold tracking-wider">M / F Duo</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="mb-4">
+<h3 class="text-xl font-bold">Milo &amp; Otis</h3>
+<p class="text-primary/70 text-sm font-medium">Dog • Corgi Mix Duo</p>
+</div>
+<div class="flex items-center gap-4 text-xs text-white/60 mb-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">event</span>
+                            2 Years Old
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                            Eugene, OR
+                        </div>
+</div>
+<div class="mt-auto pt-4 border-t border-border-dark">
+<button class="w-full py-3 rounded-full bg-primary text-background-dark font-black text-sm hover:shadow-[0_0_20px_rgba(19,236,236,0.3)] transition-all flex items-center justify-center gap-2" data-owner-name="Rescue Paws" data-owner-email="contact@rescuepaws.org" data-owner-phone="+1-555-0110">
+<span class="material-symbols-outlined text-background-dark text-base">call</span>
+Contact Owner
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Load More -->
+<div class="mt-16 flex justify-center">
+<button class="bg-surface-dark border border-border-dark text-primary px-8 py-3 rounded-lg font-bold hover:bg-border-dark transition-all flex items-center gap-2">
+<span class="material-symbols-outlined">add_circle</span>
+                Load More Pets
+            </button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-background-dark border-t border-border-dark py-12 px-6 lg:px-20">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 text-primary mb-6">
+<span class="material-symbols-outlined text-2xl">pets</span>
+<h1 class="text-white text-xl font-bold tracking-tight">Nivâra</h1>
+</div>
+<p class="text-white/40 text-sm leading-relaxed mb-6">Connecting compassionate people with pets in need. Join our community and make a difference today.</p>
+<div class="flex gap-4">
+<a class="w-8 h-8 rounded-full bg-surface-dark flex items-center justify-center text-primary/60 hover:text-primary border border-border-dark" href="#"><span class="material-symbols-outlined text-lg">share</span></a>
+<a class="w-8 h-8 rounded-full bg-surface-dark flex items-center justify-center text-primary/60 hover:text-primary border border-border-dark" href="#"><span class="material-symbols-outlined text-lg">public</span></a>
+<a class="w-8 h-8 rounded-full bg-surface-dark flex items-center justify-center text-primary/60 hover:text-primary border border-border-dark" href="#"><span class="material-symbols-outlined text-lg">mail</span></a>
+</div>
+</div>
+<div>
+<h4 class="text-white font-bold mb-6">Platform</h4>
+<ul class="space-y-4 text-sm text-white/40">
+<li><a class="hover:text-primary" href="#">Adopt a Pet</a></li>
+<li><a class="hover:text-primary" href="#">List for Adoption</a></li>
+<li><a class="hover:text-primary" href="#">Pet Care Tips</a></li>
+<li><a class="hover:text-primary" href="#">Success Stories</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold mb-6">Support</h4>
+<ul class="space-y-4 text-sm text-white/40">
+<li><a class="hover:text-primary" href="#">Help Center</a></li>
+<li><a class="hover:text-primary" href="#">Safety Guidelines</a></li>
+<li><a class="hover:text-primary" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold mb-6">Newsletter</h4>
+<p class="text-sm text-white/40 mb-4">Get updates on new pets available near you.</p>
+<div class="relative">
+<input class="w-full bg-surface-dark border-border-dark rounded-lg py-3 px-4 text-sm focus:ring-1 focus:ring-primary border" placeholder="Email address" type="email"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-primary">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-border-dark text-center text-white/20 text-xs">
+            © 2024 Nivâra Pet Care Platform. All rights reserved.
+        </div>
+</footer>
+<!-- Adopter Details Modal -->
+<div id="adoptOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-[1200]"></div>
+<div id="adoptModal" class="fixed inset-0 z-[1300] hidden items-center justify-center">
+  <div class="max-w-md w-[92%] sm:w-[28rem] rounded-2xl border border-white/10 bg-background-dark/90 shadow-2xl p-6">
+    <div class="flex items-start justify-between mb-4">
+      <h3 class="text-2xl font-bold">Owner Details</h3>
+      <button id="adoptClose" class="p-2 text-white/60 hover:text-white rounded"><span class="material-symbols-outlined">close</span></button>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+      <div>
+        <p class="text-xs text-white/40 mb-1">Owner Name</p>
+        <p id="adoptOwnerName" class="text-white font-semibold">—</p>
+      </div>
+      <div>
+        <p class="text-xs text-white/40 mb-1">Email</p>
+        <p id="adoptOwnerEmail" class="text-white font-semibold break-words">—</p>
+      </div>
+      <div class="sm:col-span-2">
+        <p class="text-xs text-white/40 mb-1">Phone</p>
+        <p id="adoptOwnerPhone" class="text-white font-semibold">—</p>
+      </div>
+    </div>
+    <div class="flex justify-end gap-2">
+      <button id="adoptCancel" class="px-4 py-2 rounded-lg border border-white/10 text-white/70 hover:text-white hover:bg-white/5">Cancel</button>
+      <a id="adoptCall" href="#" class="px-4 py-2 rounded-lg bg-primary text-background-dark font-bold hover:brightness-110 flex items-center gap-2"><span class="material-symbols-outlined text-sm">call</span>Call</a>
+    </div>
+  </div>
+</div>
+<div id="locOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-[1200]"></div>
+<div id="locModal" class="fixed inset-0 z-[1300] hidden items-center justify-center">
+<div class="max-w-md w-[92%] sm:w-[28rem] rounded-2xl border border-white/10 bg-background-dark/90 shadow-2xl p-6">
+<div class="flex items-start justify-between mb-4">
+<h3 class="text-2xl font-bold">Change Your Location</h3>
+<button id="locClose" class="p-2 text-white/60 hover:text-white rounded"><span class="material-symbols-outlined">close</span></button>
+</div>
+<p class="text-white/60 text-sm mb-6">Enter your PIN code to find nearby pets.</p>
+<label class="block text-xs font-semibold text-white/50 mb-2">Enter PIN Code</label>
+<div class="flex items-center gap-2 mb-4">
+<input id="pinInput" type="text" inputmode="numeric" placeholder="e.g. 400001" class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"/>
+<button id="useCurrent" class="px-3 py-3 rounded-lg border border-primary/30 bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20 flex items-center gap-1"><span class="material-symbols-outlined text-sm">my_location</span>Use Current</button>
+</div>
+<button id="updateLoc" class="w-full py-3 rounded-xl bg-primary text-background-dark font-black text-sm hover:shadow-[0_0_20px_rgba(19,236,236,0.3)] transition-all">UPDATE LOCATION</button>
+<div class="mt-6 text-center">
+<p class="text-[11px] text-white/40 mb-2">POPULAR CITIES</p>
+<div class="flex items-center justify-center gap-2">
+<button class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 hover:bg-white/10" data-pin="400001" data-label="Mumbai, IN">Mumbai</button>
+<button class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 hover:bg-white/10" data-pin="110001" data-label="Delhi, IN">Delhi</button>
+<button class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 hover:bg-white/10" data-pin="560001" data-label="Bangalore, IN">Bangalore</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var locationBtn = document.getElementById('locationBtn');
+  var locationLabel = document.getElementById('locationLabel');
+  var locOverlay = document.getElementById('locOverlay');
+  var locModal = document.getElementById('locModal');
+  var locClose = document.getElementById('locClose');
+  var pinInput = document.getElementById('pinInput');
+  var updateLoc = document.getElementById('updateLoc');
+  var useCurrent = document.getElementById('useCurrent');
+  function openLoc(){
+    locOverlay?.classList.remove('hidden');
+    locModal?.classList.remove('hidden');
+    locModal?.classList.add('flex');
+    document.body.classList.add('overflow-hidden');
+    var savedPin = sessionStorage.getItem('userPin') || '';
+    if(pinInput && savedPin) pinInput.value = savedPin;
+  }
+  function closeLoc(){
+    locOverlay?.classList.add('hidden');
+    locModal?.classList.add('hidden');
+    locModal?.classList.remove('flex');
+    document.body.classList.remove('overflow-hidden');
+  }
+  function pinToLabel(pin){
+    var map = { '400001': 'Mumbai, IN', '110001': 'Delhi, IN', '560001': 'Bangalore, IN' };
+    return map[pin] || ('PIN ' + pin);
+  }
+  function applyPin(pin){
+    if(!/^\d{5,6}$/.test(pin)) return false;
+    try { sessionStorage.setItem('userPin', pin); } catch {}
+    if(locationLabel) locationLabel.textContent = pinToLabel(pin);
+    closeLoc();
+    return true;
+  }
+  locationBtn?.addEventListener('click', openLoc);
+  locOverlay?.addEventListener('click', closeLoc);
+  locClose?.addEventListener('click', closeLoc);
+  updateLoc?.addEventListener('click', function(){
+    var pin = (pinInput?.value || '').trim();
+    if(!applyPin(pin)){
+      pinInput?.classList.add('ring-1','ring-red-400');
+      setTimeout(function(){ pinInput?.classList.remove('ring-1','ring-red-400'); }, 600);
+    }
+  });
+  useCurrent?.addEventListener('click', function(){
+    (async function(){
+      try{
+        await new Promise(function(res, rej){ return navigator.geolocation ? navigator.geolocation.getCurrentPosition(res, rej, { timeout: 5000 }) : rej(); });
+        if(locationLabel) locationLabel.textContent = 'Current Location';
+        closeLoc();
+      } catch { pinInput?.focus(); }
+    })();
+  });
+  Array.prototype.slice.call(document.querySelectorAll('#locModal [data-pin]')).forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pin = btn.getAttribute('data-pin') || '';
+      if(pinInput) pinInput.value = pin;
+    });
+  });
+  (function(){
+    var savedPin = sessionStorage.getItem('userPin');
+    if(savedPin && locationLabel) locationLabel.textContent = pinToLabel(savedPin);
+  })();
+  (function(){
+    function minsAgo(ts){
+      var t = typeof ts === 'number' ? ts : Date.now();
+      var diff = Math.max(0, Date.now() - t);
+      return Math.floor(diff/60000);
+    }
+    function timeLabel(mins){
+      if(mins < 60) return mins + 'm ago';
+      if(mins < 1440) return Math.round(mins/60) + 'h ago';
+      if(mins < 2880) return 'Yesterday';
+      return Math.round(mins/1440) + ' days ago';
+    }
+    function createCard(p){
+      var status = (p.status || 'available').toLowerCase();
+      var mins = minsAgo(p.createdAt || Date.now());
+      var card = document.createElement('div');
+      card.className = 'pet-card flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all duration-300';
+      var top = document.createElement('div');
+      top.className = 'relative h-64 overflow-hidden';
+      var img = document.createElement('img');
+      img.className = 'w-full h-full object-cover';
+      img.src = p.photo || 'https://lh3.googleusercontent.com/aida-public/AB6AXuBH2KaqozSl01xrzYs015svGk9HWFota8w8C7ClAiRMxkxilYba8mOQkbGfdxjMl5_xrmgDJMQWIBmoqCRT4cCVxDteNwyn8ICc7PcCb8lOKYOLHmz3EXuzWPNq7ZBDXMV812mSZh3T3uAdyOIC0sYaxYCRwxRGFn7c2bPQ4cFh8cEU4pFDyU75oBf4y81VfRRiIzOOF2TiQKb5me8QPiq5BUHnpLKYV7JgzAH7qjVVU24RdhbhBIyVWXtUhl7d0w5z3B1z_yPUQC3c';
+      top.appendChild(img);
+      var sBadge = document.createElement('div');
+      var statusCls = status==='available' ? 'bg-primary text-background-dark' : (status==='pending' ? 'bg-amber-400 text-background-dark' : 'bg-white/20 text-white');
+      sBadge.className = 'absolute top-3 left-3 '+statusCls+' text-[10px] font-black px-2.5 py- Ns1 rounded-full uppercase tracking-widest shadow-lg'.replace(' Ns1','1');
+      sBadge.textContent = (status || 'Available').toUpperCase();
+      top.appendChild(sBadge);
+      var tChip = document.createElement('div');
+      tChip.className = 'absolute bottom-3 right-3 bg-black/60 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] flex items-center gap-1';
+      tChip.innerHTML = '<span class="material-symbols-outlined text-xs text-primary">schedule</span>'+timeLabel(mins);
+      top.appendChild(tChip);
+      if(p.gender){
+        var gBadge = document.createElement('div');
+        gBadge.className = 'absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1.5 border border-primary/20';
+        var gIcon = document.createElement('span');
+        gIcon.className = 'material-symbols-outlined ' + ((p.gender||'').toLowerCase()==='female' ? 'text-pink-400' : 'text-primary') + ' text-sm';
+        gIcon.textContent = ((p.gender||'').toLowerCase()==='female') ? 'female' : 'male';
+        var gTxt = document.createElement('span');
+        gTxt.className = 'text-[10px] uppercase font-bold tracking-wider';
+        gTxt.textContent = (p.gender||'').trim();
+        gBadge.appendChild(gIcon); gBadge.appendChild(gTxt);
+        top.appendChild(gBadge);
+      }
+      card.appendChild(top);
+      var body = document.createElement('div');
+      body.className = 'p-5 flex flex-col flex-1';
+      var head = document.createElement('div');
+      head.className = 'flex justify-between items-start mb-3';
+      var left = document.createElement('div');
+      var name = document.createElement('h3');
+      name.className = 'text-xl font-bold';
+      name.textContent = p.name || 'New Listing';
+      var sub = document.createElement('p');
+      sub.className = 'text-primary/70 text-sm font-medium';
+      sub.textContent = (p.type || 'Pet') + ' • ' + (p.breed || 'Breed Unknown');
+      left.appendChild(name); left.appendChild(sub);
+      head.appendChild(left);
+      body.appendChild(head);
+      var info = document.createElement('div');
+      info.className = 'flex items-center gap-4 text-xs text-white/60 mb-4';
+      var age = document.createElement('div');
+      age.className = 'flex items-center gap-1';
+      age.innerHTML = '<span class="material-symbols-outlined text-sm">event</span>' + (p.ageBracket || 'Age Unknown');
+      var gender = document.createElement('div');
+      gender.className = 'flex items-center gap-1';
+      var gSym = ((p.gender || '').toLowerCase() === 'female') ? 'female' : 'male';
+      gender.innerHTML = '<span class="material-symbols-outlined text-sm">'+ gSym +'</span>' + (p.gender || '—');
+      info.appendChild(age); info.appendChild(gender);
+      body.appendChild(info);
+      if(p.location){
+        var ctx = document.createElement('div');
+        ctx.className = 'bg-surface-dark/60 border border-border-dark/50 rounded-xl px-4 py-3 mb-6 flex items-start gap-3';
+        ctx.innerHTML = '<span class="material-symbols-outlined text-primary">location_searching</span><div><p class="text-[11px] text-white/40 font-bold">Located At</p><p class="text-sm text-white">'+ (p.location || '') +'</p></div>';
+        body.appendChild(ctx);
+      }
+      var footer = document.createElement('div');
+      footer.className = 'mt-auto pt-4 border-t border-border-dark';
+      var cta = document.createElement('button');
+      cta.className = 'w-full py-3 rounded-full bg-primary text-background-dark font-black text-sm hover:shadow-[0_0_20px_rgba(19,236,236,0.3)] transition-all flex items-center justify-center gap-2';
+      var emailMatch = (p.contact||'').match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
+      var phoneMatch = (p.contact||'').match(/(\+?\d[\d\s().-]{6,}\d)/);
+      var email = emailMatch ? emailMatch[0] : '';
+      var phone = phoneMatch ? phoneMatch[0] : '';
+      cta.setAttribute('data-owner-name', p.owner || '');
+      cta.setAttribute('data-owner-email', email || '');
+      cta.setAttribute('data-owner-phone', phone || '');
+      cta.innerHTML = '<span class=\"material-symbols-outlined text-background-dark text-base\">call</span>Contact Owner';
+      footer.appendChild(cta);
+      body.appendChild(footer);
+      card.appendChild(body);
+      return card;
+    }
+    try{
+      var raw = sessionStorage.getItem('adoptionPosts');
+      var arr = raw ? JSON.parse(raw) : [];
+      if(!Array.isArray(arr)) arr = [];
+      var grid = document.getElementById('adoptGrid');
+      if(grid){
+        arr.forEach(function(p){ grid.appendChild(createCard(p)); });
+      }
+    } catch {}
+  })();
+  (function(){
+    var overlay = document.getElementById('adoptOverlay');
+    var modal = document.getElementById('adoptModal');
+    var closeBtn = document.getElementById('adoptClose');
+    var cancelBtn = document.getElementById('adoptCancel');
+    var nameEl = document.getElementById('adoptOwnerName');
+    var emailEl = document.getElementById('adoptOwnerEmail');
+    var phoneEl = document.getElementById('adoptOwnerPhone');
+    var callLink = document.getElementById('adoptCall');
+    function openAdopt(name, email, phone){
+      nameEl.textContent = name || '—';
+      emailEl.textContent = email || '—';
+      phoneEl.textContent = phone || '—';
+      callLink.href = phone ? ('tel:' + phone.replace(/[^0-9+]/g,'')) : '#';
+      overlay?.classList.remove('hidden');
+      modal?.classList.remove('hidden');
+      modal?.classList.add('flex');
+      document.body.classList.add('overflow-hidden');
+    }
+    function closeAdopt(){
+      overlay?.classList.add('hidden');
+      modal?.classList.add('hidden');
+      modal?.classList.remove('flex');
+      document.body.classList.remove('overflow-hidden');
+    }
+    overlay?.addEventListener('click', closeAdopt);
+    closeBtn?.addEventListener('click', closeAdopt);
+    cancelBtn?.addEventListener('click', closeAdopt);
+    document.addEventListener('click', function(e){
+      var el = e.target;
+      if(!(el instanceof Element)) return;
+      var btn = el.closest('button[data-owner-name]');
+      if(btn){
+        openAdopt(btn.getAttribute('data-owner-name'), btn.getAttribute('data-owner-email'), btn.getAttribute('data-owner-phone'));
+      }
+    });
+  })();
+});
+</script>
+</body></html>
+</body></html>

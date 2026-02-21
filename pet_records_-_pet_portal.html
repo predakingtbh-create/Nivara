@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nivâra - Pet Records</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="animations.css">
+<link rel="stylesheet" href="page-transitions.css">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102222",
+                        "card-dark": "#1a2e2e",
+                        "neutral-dark": "#234848",
+                        "muted-dark": "#92c9c9"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "hand": ["Just Another Hand", "cursive"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-item-active {
+            background-color: #234848;
+            border-left: 3px solid #13ecec;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 flex-shrink-0 bg-background-dark border-r border-white/5 flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<a href="index.html" class="flex items-center gap-3">
+<img src="logo.png" alt="Nivâra Logo" class="h-10">
+<h1 class="text-5xl font-hand tracking-[3px] text-white">nivâra</h1>
+</a>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-muted-dark hover:bg-neutral-dark hover:text-white transition-colors" href="index.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-semibold">Dashboard</span>
+</a>
+
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-muted-dark hover:bg-neutral-dark hover:text-white transition-colors" href="messages_-_pet_portal.html">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="text-sm font-semibold">Messages</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-white sidebar-item-active" href="#">
+<span class="material-symbols-outlined text-primary">folder_shared</span>
+<span class="text-sm font-semibold">Pet Records</span>
+</a>
+ 
+</nav>
+ 
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark fade-in-element">
+<header class="sticky top-0 z-10 px-8 py-6 bg-background-dark/80 backdrop-blur-md border-b border-white/5 flex flex-wrap items-center justify-between gap-4">
+<div>
+<h2 class="text-3xl font-black text-white tracking-tight">Pet Records</h2>
+<p class="text-muted-dark text-sm mt-1">Centralized health documentation for your companions</p>
+</div>
+<div class="flex items-center gap-3">
+<button id="addPetBtn" class="flex items-center gap-2 px-4 py-2 bg-primary text-background-dark rounded-lg font-bold text-sm hover:brightness-110 transition-all shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+                        Add New Pet
+                    </button>
+</div>
+</header>
+<div class="px-8 py-8 max-w-7xl mx-auto">
+<!-- Search and Filters -->
+<div class="flex flex-col md:flex-row gap-4 mb-8">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-muted-dark">search</span>
+<input id="petSearch" class="w-full bg-neutral-dark/40 border-white/10 rounded-lg pl-10 pr-4 py-2.5 text-white placeholder:text-muted-dark focus:ring-primary focus:border-primary" placeholder="Search pets by name or breed..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button data-filter="all" class="px-4 py-2 bg-primary/20 text-primary border border-primary/30 rounded-lg text-sm font-bold">All</button>
+<button data-filter="dog" class="px-4 py-2 bg-neutral-dark/40 text-muted-dark border border-white/10 rounded-lg text-sm font-bold hover:text-white transition-colors">Dogs</button>
+<button data-filter="cat" class="px-4 py-2 bg-neutral-dark/40 text-muted-dark border border-white/10 rounded-lg text-sm font-bold hover:text-white transition-colors">Cats</button>
+<button data-filter="other" class="px-4 py-2 bg-neutral-dark/40 text-muted-dark border border-white/10 rounded-lg text-sm font-bold hover:text-white transition-colors">Others</button>
+</div>
+</div>
+<!-- Pet Grid -->
+<div id="pet-grid" class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+<!-- Pet Card 1 -->
+<div class="bg-card-dark rounded-xl border border-white/5 overflow-hidden hover:border-primary/40 transition-all group shadow-xl">
+<div class="p-6 flex flex-col md:flex-row gap-6">
+<div class="relative flex-shrink-0">
+<img class="w-32 h-32 rounded-xl object-cover" data-alt="Portrait of a friendly Golden Retriever named Buddy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_wfLexNnMjDBLzehr5h7itFpQGsIgJGF4_OYs7K18dQY-6yPMl4Tp8JvMYRDXHo6Rw7yR4LV72babMBCcgI-6BHENvAhMEgYtZyS8vYyhJN6ZMjWVewIlEmXCRZDHKanyt_x19PiG3rA1eLKi-qfyqpUgchgRP6Oi5DebR6hUd8VuwYKrIlfB09LliePGcTcYhil76UU23NXMbUg_E7Ld5X7FKsTEY7xI8JNVObxjWz1SA5sMfpIWmAaPPgl-aE7GhV7rr6PHKwTi"/>
+<div class="absolute -top-2 -right-2 bg-primary text-background-dark text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-tighter">Active</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-2xl font-black text-white">Buddy</h3>
+<p class="text-muted-dark font-medium">Golden Retriever • 3 years • Male</p>
+</div>
+<button class="text-muted-dark hover:text-white">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="mt-4 flex flex-wrap gap-2">
+<div class="flex items-center gap-1.5 px-3 py-1 bg-white/5 rounded-full text-xs text-muted-dark border border-white/5">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                                        Last checkup: May 12
+                                    </div>
+<div class="flex items-center gap-1.5 px-3 py-1 bg-primary/10 rounded-full text-xs text-primary border border-primary/20">
+<span class="material-symbols-outlined text-[14px]">new_releases</span>
+                                        Recent upload
+                                    </div>
+</div>
+</div>
+</div>
+<div class="bg-black/20 p-4 grid grid-cols-1 gap-3 border-t border-white/5">
+<button class="w-full inline-flex items-center justify-center gap-2 p-3 bg-primary text-background-dark rounded-lg text-sm font-bold hover:brightness-110 transition-all">
+<span class="material-symbols-outlined">visibility</span>
+<span class="text-[11px] font-bold uppercase tracking-wider">View More</span>
+</button>
+</div>
+</div>
+<!-- Pet Card 2 -->
+<div class="bg-card-dark rounded-xl border border-white/5 overflow-hidden hover:border-primary/40 transition-all group shadow-xl">
+<div class="p-6 flex flex-col md:flex-row gap-6">
+<div class="relative flex-shrink-0">
+<img class="w-32 h-32 rounded-xl object-cover" data-alt="Portrait of a sleek black cat named Luna" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBensTkQN_IGqO2fsvoksDTlm3CQXi2_yOwBwey5GPR0jqNiJf7vB2oLaBtKyqdwoBi4L5A7XMNFxkf3P-SdXz8k9xscqeElr4qB-fe25mj_1hrjNlc-97rkDv8JfMykN4nnkr4nqzXiFXo36B4MkrJPFC0F0HP7k6ObBM_FDk6ZS2HMOtNgAAL72_P7GXxyEJxarSboA6PCct1o5HgN54K-6Ivp9R7nwdLukzlvpSef-kwBW1kl04vIUlqQA_68kv4K5ODvnHiD_nu"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-2xl font-black text-white">Luna</h3>
+<p class="text-muted-dark font-medium">Domestic Shorthair • 5 years • Female</p>
+</div>
+<button class="text-muted-dark hover:text-white">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="mt-4 flex flex-wrap gap-2">
+<div class="flex items-center gap-1.5 px-3 py-1 bg-white/5 rounded-full text-xs text-muted-dark border border-white/5">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                                        Last checkup: Feb 20
+                                    </div>
+</div>
+</div>
+</div>
+<div class="bg-black/20 p-4 grid grid-cols-1 gap-3 border-t border-white/5">
+<button class="w-full inline-flex items-center justify-center gap-2 p-3 bg-primary text-background-dark rounded-lg text-sm font-bold hover:brightness-110 transition-all">
+<span class="material-symbols-outlined">visibility</span>
+<span class="text-[11px] font-bold uppercase tracking-wider">View More</span>
+</button>
+</div>
+</div>
+<!-- Pet Card 3 -->
+<div class="bg-card-dark rounded-xl border border-white/5 overflow-hidden hover:border-primary/40 transition-all group shadow-xl">
+<div class="p-6 flex flex-col md:flex-row gap-6">
+<div class="relative flex-shrink-0">
+<img class="w-32 h-32 rounded-xl object-cover" data-alt="Portrait of a cute Corgi named Cooper" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDm8cGXO62OO0bt9_ehKO3ApppSy71x5scxubbf_K1NzmrT4TOBao_1rS9GDVgtsRHnatopHIPs7y74RQXl-y96ehzChdDLpSAt03S7e86Syi-LMt80M_evPstKn8tHj6AYuMB95Ek509_SXmJJXc9imBLLmJgvmno1O1G3dnp-IH7OefuvWse4a_NHOzMuy5cuNw9sJCJVFaMQeF1duir_DsF25n56Y3-amyb-11QkvKbPQWEseGKivR9iwpIqSp-DdQ4xDc4wHv3"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-2xl font-black text-white">Cooper</h3>
+<p class="text-muted-dark font-medium">Pembroke Welsh Corgi • 1 year • Male</p>
+</div>
+<button class="text-muted-dark hover:text-white">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="mt-4 flex flex-wrap gap-2">
+<div class="flex items-center gap-1.5 px-3 py-1 bg-white/5 rounded-full text-xs text-muted-dark border border-white/5">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                                        Last checkup: Aug 05
+                                    </div>
+<div class="flex items-center gap-1.5 px-3 py-1 bg-amber-500/10 rounded-full text-xs text-amber-500 border border-amber-500/20">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                                        Booster due soon
+                                    </div>
+</div>
+</div>
+</div>
+<div class="bg-black/20 p-4 grid grid-cols-1 gap-3 border-t border-white/5">
+<button class="w-full inline-flex items-center justify-center gap-2 p-3 bg-primary text-background-dark rounded-lg text-sm font-bold hover:brightness-110 transition-all">
+<span class="material-symbols-outlined">visibility</span>
+<span class="text-[11px] font-bold uppercase tracking-wider">View More</span>
+</button>
+</div>
+</div>
+<!-- Add New Pet Card Placeholder -->
+<div id="addPetCard" class="bg-card-dark/30 rounded-xl border-2 border-dashed border-white/10 flex flex-col items-center justify-center p-8 text-center group hover:border-primary/40 hover:bg-neutral-dark/10 transition-all cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-neutral-dark flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-3xl text-primary group-hover:text-background-dark">add</span>
+</div>
+<h4 class="text-lg font-bold text-white">Add New Companion</h4>
+<p class="text-muted-dark text-sm mt-1">Ready to manage another pet? Start here.</p>
+</div>
+</div>
+<!-- Recent Activity/Uploads Section -->
+<section class="mt-12 fade-in-element">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-black text-white tracking-tight">Recent Document Uploads</h3>
+<a class="text-primary text-sm font-bold hover:underline" href="#">View All</a>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-4 p-4 bg-neutral-dark/20 rounded-xl border border-white/5 hover:bg-neutral-dark/40 transition-colors">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">description</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold text-white">Annual_Checkup_Buddy_2024.pdf</p>
+<p class="text-xs text-muted-dark">Uploaded 2 hours ago • 2.4 MB</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-muted-dark hover:text-white"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+<button class="p-2 text-muted-dark hover:text-white"><span class="material-symbols-outlined text-[20px]">download</span></button>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 bg-neutral-dark/20 rounded-xl border border-white/5 hover:bg-neutral-dark/40 transition-colors">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">description</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold text-white">Luna_Vaccination_Card.png</p>
+<p class="text-xs text-muted-dark">Uploaded 1 day ago • 1.1 MB</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-muted-dark hover:text-white"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+<button class="p-2 text-muted-dark hover:text-white"><span class="material-symbols-outlined text-[20px]">download</span></button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<div id="addPetOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-[1200]"></div>
+<div id="addPetModal" class="fixed inset-0 z-[1300] hidden items-center justify-center">
+<div class="max-w-xl w-[92%] sm:w-[34rem] rounded-2xl border border-white/10 bg-background-dark/95 shadow-2xl p-6">
+<div class="flex items-start justify-between mb-4">
+<h3 class="text-xl font-extrabold text-white">Add New Companion</h3>
+<button id="closeAddPet" class="p-2 text-white/60 hover:text-white rounded"><span class="material-symbols-outlined">close</span></button>
+</div>
+<form id="addPetForm" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="col-span-1">
+<label class="block text-xs font-bold text-white/50 mb-1">Pet Name</label>
+<input id="petNameInput" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-muted-dark focus:ring-1 focus:ring-primary" placeholder="e.g. Buddy" type="text"/>
+</div>
+<div class="col-span-1">
+<label class="block text-xs font-bold text-white/50 mb-1">Pet Type</label>
+<input id="petTypeInput" class="w-full bg-neutral-dark/40 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-muted-dark focus:ring-1 focus:ring-primary" placeholder="e.g. Dog, Cat, Bird" type="text"/>
+</div>
+<div class="col-span-1">
+<label class="block text-xs font-bold text-white/50 mb-1">Breed</label>
+<input id="breedInput" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-muted-dark focus:ring-1 focus:ring-primary" placeholder="e.g. Golden Retriever" type="text"/>
+</div>
+<div class="col-span-1">
+<label class="block text-xs font-bold text-white/50 mb-1">Age (years)</label>
+<input id="ageInput" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-muted-dark focus:ring-1 focus:ring-primary" placeholder="e.g. 3" type="number" min="0"/>
+</div>
+<div class="col-span-1">
+<label class="block text-xs font-bold text-white/50 mb-1">Gender</label>
+<div class="flex gap-2">
+<button type="button" id="genderMale" class="flex-1 px-3 py-2 rounded-lg bg-primary/20 text-primary border border-primary/30 text-sm font-bold">Male</button>
+<button type="button" id="genderFemale" class="flex-1 px-3 py-2 rounded-lg bg-white/5 text-white/70 border border-white/10 text-sm font-bold">Female</button>
+</div>
+</div>
+<div class="col-span-1">
+<label class="block text-xs font-bold text-white/50 mb-1">Weight (kg)</label>
+<input id="weightInput" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-muted-dark focus:ring-1 focus:ring-primary" placeholder="e.g. 25" type="number" min="0"/>
+</div>
+<div class="col-span-2">
+<label class="block text-xs font-bold text-white/50 mb-1">Microchip ID (optional)</label>
+<input id="chipInput" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-muted-dark focus:ring-1 focus:ring-primary" placeholder="Enter 15-digit ID" type="text"/>
+</div>
+<div class="col-span-2">
+<label class="block text-xs font-bold text-white/50 mb-2">Pet Photo</label>
+<div id="photoDrop" class="border border-dashed border-white/10 rounded-xl bg-black/20 p-6 text-center cursor-pointer">
+<input id="photoInput" type="file" accept="image/*" class="hidden"/>
+<div class="flex flex-col items-center gap-2 text-white/60">
+<span class="material-symbols-outlined">photo_camera</span>
+<p class="text-xs">Click to upload or drag & drop</p>
+<p class="text-[10px]">PNG, JPG up to 5MB</p>
+</div>
+</div>
+</div>
+<div class="col-span-2 flex items-center justify-between mt-2">
+<button type="button" id="cancelAddPet" class="px-4 py-2 rounded-lg bg-white/5 text-white/70 border border-white/10 text-sm font-bold">Cancel</button>
+<button type="submit" id="confirmAddPet" class="px-4 py-2 rounded-lg bg-primary text-background-dark text-sm font-extrabold">Add Companion</button>
+</div>
+</form>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var addBtn = document.getElementById('addPetBtn');
+  var addCard = document.getElementById('addPetCard');
+  var overlay = document.getElementById('addPetOverlay');
+  var modal = document.getElementById('addPetModal');
+  var closeX = document.getElementById('closeAddPet');
+  var cancelBtn = document.getElementById('cancelAddPet');
+  var form = document.getElementById('addPetForm');
+  var grid = document.getElementById('pet-grid');
+  var search = document.getElementById('petSearch');
+  var filterBtns = Array.prototype.slice.call(document.querySelectorAll('[data-filter]'));
+  var genderMale = document.getElementById('genderMale');
+  var genderFemale = document.getElementById('genderFemale');
+  var gender = 'Male';
+  function openModal(){
+    overlay.classList.remove('hidden');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.classList.add('overflow-hidden');
+  }
+  function closeModal(){
+    overlay.classList.add('hidden');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.classList.remove('overflow-hidden');
+    form.reset();
+    gender = 'Male';
+    genderMale.classList.add('bg-primary/20','text-primary','border','border-primary/30');
+    genderFemale.classList.remove('bg-primary/20','text-primary','border','border-primary/30');
+    previewClear();
+  }
+  addBtn?.addEventListener('click', openModal);
+  addCard?.addEventListener('click', openModal);
+  overlay?.addEventListener('click', closeModal);
+  closeX?.addEventListener('click', closeModal);
+  cancelBtn?.addEventListener('click', closeModal);
+  genderMale?.addEventListener('click', function(){
+    gender = 'Male';
+    genderMale.classList.add('bg-primary/20','text-primary','border','border-primary/30');
+    genderFemale.classList.remove('bg-primary/20','text-primary','border','border-primary/30');
+  });
+  genderFemale?.addEventListener('click', function(){
+    gender = 'Female';
+    genderFemale.classList.add('bg-primary/20','text-primary','border','border-primary/30');
+    genderMale.classList.remove('bg-primary/20','text-primary','border','border-primary/30');
+  });
+  var photoInput = document.getElementById('photoInput');
+  var photoDrop = document.getElementById('photoDrop');
+  var photoData = '';
+  function previewClear(){ photoData=''; photoDrop.style.backgroundImage=''; photoDrop.style.backgroundSize=''; }
+  function setPreview(file){
+    if(!file) return;
+    if(!(file.type||'').startsWith('image/')) return;
+    if(file.size > 5*1024*1024) return;
+    var reader = new FileReader();
+    reader.onload = function(e){ photoData = e.target.result || ''; photoDrop.style.backgroundImage = 'url(' + photoData + ')'; photoDrop.style.backgroundSize='cover'; };
+    reader.readAsDataURL(file);
+  }
+  photoDrop?.addEventListener('click', function(){ photoInput?.click(); });
+  photoInput?.addEventListener('change', function(){ setPreview(photoInput.files && photoInput.files[0]); });
+  photoDrop?.addEventListener('dragover', function(e){ e.preventDefault(); });
+  photoDrop?.addEventListener('drop', function(e){ e.preventDefault(); var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]; setPreview(f); });
+  function createCard(p){
+    var card = document.createElement('div');
+    card.className = 'bg-card-dark rounded-xl border border-white/5 overflow-hidden hover:border-primary/40 transition-all group shadow-xl';
+    card.dataset.type = (p.type || 'other').toLowerCase().includes('dog') ? 'dog' : (p.type || '').toLowerCase().includes('cat') ? 'cat' : 'other';
+    var inner = document.createElement('div');
+    inner.className = 'p-6 flex flex-col md:flex-row gap-6';
+    var imgWrap = document.createElement('div');
+    imgWrap.className = 'relative flex-shrink-0';
+    var img = document.createElement('img');
+    img.className = 'w-32 h-32 rounded-xl object-cover';
+    img.src = p.photo || 'https://lh3.googleusercontent.com/aida-public/AB6AXuB_wfLexNnMjDBLzehr5h7itFpQGsIgJGF4_OYs7K18dQY-6yPMl4Tp8JvMYRDXHo6Rw7yR4LV72babMBCcgI-6BHENvAhMEgYtZyS8vYyhJN6ZMjWVewIlEmXCRZDHKanyt_x19PiG3rA1eLKi-qfyqpUgchgRP6Oi5DebR6hUd8VuwYKrIlfB09LliePGcTcYhil76UU23NXMbUg_E7Ld5X7FKsTEY7xI8JNVObxjWz1SA5sMfpIWmAaPPgl-aE7GhV7rr6PHKwTi';
+    imgWrap.appendChild(img);
+    inner.appendChild(imgWrap);
+    var right = document.createElement('div');
+    right.className = 'flex-1';
+    var top = document.createElement('div');
+    top.className = 'flex justify-between items-start';
+    var infoBox = document.createElement('div');
+    var title = document.createElement('h3');
+    title.className = 'text-2xl font-black text-white';
+    title.textContent = p.name || 'New Pet';
+    var meta = document.createElement('p');
+    meta.className = 'text-muted-dark font-medium';
+    meta.textContent = (p.breed||'Unknown') + ' • ' + (p.age||'0') + ' years • ' + (p.gender||'');
+    infoBox.appendChild(title); infoBox.appendChild(meta);
+    var more = document.createElement('button');
+    more.className = 'text-muted-dark hover:text-white';
+    more.innerHTML = '<span class="material-symbols-outlined">more_horiz</span>';
+    top.appendChild(infoBox); top.appendChild(more);
+    right.appendChild(top);
+    inner.appendChild(right);
+    card.appendChild(inner);
+    var actions = document.createElement('div');
+    actions.className = 'bg-black/20 p-4 grid grid-cols-1 gap-3 border-t border-white/5';
+    var viewBtn = document.createElement('button');
+    viewBtn.className = 'w-full inline-flex items-center justify-center gap-2 p-3 bg-primary text-background-dark rounded-lg text-sm font-bold hover:brightness-110 transition-all';
+    viewBtn.innerHTML = '<span class="material-symbols-outlined">visibility</span><span class="text-[11px] font-bold uppercase tracking-wider">View More</span>';
+    actions.appendChild(viewBtn);
+    card.appendChild(actions);
+    viewBtn.addEventListener('click', function(){
+      alert('Viewing ' + (p.name||'pet'));
+    });
+    return card;
+  }
+  function savePet(p){
+    try {
+      var raw = sessionStorage.getItem('pets');
+      var arr = raw ? JSON.parse(raw) : [];
+      if(!Array.isArray(arr)) arr = [];
+      arr.push(p);
+      sessionStorage.setItem('pets', JSON.stringify(arr));
+    } catch {}
+  }
+  function renderSavedPets(){
+    try {
+      var raw = sessionStorage.getItem('pets');
+      var arr = raw ? JSON.parse(raw) : [];
+      if(!Array.isArray(arr)) arr = [];
+      arr.forEach(function(p){ grid.appendChild(createCard(p)); });
+    } catch {}
+  }
+  renderSavedPets();
+  form?.addEventListener('submit', function(e){
+    e.preventDefault();
+    var p = {
+      name: document.getElementById('petNameInput')?.value || '',
+      type: document.getElementById('petTypeInput')?.value || '',
+      breed: document.getElementById('breedInput')?.value || '',
+      age: document.getElementById('ageInput')?.value || '',
+      gender: gender,
+      weight: document.getElementById('weightInput')?.value || '',
+      chip: document.getElementById('chipInput')?.value || '',
+      photo: photoData
+    };
+    var card = createCard(p);
+    grid.appendChild(card);
+    savePet(p);
+    closeModal();
+    grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  function norm(s){ return (s||'').toLowerCase(); }
+  function applySearch(){
+    var q = norm(search?.value || '');
+    Array.prototype.slice.call(grid.querySelectorAll(':scope > div')).forEach(function(card){
+      var hay = norm(card.innerText);
+      var ok = !q || hay.includes(q);
+      card.classList.toggle('hidden', !ok);
+    });
+  }
+  search?.addEventListener('input', applySearch);
+  function applyFilter(key){
+    Array.prototype.slice.call(grid.querySelectorAll(':scope > div')).forEach(function(card){
+      var type = card.dataset.type || 'other';
+      var ok = (key==='all') || (type===key);
+      card.classList.toggle('hidden', !ok);
+    });
+    filterBtns.forEach(function(b){ b.classList.remove('bg-primary/20','text-primary','border','border-primary/30'); b.classList.add('bg-neutral-dark/40','text-muted-dark'); });
+    var active = filterBtns.find(function(b){ return b.dataset.filter===key; });
+    if(active){ active.classList.remove('bg-neutral-dark/40','text-muted-dark'); active.classList.add('bg-primary/20','text-primary','border','border-primary/30'); }
+  }
+  filterBtns.forEach(function(btn){ btn.addEventListener('click', function(){ applyFilter(btn.dataset.filter || 'all'); }); });
+  Array.prototype.slice.call(grid.querySelectorAll(':scope > div')).forEach(function(card){
+    var text = norm(card.innerText);
+    if(/dog|retriever|corgi/i.test(text)) card.dataset.type='dog';
+    else if(/cat|shorthair/i.test(text)) card.dataset.type='cat';
+    else card.dataset.type='other';
+  });
+});
+</script>
+<script src="scroll-animations.js"></script>
+<script src="page-transitions.js"></script>
+</body></html>

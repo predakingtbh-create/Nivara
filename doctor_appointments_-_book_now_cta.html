@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nivâra - Pet Care Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102222",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "hand": ["Just Another Hand", "cursive"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-nav {
+            background-color: #102222;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #234848;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<nav class="fixed top-0 left-64 right-0 z-50 glass-nav border-b border-primary/10">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<a href="index.html" class="flex items-center gap-3">
+<img src="logo.png" alt="Nivâra Logo" class="h-10">
+<h1 class="text-5xl font-hand tracking-[3px] text-white">nivâra</h1>
+</a>
+<div class="hidden lg:flex items-center gap-8">
+<a class="text-sm font-medium text-slate-300 hover:text-primary transition-colors" href="index.html">Home</a>
+<a class="text-sm font-semibold text-primary hover:text-primary/80 transition-colors" href="doctor_appointments_-_book_now_cta.html">Doctor Appointments</a>
+<a class="text-sm font-medium text-slate-300 hover:text-primary transition-colors" href="pet_medicines.html">Medicines</a>
+<a class="text-sm font-medium text-slate-300 hover:text-primary transition-colors" href="lost_&_found.html">Lost & Found</a>
+<a class="text-sm font-medium text-slate-300 hover:text-primary transition-colors" href="pet_adoption.html">Adoption</a>
+</div>
+<div class="flex items-center gap-4">
+<button id="locationBtn" class="hidden md:flex items-center gap-2 text-xs font-medium text-white/60 hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-primary text-sm">location_on</span>
+<span id="locationLabel">Mumbai, IN</span>
+</button>
+<button id="openBookings" class="flex items-center gap-3 bg-background-dark/50 border border-primary/20 rounded-xl px-4 py-2 text-primary text-sm font-bold hover:bg-background-dark transition-all shadow-[0_0_0_2px_rgba(19,236,236,0.15)]">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 0">calendar_month</span>
+My Bookings
+</button>
+<a href="user_profile_&_management.html" class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/30 overflow-hidden" data-alt="User profile picture of a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAfVmbNZVjbRTVurhi3gB8SdJ4-EJVdtyoYLLPW6CLrF_pToJakHVYq2hQFhOfJ16xSZS4A0H9L-JSw0NTE8mG4PRrYr8bRKdhSw13xF2CXGYPHeWUyj_b2Icf0u7DK0MnswN93-5ci5vv-D37h3jIeDaiJocFhlQV9_QdCSU2zDhElLeoK1ypvikMe-XTtXt_B9QMIaxye9YfI1hYFeSQiNQksQZLx8R-ItJ0acV6ujjURFCEd921eyJUREbmGOsfHAQSy57a6gDF3");'></a>
+</div>
+</div>
+</nav>
+<div class="flex min-h-screen">
+<!-- Persistent Side Navigation -->
+<aside class="fixed left-0 top-0 h-screen w-64 bg-[#112222] border-r border-[#234848] flex flex-col z-50">
+<div class="p-6">
+<a href="index.html" class="flex items-center gap-3">
+<img src="logo.png" alt="Nivâra Logo" class="h-10">
+<h1 class="text-5xl font-hand tracking-[3px] text-white">nivâra</h1>
+</a>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-2">
+
+<a class="flex items-center gap-3 px-4 py-3 bg-primary/10 text-primary rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-sm font-semibold">Appointments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#92c9c9] hover:text-white hover:bg-[#234848]/50 rounded-lg transition-all" href="messages_-_pet_portal.html">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="text-sm font-semibold">Messages</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#92c9c9] hover:text-white hover:bg-[#234848]/50 rounded-lg transition-all" href="pet_records_-_pet_portal.html">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="text-sm font-semibold">Pet Records</span>
+</a>
+
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 p-8 pt-28">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+<div>
+<h2 class="text-3xl font-extrabold text-white tracking-tight">Find a Trusted Veterinarian</h2>
+<p class="text-slate-400 mt-1">Book top-rated specialists for your beloved companions.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-background-dark bg-cover" data-alt="Portrait of a female pet owner" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBum60csCKbdKWu_54mlS0THF44yaCCuS0H6oYXs7b7pEKi-spcARf1LlgjbNBmQWCa-LRC4kNnha6sl0SBT7OzNS65puAEsujIg7W3lGMryJFSJzxBxuKPDSPcs70N7C0Ph1bZ7Lcu2mAs4nQKyrj_rCYMkkF-JqQnaRsI4y16Lj0vA6iz-eieL2ohZ5694vLhvtwVXxvTzXNfyorKLZpxRYajNQ0i5emfTCJZ3jX3yzHn4O-VACruIvdvHY1pUtgKa3CpCZsDSy2D')"></div>
+<div class="w-10 h-10 rounded-full border-2 border-background-dark bg-cover" data-alt="Portrait of a male pet owner" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBO6osthcR69aA21I052fUKHckB8P0GeR3QRy92oH8mb9aneyhcXWBWPoFsMeYSXyBipLuHYdm5ulp2wzNHguEtMbHGzS7xUwjZgEaAzLyAJcv_eWXqf6gVswF64V55h0e0AnM-OVoNVKvMspQ7IFDa5jIH-WxvTVZZqAUjLZ3wHYyJ00Zeyo6gN8i2sHCZyN8OCe9nJF8i6sULHBY0pgf1fIp0lpit2SDQMw63zUvllXKW6D1ix4YKojJdMjjS8V1nVuItN6CHBI8j')"></div>
+<div class="flex items-center justify-center w-10 h-10 rounded-full border-2 border-background-dark bg-primary/20 text-primary text-xs font-bold">+12k</div>
+</div>
+<span class="text-sm text-slate-400 font-medium">Trusted by owners nationwide</span>
+</div>
+</header>
+<div id="locOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-[1200]"></div>
+<div id="locModal" class="fixed inset-0 z-[1300] hidden items-center justify-center">
+<div class="max-w-md w-[92%] sm:w-[28rem] rounded-2xl border border-white/10 bg-background-dark/90 shadow-2xl p-6">
+<div class="flex items-start justify-between mb-4">
+<h3 class="text-2xl font-bold">Change Your Location</h3>
+<button id="locClose" class="p-2 text-white/60 hover:text-white rounded"><span class="material-symbols-outlined">close</span></button>
+</div>
+<p class="text-white/60 text-sm mb-6">Enter your PIN code to find services near you.</p>
+<label class="block text-xs font-semibold text-white/50 mb-2">Enter PIN Code</label>
+<div class="flex items-center gap-2 mb-4">
+<input id="pinInput" type="text" inputmode="numeric" placeholder="e.g. 400001" class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"/>
+<button id="useCurrent" class="px-3 py-3 rounded-lg border border-primary/30 bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20 flex items-center gap-1"><span class="material-symbols-outlined text-sm">my_location</span>Use Current</button>
+</div>
+<button id="updateLoc" class="w-full py-3 rounded-xl bg-primary text-background-dark font-black text-sm hover:shadow-[0_0_20px_rgba(19,236,236,0.3)] transition-all">UPDATE LOCATION</button>
+<div class="mt-6 text-center">
+<p class="text-[11px] text-white/40 mb-2">POPULAR CITIES</p>
+<div class="flex items-center justify-center gap-2">
+<button class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 hover:bg-white/10" data-pin="400001" data-label="Mumbai, IN">Mumbai</button>
+<button class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 hover:bg-white/10" data-pin="110001" data-label="Delhi, IN">Delhi</button>
+<button class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 hover:bg-white/10" data-pin="560001" data-label="Bangalore, IN">Bangalore</button>
+</div>
+</div>
+</div>
+</div>
+<div id="bookingsOverlay" class="fixed inset-0 bg-background-dark/70 backdrop-blur-sm hidden z-[1000]"></div>
+<div id="bookingsModal" class="fixed inset-0 hidden z-[1100] items-center justify-center">
+<div class="w-full max-w-lg mx-auto bg-[#1a2e2e] border border-primary/20 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
+<div class="flex items-center justify-between px-6 py-4 border-b border-primary/20">
+<h3 class="text-white text-lg font-extrabold">My Upcoming Appointments</h3>
+<button id="closeBookings" class="p-1 rounded-lg text-white/70 hover:text-white hover:bg-background-dark/50">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div id="bookingsList" class="p-4 space-y-3 max-h-[60vh] overflow-y-auto custom-scrollbar"></div>
+</div>
+</div>
+<!-- Search & Filter Bar -->
+<section class="bg-[#1a2e2e] p-4 rounded-2xl border border-primary/10 mb-8">
+<div class="flex flex-wrap items-center gap-4">
+<!-- Search Input -->
+<div class="flex-1 min-w-[300px] relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary/60">search</span>
+<input id="doctorSearch" class="w-full bg-background-dark/50 border-primary/10 focus:border-primary focus:ring-primary/20 text-white rounded-xl pl-12 py-3 text-sm placeholder:text-slate-500" placeholder="Search by name, clinic, or specialization..." type="text"/>
+</div>
+<!-- Location Filter -->
+<div class="relative z-50">
+<button id="locationDropdownBtn" class="flex items-center gap-2 bg-background-dark/50 border border-primary/10 rounded-xl px-4 py-2 text-white text-sm">
+<span class="material-symbols-outlined text-primary/60 text-lg">location_on</span>
+<span id="locationDropdownLabel">All Areas</span>
+<span class="material-symbols-outlined text-xs">expand_more</span>
+</button>
+<div id="locationDropdownMenu" class="absolute mt-2 w-48 bg-[#1a2e2e] border border-primary/20 rounded-xl shadow-lg hidden overflow-hidden z-50">
+<button data-value="All Areas" class="block w-full text-left px-4 py-2 text-white hover:bg-primary/10">All Areas</button>
+<button data-value="Downtown Area" class="block w-full text-left px-4 py-2 text-white hover:bg-primary/10">Downtown Area</button>
+<button data-value="West End" class="block w-full text-left px-4 py-2 text-white hover:bg-primary/10">West End</button>
+<button data-value="North Side" class="block w-full text-left px-4 py-2 text-white hover:bg-primary/10">North Side</button>
+<button data-value="East Side" class="block w-full text-left px-4 py-2 text-white hover:bg-primary/10">East Side</button>
+</div>
+</div>
+<!-- Time Filter -->
+<div class="relative z-50">
+<button id="timeDropdownBtn" class="flex items-center gap-2 bg-background-dark/50 border border-primary/10 rounded-xl px-4 py-2 text-white text-sm">
+<span class="material-symbols-outlined text-primary/60 text-lg">schedule</span>
+<span id="timeDropdownLabel">Any Time</span>
+<span class="material-symbols-outlined text-xs">expand_more</span>
+</button>
+<div id="timeDropdownMenu" class="absolute mt-2 w-48 bg-[#1a2e2e] border border-primary/20 rounded-xl shadow-lg hidden overflow-hidden z-50">
+<button data-value="Any Time" class="block w-full text-left px-4 py-2 text-white hover:bg-primary/10">Any Time</button>
+<button data-value="Today" class="block w-full text-left px-4 py-2 text-white hover:bg-primary/10">Today</button>
+<button data-value="Tomorrow" class="block w-full text-left px-4 py-2 text-white hover:bg-primary/10">Tomorrow</button>
+<button data-value="Next 7 Days" class="block w-full text-left px-4 py-2 text-white hover:bg-primary/10">Next 7 Days</button>
+<button data-value="Past Week" class="block w-full text-left px-4 py-2 text-white hover:bg-primary/10">Past Week</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Specialization Tags (Quick Filter) -->
+<div id="specialty-filters" class="flex gap-3 mb-8 overflow-x-auto pb-2 custom-scrollbar">
+<button data-filter="all" class="whitespace-nowrap px-4 py-2 rounded-full bg-primary text-background-dark text-xs font-bold">All Specialists</button>
+<button data-filter="surgeon" class="whitespace-nowrap px-4 py-2 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs font-bold hover:bg-primary/20">Surgeon</button>
+<button data-filter="general" class="whitespace-nowrap px-4 py-2 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs font-bold hover:bg-primary/20">General Vet</button>
+<button data-filter="cardiologist" class="whitespace-nowrap px-4 py-2 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs font-bold hover:bg-primary/20">Cardiologist</button>
+<button data-filter="dermatologist" class="whitespace-nowrap px-4 py-2 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs font-bold hover:bg-primary/20">Dermatologist</button>
+<button data-filter="nutritionist" class="whitespace-nowrap px-4 py-2 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs font-bold hover:bg-primary/20">Nutritionist</button>
+<button data-filter="dentist" class="whitespace-nowrap px-4 py-2 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs font-bold hover:bg-primary/20">Dentist</button>
+</div>
+<!-- Doctor Grid -->
+<div id="doctor-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Doctor Card 1 -->
+<div class="group bg-[#1a2e2e] rounded-2xl border border-primary/10 p-5 hover:border-primary/40 transition-all hover:shadow-[0_0_20px_rgba(19,236,236,0.1)] flex flex-col h-full">
+<div class="relative mb-4">
+<div class="w-full aspect-square rounded-xl bg-cover bg-center mb-4" data-alt="Professional headshot of Dr. Aris Thorne" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD7G2T2-MNsF3rYqpaoJbGuRs0uAIHvei_L-ajA-2TBOLeuilPgZBYlR2lowgMYBosujxPe8PXGpiJCV5IXUDRWemeRbuPBdbxRIjXumPk4KN9IxDBzOASDzcZSEvRbGS2k7bDX_XavOAMwLX4_M12CU3DTMR6qs6hAQCufQv8j1qlEMVm5gXVCyamhUuF1VqNWKWonJrfvWPPT5YwjaEGPOmMzeXjdoHWdxvCFwPMvvHAxbC38uwEYBvyWzo-HdepSbii37kmm1mwR')"></div>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="text-white text-xs font-bold">4.9</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-white text-lg font-bold group-hover:text-primary transition-colors">Dr. Aris Thorne</h3>
+</div>
+<p class="text-primary text-xs font-extrabold uppercase tracking-wider mb-2">Surgeon</p>
+<div class="space-y-2 mb-6">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">local_hospital</span>
+<span class="text-xs">Paw-some Clinic</span>
+</div>
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-xs">Downtown Center</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-primary text-xs font-bold">Available Today</span>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-primary/10">
+<a href="doctor_profile_&_appointment_detail.html" class="w-full inline-block text-center py-2.5 px-3 bg-primary text-background-dark hover:brightness-110 rounded-lg text-xs font-extrabold transition-all">Book Now</a>
+</div>
+</div>
+<!-- Doctor Card 2 -->
+<div class="group bg-[#1a2e2e] rounded-2xl border border-primary/10 p-5 hover:border-primary/40 transition-all hover:shadow-[0_0_20px_rgba(19,236,236,0.1)] flex flex-col h-full">
+<div class="relative mb-4">
+<div class="w-full aspect-square rounded-xl bg-cover bg-center mb-4" data-alt="Professional headshot of Dr. Elena Vance" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAgbpbxm_eOgL_Rggrte2zzCWIbje4fySj6oGIBHzlQ8xmmRDbZqNAFQLrxdOe76DI1dslTsv54Bu43SQIkfX9mc98Cv5pTWnzplQRsqctLJetAg6PrA0DN6sHuGHQzkCMEqbc2_f4x4vOP0pcZlTZ7f5jivDn_m8BHdAntfSwE63lXGUvHMA4MsmoEpd4sbrFzwaVuEGccUmYR4vaesjtllnNXov4aMyQJ9pJgAUfMtUyFSn6k2yKAyWyCNTQo7tZnY6-RhPg_oGsv')"></div>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="text-white text-xs font-bold">4.8</span>
+</div>
+</div>
+<div class="flex-1">
+<h3 class="text-white text-lg font-bold group-hover:text-primary transition-colors">Dr. Elena Vance</h3>
+<p class="text-primary text-xs font-extrabold uppercase tracking-wider mb-2">General Vet</p>
+<div class="space-y-2 mb-6">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">local_hospital</span>
+<span class="text-xs">City Pet Hospital</span>
+</div>
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-xs">North Side Annex</span>
+</div>
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">event</span>
+<span class="text-xs font-medium">Next: Tomorrow, 9:00 AM</span>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-primary/10">
+<a href="doctor_profile_&_appointment_detail.html" class="w-full inline-block text-center py-2.5 px-3 bg-primary text-background-dark hover:brightness-110 rounded-lg text-xs font-extrabold transition-all">Book Now</a>
+</div>
+</div>
+<!-- Doctor Card 3 -->
+<div class="group bg-[#1a2e2e] rounded-2xl border border-primary/10 p-5 hover:border-primary/40 transition-all hover:shadow-[0_0_20px_rgba(19,236,236,0.1)] flex flex-col h-full">
+<div class="relative mb-4">
+<div class="w-full aspect-square rounded-xl bg-cover bg-center mb-4" data-alt="Professional headshot of Dr. Julian Moss" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCHBHJ9L6mXvn_a7juD_Tb3vXpYENpegc5AqqcgMG91rkxzrMsosWL03Mnj7QcSbjoc8_bhPFS6JtuQ4mTQlKyfQu0TXbs1n8kwjORTjm7kGb93z7h3IPF04yQeiudGZnSMloMzuOAU84sFjWVrag7qzglygs_-jPuJt5Ql0OkEtSpXHOQlm0T7_4qMGM9Lz6-3B1mMw0kUOBoxlbxrgdV5-mIGM23wfBBO8PWOnwt-D1g_4k4CkgG42SVKhD5CRFZhahNWdVFEN30O')"></div>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="text-white text-xs font-bold">5.0</span>
+</div>
+</div>
+<div class="flex-1">
+<h3 class="text-white text-lg font-bold group-hover:text-primary transition-colors">Dr. Julian Moss</h3>
+<p class="text-primary text-xs font-extrabold uppercase tracking-wider mb-2">Cardiologist</p>
+<div class="space-y-2 mb-6">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">local_hospital</span>
+<span class="text-xs">Heart &amp; Tail Specialty</span>
+</div>
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-xs">West End Hub</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-primary text-xs font-bold">Available Today</span>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-primary/10">
+<a href="doctor_profile_&_appointment_detail.html" class="w-full inline-block text-center py-2.5 px-3 bg-primary text-background-dark hover:brightness-110 rounded-lg text-xs font-extrabold transition-all">Book Now</a>
+</div>
+</div>
+<!-- Doctor Card 4 -->
+<div class="group bg-[#1a2e2e] rounded-2xl border border-primary/10 p-5 hover:border-primary/40 transition-all hover:shadow-[0_0_20px_rgba(19,236,236,0.1)] flex flex-col h-full">
+<div class="relative mb-4">
+<div class="w-full aspect-square rounded-xl bg-cover bg-center mb-4" data-alt="Professional headshot of Dr. Sarah Chen" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBivpYvJ7h0xy-6Z5njziR2mVdbn4DkPeI6JDxK6GO_tuSjIUSJHa0PjGRo-k9NBODmyC3yPbgno24evnBJDdPSRgNfkC45Ulp0-VKrsghTfgbfjcXvBSnBOviT3krKaN7V3r6i9K__RhHL-fvGSDNYUAbCustvp-7-J-vMX3jvtOYRUK8yWbLgzevsLoem9mUmR4eyL396ZKj-bstexfNzBt27nymVi-V36T7Faa1c0E5A3yfHrv-VtwLcWd9wQddndxscwWq6jFcv')"></div>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="text-white text-xs font-bold">4.7</span>
+</div>
+</div>
+<div class="flex-1">
+<h3 class="text-white text-lg font-bold group-hover:text-primary transition-colors">Dr. Sarah Chen</h3>
+<p class="text-primary text-xs font-extrabold uppercase tracking-wider mb-2">General Vet</p>
+<div class="space-y-2 mb-6">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">local_hospital</span>
+<span class="text-xs">Green Valley Clinic</span>
+</div>
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-xs">East Side Plaza</span>
+</div>
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">event</span>
+<span class="text-xs font-medium">Available Wed, Nov 22</span>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-primary/10">
+<a href="doctor_profile_&_appointment_detail.html" class="w-full inline-block text-center py-2.5 px-3 bg-primary text-background-dark hover:brightness-110 rounded-lg text-xs font-extrabold transition-all">Book Now</a>
+</div>
+</div>
+<!-- Doctor Card 5 -->
+<div class="group bg-[#1a2e2e] rounded-2xl border border-primary/10 p-5 hover:border-primary/40 transition-all hover:shadow-[0_0_20px_rgba(19,236,236,0.1)] flex flex-col h-full">
+<div class="relative mb-4">
+<div class="w-full aspect-square rounded-xl bg-cover bg-center mb-4" data-alt="Professional headshot of Dr. Marcus Reed" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCFx9_niFmcgXxAyh9vetVOZA1o5ubHoWIzviqH2ajMHm-br0Dn743F8xGThq90K8_7Cw072bSUhnUI5NmF2vkiV02x09a-QvEYwb8hliOub2pi5I_l0XEf7KEINoRFBlIIdHDx3oV-VPN_sl_nLHDUIpuWvbEMJ0fLB9yXuXUO9QHuCZY7zLfndG2B0o5B1-G1BE7gMfxVnb19rE7z2rd2a4Esfq-7Brmf3RzmpObce0Xci7ZrEl_sQDmp4nosaNVC4BJygl03YqM2')"></div>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="text-white text-xs font-bold">4.9</span>
+</div>
+</div>
+<div class="flex-1">
+<h3 class="text-white text-lg font-bold group-hover:text-primary transition-colors">Dr. Marcus Reed</h3>
+<p class="text-primary text-xs font-extrabold uppercase tracking-wider mb-2">Dermatologist</p>
+<div class="space-y-2 mb-6">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">local_hospital</span>
+<span class="text-xs">Skin &amp; Coat Center</span>
+</div>
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-xs">Central Business District</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-primary text-xs font-bold">Available Today</span>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-primary/10">
+<button class="book-now w-full py-2.5 px-3 bg-primary text-background-dark hover:brightness-110 rounded-lg text-xs font-extrabold transition-all" data-doctor="Dr. Marcus Reed">Book Now</button>
+</div>
+</div>
+<!-- Doctor Card 6 -->
+<div class="group bg-[#1a2e2e] rounded-2xl border border-primary/10 p-5 hover:border-primary/40 transition-all hover:shadow-[0_0_20px_rgba(19,236,236,0.1)] flex flex-col h-full">
+<div class="relative mb-4">
+<div class="w-full aspect-square rounded-xl bg-cover bg-center mb-4" data-alt="Professional headshot of Dr. Emily Watts" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDnHlvNUed6f6oGITAhIXNRdUuCw3H979y6BiF8LlxG2J1FK9cAKqxFAaTN_XAKUAOgo9ry2FDT7C8quLGNKl8pe6dOt6iX7UaXb9_K2vdVi62HgUYjd5lKeujTpCBep6F_1yIt1GAr5CilPhrG6zo_3_05Mopg6tyE8iCh89b7CvXS7M0e2uv9DfqCSkGV9-neU2tGLLuJGYDrZtzkiUCz91I9TDtyL650hc0oss1aQlASV6-6he14WQ7eQJj4VrnxooSLNl6YSr24')"></div>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="text-white text-xs font-bold">5.0</span>
+</div>
+</div>
+<div class="flex-1">
+<h3 class="text-white text-lg font-bold group-hover:text-primary transition-colors">Dr. Emily Watts</h3>
+<p class="text-primary text-xs font-extrabold uppercase tracking-wider mb-2">Nutritionist</p>
+<div class="space-y-2 mb-6">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">local_hospital</span>
+<span class="text-xs">Holistic Pet Wellness</span>
+</div>
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-xs">Riverside District</span>
+</div>
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">event</span>
+<span class="text-xs font-medium">Available Fri, Nov 24</span>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-primary/10">
+<button class="book-now w-full py-2.5 px-3 bg-primary text-background-dark hover:brightness-110 rounded-lg text-xs font-extrabold transition-all" data-doctor="Dr. Emily Watts">Book Now</button>
+</div>
+</div>
+<!-- Doctor Card 7 -->
+<div class="group bg-[#1a2e2e] rounded-2xl border border-primary/10 p-5 hover:border-primary/40 transition-all hover:shadow-[0_0_20px_rgba(19,236,236,0.1)] flex flex-col h-full">
+<div class="relative mb-4">
+<div class="w-full aspect-square rounded-xl bg-cover bg-center mb-4" data-alt="Professional headshot of Dr. Robert King" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDz2yA71vL4BWUkSGhLocl8YM9i2G4u7XLvBeNXtlxhxwfp91mbuxz1eqaoQj9UwKKbpKualFudvIrwJl7wlMz1KIqHEPMR12nx-c-dOhe-ZYvXBGFadMhT4wFYhXP67pBgFDonvYV7bH5Zmk_CKwJyy_OhZI75u33i2RbpAzZpBX1e6fO0ToFPYON_Bf-T9E85hgWRn4uMdcdEqpQKwEqNQNgn6ZORRYxwZToECVQRV6IArTQ3tWqbWwHCQQ3WU42SzDV-0GlPaZ0a')"></div>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="text-white text-xs font-bold">4.6</span>
+</div>
+</div>
+<div class="flex-1">
+<h3 class="text-white text-lg font-bold group-hover:text-primary transition-colors">Dr. Robert King</h3>
+<p class="text-primary text-xs font-extrabold uppercase tracking-wider mb-2">Surgeon</p>
+<div class="space-y-2 mb-6">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">local_hospital</span>
+<span class="text-xs">Premier Orthopedic Vet</span>
+</div>
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-xs">Hilltop Heights</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-primary text-xs font-bold">Available Today</span>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-primary/10">
+<button class="book-now w-full py-2.5 px-3 bg-primary text-background-dark hover:brightness-110 rounded-lg text-xs font-extrabold transition-all" data-doctor="Dr. Robert King">Book Now</button>
+</div>
+</div>
+<!-- Doctor Card 8 -->
+<div class="group bg-[#1a2e2e] rounded-2xl border border-primary/10 p-5 hover:border-primary/40 transition-all hover:shadow-[0_0_20px_rgba(19,236,236,0.1)] flex flex-col h-full">
+<div class="relative mb-4">
+<div class="w-full aspect-square rounded-xl bg-cover bg-center mb-4" data-alt="Professional headshot of Dr. Lisa Wong" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCVxTPsYUUBdTto9XGukIFUNMT94QyPcLDirLUWH0qNra-HCfnIx9NbFAokpyQQrFcmGu0Z9zoquvIgeZnWCSJUt4_ooDg-PC0N-U6kwOCG08JK6dOargN3PpOwdlkRvqJRP-whwKdcbfrpwgdkd28YafDXs1wWaE41ACYCdD-Qcs_7Zr7nIHeeOiNIqNnjBhpJriFwG9grN4WKeP08JCRfYVOZY3sFofAAnNF6NJH4OYj9PDwUx2XZG_PPB_mLCT_E-bI0yNP-zqdv')"></div>
+<div class="absolute top-3 right-3 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="text-white text-xs font-bold">4.8</span>
+</div>
+</div>
+<div class="flex-1">
+<h3 class="text-white text-lg font-bold group-hover:text-primary transition-colors">Dr. Lisa Wong</h3>
+<p class="text-primary text-xs font-extrabold uppercase tracking-wider mb-2">Dentist</p>
+<div class="space-y-2 mb-6">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">local_hospital</span>
+<span class="text-xs">Sparkle Pet Dental</span>
+</div>
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-xs">Suburban Grove</span>
+</div>
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">event</span>
+<span class="text-xs font-medium">Next: Today, 3:30 PM</span>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-primary/10">
+<button class="book-now w-full py-2.5 px-3 bg-primary text-background-dark hover:brightness-110 rounded-lg text-xs font-extrabold transition-all" data-doctor="Dr. Lisa Wong">Book Now</button>
+</div>
+</div>
+</div>
+<!-- Footer Meta -->
+<footer class="mt-12 py-8 border-t border-primary/10 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-slate-500 text-sm">© 2024 Nivâra Pet Care Portal. All rights reserved.</p>
+<div class="flex items-center gap-6">
+<a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Terms of Service</a>
+<a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Cookie Policy</a>
+</div>
+</footer>
+</main>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var filters = document.querySelectorAll('#specialty-filters button');
+  var grid = document.getElementById('doctor-grid');
+  var cards = Array.prototype.slice.call(grid.querySelectorAll(':scope > .group'));
+  var searchInput = document.getElementById('doctorSearch');
+  var locLabel = document.getElementById('locationDropdownLabel');
+  var timeLabel = document.getElementById('timeDropdownLabel');
+  function norm(t){return (t||'').toLowerCase().trim();}
+  // Extract metadata for each card
+  cards.forEach(function(card){
+    var nameEl = card.querySelector('h3');
+    var specEl = card.querySelector('p.text-primary');
+    var clinicEl = card.querySelector('.material-symbols-outlined + span.text-xs, .material-symbols-outlined + span'); // first hospital span
+    var locEl = Array.prototype.find.call(card.querySelectorAll('.material-symbols-outlined + span.text-xs, .material-symbols-outlined + span'), function(s){ return /downtown|north|west|east|suburban|riverside|hilltop|central/i.test(s.textContent||''); });
+    var availEl = card.querySelector('.material-symbols-outlined + span.text-xs.font-medium, .text-primary.text-xs.font-bold, .text-xs.font-medium');
+    var specText = norm(specEl && specEl.textContent);
+    var key = 'other';
+    if(specText.includes('general')) key='general';
+    else if(specText.includes('surgeon')) key='surgeon';
+    else if(specText.includes('cardio')) key='cardiologist';
+    else if(specText.includes('derma')) key='dermatologist';
+    else if(specText.includes('nutrition')) key='nutritionist';
+    else if(specText.includes('dentist')) key='dentist';
+    card.dataset.specialty = key;
+    card.dataset.name = norm(nameEl && nameEl.textContent);
+    card.dataset.clinic = norm(clinicEl && clinicEl.textContent);
+    card.dataset.location = norm(locEl && locEl.textContent);
+    card.dataset.availability = norm(availEl && availEl.textContent);
+  });
+  var state = {
+    specialty: 'all',
+    location: norm(locLabel.textContent),
+    time: norm(timeLabel.textContent),
+    query: ''
+  };
+  function setActive(btn){
+    filters.forEach(function(b){
+      b.classList.remove('bg-primary','text-background-dark');
+      if(!b.classList.contains('border')) b.classList.add('border');
+      b.classList.add('bg-primary/10','text-primary','border-primary/20');
+    });
+    btn.classList.remove('bg-primary/10','text-primary','border','border-primary/20');
+    btn.classList.add('bg-primary','text-background-dark');
+  }
+  function locationMatches(sel, cardLoc){
+    if(!sel || sel==='') return true;
+    if(!cardLoc) return false;
+    if(sel.includes('downtown')) return /downtown/i.test(cardLoc);
+    if(sel.includes('west')) return /west/i.test(cardLoc);
+    if(sel.includes('north')) return /north/i.test(cardLoc);
+    if(sel.includes('east')) return /east/i.test(cardLoc);
+    return true;
+  }
+  function timeMatches(sel, avail){
+    if(!sel || sel==='') return true;
+    if(!avail) return false;
+    if(sel.includes('today')) return /today/i.test(avail) || /available today/i.test(avail);
+    if(sel.includes('tomorrow')) return /tomorrow/i.test(avail);
+    if(sel.includes('next 7')) return /(today|tomorrow|available|next|mon|tue|wed|thu|fri|sat|sun)/i.test(avail);
+    if(sel.includes('past week')) return /yesterday|last/i.test(avail); // likely none
+    return true;
+  }
+  function textMatches(q, card){
+    if(!q) return true;
+    var hay = (card.dataset.name + ' ' + card.dataset.clinic + ' ' + card.dataset.specialty).toLowerCase();
+    return hay.indexOf(q) !== -1;
+  }
+  function applyFilters(){
+    var q = norm(state.query);
+    cards.forEach(function(card){
+      var okSpec = (state.specialty==='all' || card.dataset.specialty===state.specialty);
+      var okText = textMatches(q, card);
+      var okLoc = locationMatches(state.location, card.dataset.location);
+      var okTime = timeMatches(state.time, card.dataset.availability);
+      if(okSpec && okText && okLoc && okTime){
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
+  filters.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      state.specialty = btn.dataset.filter || 'all';
+      setActive(btn);
+      applyFilters();
+    });
+  });
+  function setupDropdown(btnId, menuId, labelId, onChange){
+    var btn = document.getElementById(btnId);
+    var menu = document.getElementById(menuId);
+    var label = document.getElementById(labelId);
+    function close(){
+      menu.classList.add('hidden');
+      document.removeEventListener('click', outside);
+    }
+    function outside(e){
+      if(!menu.contains(e.target) && !btn.contains(e.target)) close();
+    }
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      menu.classList.toggle('hidden');
+      if(!menu.classList.contains('hidden')) document.addEventListener('click', outside);
+    });
+    Array.prototype.slice.call(menu.querySelectorAll('button[data-value]')).forEach(function(item){
+      item.addEventListener('click', function(){
+        label.textContent = item.getAttribute('data-value');
+        close();
+        if(onChange) onChange(norm(label.textContent));
+      });
+    });
+  }
+  setupDropdown('locationDropdownBtn','locationDropdownMenu','locationDropdownLabel', function(val){ state.location = val; applyFilters(); });
+  setupDropdown('timeDropdownBtn','timeDropdownMenu','timeDropdownLabel', function(val){ state.time = val; applyFilters(); });
+  if(searchInput){
+    searchInput.addEventListener('input', function(){
+      state.query = searchInput.value;
+      applyFilters();
+    });
+  }
+  applyFilters();
+  var bookBtns = Array.prototype.slice.call(document.querySelectorAll('.book-now'));
+  bookBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var name = btn.getAttribute('data-doctor') || ((btn.closest('.group') && btn.closest('.group').querySelector('h3') && btn.closest('.group').querySelector('h3').textContent) || '');
+      try { sessionStorage.setItem('selectedDoctor', name); } catch {}
+      window.location.href = 'doctor_profile_&_appointment_detail.html';
+    });
+  });
+  function readAppointments(){
+    try {
+      var raw = sessionStorage.getItem('appointments');
+      var arr = raw ? JSON.parse(raw) : [];
+      if(!Array.isArray(arr)) arr = [];
+      return arr;
+    } catch { return []; }
+  }
+  function renderBookings(){
+    var list = document.getElementById('bookingsList');
+    if(!list) return;
+    list.innerHTML = '';
+    var items = readAppointments();
+    if(items.length === 0){
+      var empty = document.createElement('div');
+      empty.className = 'flex flex-col items-center justify-center text-center p-8 bg-background-dark/40 border border-[#234848] rounded-xl';
+      var icon = document.createElement('span');
+      icon.className = 'material-symbols-outlined text-4xl text-white/30 mb-2';
+      icon.textContent = 'event_busy';
+      var h = document.createElement('p');
+      h.className = 'text-white/80 font-bold';
+      h.textContent = 'No bookings yet';
+      var p = document.createElement('p');
+      p.className = 'text-white/40 text-sm mt-1';
+      p.textContent = 'Your appointments will show up here after you book one.';
+      empty.appendChild(icon); empty.appendChild(h); empty.appendChild(p);
+      list.appendChild(empty);
+      return;
+    }
+    items.forEach(function(it){
+      var el = document.createElement('div');
+      el.className = 'flex items-start justify-between gap-3 bg-background-dark/40 border border-[#234848] rounded-xl p-4';
+      var left = document.createElement('div');
+      left.className = 'flex-1';
+      var title = document.createElement('p');
+      title.className = 'text-white font-bold';
+      title.textContent = it.doctor || '';
+      var spec = document.createElement('p');
+      spec.className = 'text-primary text-xs font-extrabold uppercase tracking-wider';
+      spec.textContent = (it.specialty || '').toUpperCase().replace(/_/g,' ');
+      var meta = document.createElement('div');
+      meta.className = 'flex items-center gap-2 text-slate-400 text-xs mt-2';
+      var ic = document.createElement('span');
+      ic.className = 'material-symbols-outlined text-sm';
+      ic.textContent = 'calendar_month';
+      var dt = document.createElement('span');
+      dt.textContent = (it.date || '') + ', ' + (it.time || '');
+      meta.appendChild(ic); meta.appendChild(dt);
+      left.appendChild(title); left.appendChild(spec); left.appendChild(meta);
+      var badge = document.createElement('span');
+      badge.className = 'px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold border border-primary/30';
+      badge.textContent = (it.status || 'CONFIRMED');
+      el.appendChild(left); el.appendChild(badge);
+      list.appendChild(el);
+    });
+  }
+  var openBtn = document.getElementById('openBookings');
+  var closeBtn = document.getElementById('closeBookings');
+  var modal = document.getElementById('bookingsModal');
+  var overlay = document.getElementById('bookingsOverlay');
+  function openModal(){
+    renderBookings();
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    overlay.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+    closeBtn?.focus();
+  }
+  function closeModal(){
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    overlay.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+    openBtn?.focus();
+  }
+  openBtn?.addEventListener('click', openModal);
+  closeBtn?.addEventListener('click', closeModal);
+  overlay?.addEventListener('click', closeModal);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeModal(); } });
+  var locationBtn = document.getElementById('locationBtn');
+  var locationLabel = document.getElementById('locationLabel');
+  var locOverlay = document.getElementById('locOverlay');
+  var locModal = document.getElementById('locModal');
+  var locClose = document.getElementById('locClose');
+  var pinInput = document.getElementById('pinInput');
+  var updateLoc = document.getElementById('updateLoc');
+  var useCurrent = document.getElementById('useCurrent');
+  function openLoc(){
+    locOverlay?.classList.remove('hidden');
+    locModal?.classList.remove('hidden');
+    locModal?.classList.add('flex');
+    document.body.classList.add('overflow-hidden');
+    var savedPin = sessionStorage.getItem('userPin') || '';
+    if(pinInput && savedPin) pinInput.value = savedPin;
+  }
+  function closeLoc(){
+    locOverlay?.classList.add('hidden');
+    locModal?.classList.add('hidden');
+    locModal?.classList.remove('flex');
+    document.body.classList.remove('overflow-hidden');
+  }
+  function pinToLabel(pin){
+    var map = { '400001': 'Mumbai, IN', '110001': 'Delhi, IN', '560001': 'Bangalore, IN' };
+    return map[pin] || ('PIN ' + pin);
+  }
+  function applyPin(pin){
+    if(!/^\d{5,6}$/.test(pin)) return false;
+    try { sessionStorage.setItem('userPin', pin); } catch {}
+    if(locationLabel) locationLabel.textContent = pinToLabel(pin);
+    closeLoc();
+    return true;
+  }
+  locationBtn?.addEventListener('click', openLoc);
+  locOverlay?.addEventListener('click', closeLoc);
+  locClose?.addEventListener('click', closeLoc);
+  updateLoc?.addEventListener('click', function(){
+    var pin = (pinInput?.value || '').trim();
+    if(!applyPin(pin)){
+      pinInput?.classList.add('ring-1','ring-red-400');
+      setTimeout(function(){ pinInput?.classList.remove('ring-1','ring-red-400'); }, 600);
+    }
+  });
+  useCurrent?.addEventListener('click', function(){
+    (async function(){
+      try{
+        await new Promise(function(res, rej){ return navigator.geolocation ? navigator.geolocation.getCurrentPosition(res, rej, { timeout: 5000 }) : rej(); });
+        if(locationLabel) locationLabel.textContent = 'Current Location';
+        closeLoc();
+      } catch {
+        pinInput?.focus();
+      }
+    })();
+  });
+  Array.prototype.slice.call(document.querySelectorAll('#locModal [data-pin]')).forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pin = btn.getAttribute('data-pin') || '';
+      if(pinInput) pinInput.value = pin;
+    });
+  });
+  (function(){
+    var savedPin = sessionStorage.getItem('userPin');
+    if(savedPin && locationLabel) locationLabel.textContent = pinToLabel(savedPin);
+  })();
+});
+</script>
+</body></html>
